@@ -1,0 +1,1532 @@
+2025-09-30 07:56:54,853 - INFO - ====== WebDriver manager ======
+2025-09-30 07:56:56,072 - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-30 07:56:56,298 - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-30 07:56:56,518 - INFO - There is no [win64] chromedriver "140.0.7339.207" for browser google-chrome "140.0.7339" in cache
+2025-09-30 07:56:56,518 - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-30 07:56:57,035 - INFO - WebDriver version 140.0.7339.207 selected
+2025-09-30 07:56:57,039 - INFO - Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/140.0.7339.207/win32/chromedriver-win32.zip
+2025-09-30 07:56:57,039 - INFO - About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/140.0.7339.207/win32/chromedriver-win32.zip
+2025-09-30 07:56:57,244 - INFO - Driver downloading response is 200
+2025-09-30 07:56:57,952 - INFO - Get LATEST chromedriver version for google-chrome
+2025-09-30 07:56:59,197 - INFO - Driver has been saved in cache [C:\Users\chase\.wdm\drivers\chromedriver\win64\140.0.7339.207]
+2025-09-30 07:57:02,068 - INFO - Chrome driver initialized successfully
+2025-09-30 07:57:28,015 - INFO - Processing CSV file: C:/Users/chase/My Drive/scripts/School Scripts/D2L Macro/D2L Assignments.csv
+2025-09-30 07:57:28,016 - INFO - CSV headers found: ['Name', 'Start Date', 'Start Time', 'Due Date', 'Due Time', 'Visibility']
+2025-09-30 07:57:28,018 - INFO - Row 2: Processing assignment name: '10.1 - 10.3 Homework'
+2025-09-30 07:57:28,018 - INFO - Assignment name length: 20 characters
+2025-09-30 07:57:28,018 - INFO - Assignment name repr: '10.1 - 10.3 Homework'
+2025-09-30 07:57:28,018 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-09-30 07:57:28,018 - INFO -   'Name': '10.1 - 10.3 Homework' (len=20)
+2025-09-30 07:57:28,019 - INFO -   'Start Date': '11/25/2025' (len=10)
+2025-09-30 07:57:28,019 - INFO -   'Start Time': '2:00pm' (len=6)
+2025-09-30 07:57:28,019 - INFO -   'Due Date': '12/3/2025' (len=9)
+2025-09-30 07:57:28,019 - INFO -   'Due Time': '1:01am' (len=6)
+2025-09-30 07:57:28,019 - INFO -   'Visibility': '' (len=0)
+2025-09-30 07:57:28,020 - INFO - DEBUG: Raw due_date='12/3/2025', due_time='1:01am'
+2025-09-30 07:57:28,020 - INFO - DEBUG: due_date bool=True, due_time bool=True
+2025-09-30 07:57:28,020 - INFO - CONDITION MET: Setting due date: 12/3/2025 at 1:01am
+2025-09-30 07:57:28,020 - INFO - Looking for due date link for assignment: '10.1 - 10.3 Homework'
+2025-09-30 07:57:28,020 - INFO - Searching for EXACT match: '10.1 - 10.3 Homework'
+2025-09-30 07:57:28,043 - INFO - Trying DASH-FREE search: '10.1 10.3 Homework'
+2025-09-30 07:57:28,084 - INFO - SUCCESS: Found DASH-FREE match! '10.1 - 10.3 Homework'
+2025-09-30 07:57:28,084 - INFO - EXACT MATCH: Found 1 assignment name links
+2025-09-30 07:57:28,094 - INFO -   Exact match 1: '10.1 - 10.3 Homework'
+2025-09-30 07:57:28,094 - INFO - Found 1 assignment name links
+2025-09-30 07:57:28,107 - INFO - Found parent row for the assignment
+2025-09-30 07:57:28,119 - INFO - Found due date link in the same row
+2025-09-30 07:57:28,714 - INFO - Clicked due date link
+2025-09-30 07:57:30,715 - INFO - Setting date to '12/3/2025' and time to '1:01am' in mini editor...
+2025-09-30 07:57:30,727 - INFO - SUCCESS: Dialog appeared
+2025-09-30 07:57:30,735 - INFO - Found 1 iframe(s) in dialog
+2025-09-30 07:57:30,735 - INFO - Switching to iframe 0...
+2025-09-30 07:57:30,761 - INFO - Found date fields in iframe 0!
+2025-09-30 07:57:30,762 - INFO - Setting date to '12/3/2025' and time to '1:01am' inside iframe...
+2025-09-30 07:57:30,762 - INFO - Parsed date: 12/3/2025, time: 1:01
+2025-09-30 07:57:30,762 - INFO - Looking for 'Has Due Date' checkbox (#z_k)
+2025-09-30 07:57:30,781 - INFO - Clicking checkbox to enable date fields...
+2025-09-30 07:57:31,111 - INFO - Checkbox clicked successfully!
+2025-09-30 07:57:31,115 - INFO - Successfully set date to 12/3/2025
+2025-09-30 07:57:31,115 - INFO - Successfully set time to 1:01
+2025-09-30 07:57:31,244 - INFO - Clicked Save button
+2025-09-30 07:57:31,744 - INFO - Due date set successfully!
+2025-09-30 07:57:31,745 - INFO - Returning to main page before processing start date...
+2025-09-30 07:57:32,245 - INFO - Setting start date: 11/25/2025 at 2:00pm
+2025-09-30 07:57:32,246 - INFO - Looking for start date link for assignment: '10.1 - 10.3 Homework'
+2025-09-30 07:57:32,247 - INFO - Searching for EXACT match: '10.1 - 10.3 Homework'
+2025-09-30 07:57:32,260 - INFO - Trying DASH-FREE search: '10.1 10.3 Homework'
+2025-09-30 07:57:32,281 - INFO - SUCCESS: Found DASH-FREE match! '10.1 - 10.3 Homework'
+2025-09-30 07:57:32,281 - INFO - Found 1 assignment name links
+2025-09-30 07:57:32,288 - INFO - Found parent row for the assignment
+2025-09-30 07:57:32,308 - INFO - Found clickable '-' link to create new start date
+2025-09-30 07:57:32,812 - INFO - Attempting to click start date link...
+2025-09-30 07:57:32,887 - INFO - SUCCESS: Selenium click on start date link executed
+2025-09-30 07:57:32,888 - INFO - Waiting for start date mini-editor to load...
+2025-09-30 07:57:35,888 - INFO - Setting start date to '11/25/2025' and time to '2:00pm' in mini editor...
+2025-09-30 07:57:35,889 - INFO - Waiting for start date dialog to appear...
+2025-09-30 07:57:35,896 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-09-30 07:57:35,906 - INFO - Found 2 iframe(s) in dialog
+2025-09-30 07:57:35,906 - INFO - Switching to iframe 0...
+2025-09-30 07:57:35,939 - INFO - No date fields in iframe 0, trying next...
+2025-09-30 07:57:35,942 - INFO - Switching to iframe 1...
+2025-09-30 07:57:35,956 - INFO - Found date fields in iframe 1!
+2025-09-30 07:57:35,956 - INFO - Setting date to '11/25/2025' and time to '2:00pm' inside iframe...
+2025-09-30 07:57:35,956 - INFO - Parsed date: 11/25/2025, time: 14:00
+2025-09-30 07:57:35,957 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-09-30 07:57:35,970 - INFO - Clicking checkbox to enable date fields...
+2025-09-30 07:57:36,189 - INFO - Checkbox activated successfully!
+2025-09-30 07:57:36,194 - INFO - Successfully set date to 11/25/2025
+2025-09-30 07:57:36,195 - INFO - Successfully set time to 14:00
+2025-09-30 07:57:36,247 - INFO - Clicked Save button
+2025-09-30 07:57:36,748 - INFO - Start date set successfully!
+2025-09-30 07:57:36,754 - INFO - Successfully processed '10.1 - 10.3 Homework'
+2025-09-30 07:57:37,255 - WARNING - Row 3: Empty assignment name, skipping
+2025-09-30 07:57:37,255 - INFO - CSV processing completed: 1 successful, 0 errors
+2025-10-01 08:41:33,530 - INFO - ====== WebDriver manager ======
+2025-10-01 08:41:34,945 - INFO - Get LATEST chromedriver version for google-chrome
+2025-10-01 08:41:35,281 - INFO - Get LATEST chromedriver version for google-chrome
+2025-10-01 08:41:35,474 - INFO - Get LATEST chromedriver version for google-chrome
+2025-10-01 08:41:35,969 - INFO - WebDriver version 140.0.7339.207 selected
+2025-10-01 08:41:35,983 - INFO - Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/140.0.7339.207/win32/chromedriver-win32.zip
+2025-10-01 08:41:35,983 - INFO - About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/140.0.7339.207/win32/chromedriver-win32.zip
+2025-10-01 08:41:36,192 - INFO - Driver downloading response is 200
+2025-10-01 08:41:37,003 - INFO - Get LATEST chromedriver version for google-chrome
+2025-10-01 08:41:37,332 - INFO - Driver has been saved in cache [C:\Users\chase\.wdm\drivers\chromedriver\win64\140.0.7339.207]
+2025-10-01 08:41:42,124 - WARNING - ChromeDriverManager failed: Message: session not created: probably user data directory is already in use, please specify a unique value for --user-data-dir argument, or don't use --user-data-dir
+Stacktrace:
+	GetHandleVerifier [0x0x62c333+65459]
+	GetHandleVerifier [0x0x62c374+65524]
+	(No symbol) [0x0x44d973]
+	(No symbol) [0x0x48256a]
+	(No symbol) [0x0x47db5a]
+	(No symbol) [0x0x4c5a50]
+	(No symbol) [0x0x4c534a]
+	(No symbol) [0x0x4b9bf6]
+	(No symbol) [0x0x48b38e]
+	(No symbol) [0x0x48c274]
+	GetHandleVerifier [0x0x8aeda3+2697763]
+	GetHandleVerifier [0x0x8a9ec7+2677575]
+	GetHandleVerifier [0x0x654194+228884]
+	GetHandleVerifier [0x0x6449f8+165496]
+	GetHandleVerifier [0x0x64b18d+192013]
+	GetHandleVerifier [0x0x6347d8+99416]
+	GetHandleVerifier [0x0x634972+99826]
+	GetHandleVerifier [0x0x61ebea+10346]
+	BaseThreadInitThunk [0x0x76085d49+25]
+	RtlInitializeExceptionChain [0x0x7724d6db+107]
+	RtlGetAppContainerNamedObjectPath [0x0x7724d661+561]
+
+2025-10-01 08:41:46,833 - ERROR - Failed to initialize driver: Message: session not created: probably user data directory is already in use, please specify a unique value for --user-data-dir argument, or don't use --user-data-dir
+Stacktrace:
+	GetHandleVerifier [0x0x7ff774639f25+80677]
+	GetHandleVerifier [0x0x7ff774639f80+80768]
+	(No symbol) [0x0x7ff7743e02bf]
+	(No symbol) [0x0x7ff774420248]
+	(No symbol) [0x0x7ff77441a4e7]
+	(No symbol) [0x0x7ff77446f310]
+	(No symbol) [0x0x7ff77446ea80]
+	(No symbol) [0x0x7ff7744612e3]
+	(No symbol) [0x0x7ff774429770]
+	(No symbol) [0x0x7ff77442a5a3]
+	GetHandleVerifier [0x0x7ff77491817d+3087741]
+	GetHandleVerifier [0x0x7ff77491223a+3063354]
+	GetHandleVerifier [0x0x7ff7749332c5+3198661]
+	GetHandleVerifier [0x0x7ff77465412e+187694]
+	GetHandleVerifier [0x0x7ff77465b20f+216591]
+	GetHandleVerifier [0x0x7ff774642ee4+117476]
+	GetHandleVerifier [0x0x7ff77464309f+117919]
+	GetHandleVerifier [0x0x7ff7746291a8+11688]
+	BaseThreadInitThunk [0x0x7fff6d32e8d7+23]
+	RtlUserThreadStart [0x0x7fff6da88d9c+44]
+
+2025-10-01 08:42:12,480 - INFO - ====== WebDriver manager ======
+2025-10-01 08:42:13,188 - INFO - Get LATEST chromedriver version for google-chrome
+2025-10-01 08:42:13,395 - INFO - Get LATEST chromedriver version for google-chrome
+2025-10-01 08:42:13,615 - INFO - There is no [win64] chromedriver "141.0.7390.54" for browser google-chrome "141.0.7390" in cache
+2025-10-01 08:42:13,616 - INFO - Get LATEST chromedriver version for google-chrome
+2025-10-01 08:42:14,134 - INFO - WebDriver version 141.0.7390.54 selected
+2025-10-01 08:42:14,140 - INFO - Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/141.0.7390.54/win32/chromedriver-win32.zip
+2025-10-01 08:42:14,143 - INFO - About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/141.0.7390.54/win32/chromedriver-win32.zip
+2025-10-01 08:42:14,339 - INFO - Driver downloading response is 200
+2025-10-01 08:42:15,003 - INFO - Get LATEST chromedriver version for google-chrome
+2025-10-01 08:42:16,032 - INFO - Driver has been saved in cache [C:\Users\chase\.wdm\drivers\chromedriver\win64\141.0.7390.54]
+2025-10-01 08:42:18,907 - INFO - Chrome driver initialized successfully
+2025-10-01 08:42:48,459 - INFO - Processing CSV file: C:/Users/chase/My Drive/scripts/School Scripts/D2L Macro/D2L Assignments.csv
+2025-10-01 08:42:48,459 - INFO - CSV headers found: ['Name', 'Start Date', 'Start Time', 'Due Date', 'Due Time', 'Visibility']
+2025-10-01 08:42:48,460 - INFO - Row 2: Processing assignment name: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:42:48,460 - INFO - Assignment name length: 18 characters
+2025-10-01 08:42:48,460 - INFO - Assignment name repr: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:42:48,460 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 08:42:48,461 - INFO -   'Name': 'Quiz 4 (7.1 - 7.4)' (len=18)
+2025-10-01 08:42:48,461 - INFO -   'Start Date': '10/21/2025' (len=10)
+2025-10-01 08:42:48,461 - INFO -   'Start Time': '11:00 AM' (len=8)
+2025-10-01 08:42:48,461 - INFO -   'Due Date': '10/21/2025' (len=10)
+2025-10-01 08:42:48,461 - INFO -   'Due Time': '11:59 PM' (len=8)
+2025-10-01 08:42:48,461 - INFO -   'Visibility': '' (len=0)
+2025-10-01 08:42:48,461 - INFO - DEBUG: Raw due_date='10/21/2025', due_time='11:59 PM'
+2025-10-01 08:42:48,461 - INFO - DEBUG: due_date bool=True, due_time bool=True
+2025-10-01 08:42:48,461 - INFO - CONDITION MET: Setting due date: 10/21/2025 at 11:59 PM
+2025-10-01 08:42:48,461 - INFO - Looking for due date link for assignment: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:42:48,461 - INFO - Searching for EXACT match: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:42:48,475 - INFO - Trying DASH-FREE search: 'Quiz 4 (7.1 7.4)'
+2025-10-01 08:42:49,330 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:42:49,330 - INFO - EXACT MATCH: Found 1 assignment name links
+2025-10-01 08:42:49,336 - INFO -   Exact match 1: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:42:49,336 - INFO - Found 1 assignment name links
+2025-10-01 08:42:49,345 - INFO - Found parent row for the assignment
+2025-10-01 08:42:49,355 - INFO - Found due date link in the same row
+2025-10-01 08:42:49,942 - INFO - Clicked due date link
+2025-10-01 08:42:51,943 - INFO - Setting date to '10/21/2025' and time to '11:59 PM' in mini editor...
+2025-10-01 08:42:51,986 - INFO - SUCCESS: Dialog appeared
+2025-10-01 08:42:51,995 - INFO - Found 1 iframe(s) in dialog
+2025-10-01 08:42:51,995 - INFO - Switching to iframe 0...
+2025-10-01 08:42:52,007 - INFO - Found date fields in iframe 0!
+2025-10-01 08:42:52,007 - INFO - Setting date to '10/21/2025' and time to '11:59 PM' inside iframe...
+2025-10-01 08:42:52,008 - INFO - Parsed date: 10/21/2025, time: 23:59
+2025-10-01 08:42:52,008 - INFO - Looking for 'Has Due Date' checkbox (#z_k)
+2025-10-01 08:42:52,020 - INFO - Checkbox is already checked
+2025-10-01 08:42:52,023 - INFO - Successfully set date to 10/21/2025
+2025-10-01 08:42:52,023 - INFO - Successfully set time to 23:59
+2025-10-01 08:42:52,132 - INFO - Clicked Save button
+2025-10-01 08:42:52,632 - INFO - Due date set successfully!
+2025-10-01 08:42:52,633 - INFO - Returning to main page before processing start date...
+2025-10-01 08:42:53,133 - INFO - Setting start date: 10/21/2025 at 11:00 AM
+2025-10-01 08:42:53,134 - INFO - Looking for start date link for assignment: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:42:53,134 - INFO - Searching for EXACT match: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:42:53,144 - INFO - Trying DASH-FREE search: 'Quiz 4 (7.1 7.4)'
+2025-10-01 08:42:53,847 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:42:53,848 - INFO - Found 1 assignment name links
+2025-10-01 08:42:53,854 - INFO - Found parent row for the assignment
+2025-10-01 08:42:53,868 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '3/26/2025 9:30 AM'
+2025-10-01 08:42:54,372 - INFO - Attempting to click start date link...
+2025-10-01 08:42:54,432 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 08:42:54,433 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 08:42:57,433 - INFO - Setting start date to '10/21/2025' and time to '11:00 AM' in mini editor...
+2025-10-01 08:42:57,435 - INFO - Waiting for start date dialog to appear...
+2025-10-01 08:42:57,444 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 08:42:57,451 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 08:42:57,452 - INFO - Switching to iframe 0...
+2025-10-01 08:42:57,465 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 08:42:57,466 - INFO - Switching to iframe 1...
+2025-10-01 08:42:57,479 - INFO - Found date fields in iframe 1!
+2025-10-01 08:42:57,479 - INFO - Setting date to '10/21/2025' and time to '11:00 AM' inside iframe...
+2025-10-01 08:42:57,479 - INFO - Parsed date: 10/21/2025, time: 11:00
+2025-10-01 08:42:57,479 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 08:42:57,491 - INFO - Checkbox is already checked
+2025-10-01 08:42:57,495 - INFO - Successfully set date to 10/21/2025
+2025-10-01 08:42:57,495 - INFO - Successfully set time to 11:00
+2025-10-01 08:42:57,547 - INFO - Clicked Save button
+2025-10-01 08:42:58,048 - INFO - Start date set successfully!
+2025-10-01 08:42:58,049 - INFO - Successfully processed 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:42:58,549 - INFO - Row 3: Processing assignment name: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 08:42:58,550 - INFO - Assignment name length: 18 characters
+2025-10-01 08:42:58,551 - INFO - Assignment name repr: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 08:42:58,551 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 08:42:58,551 - INFO -   'Name': 'Quiz 5 (8.1 - 8.3)' (len=18)
+2025-10-01 08:42:58,551 - INFO -   'Start Date': '11/4/2025' (len=9)
+2025-10-01 08:42:58,552 - INFO -   'Start Time': '11:00 AM' (len=8)
+2025-10-01 08:42:58,552 - INFO -   'Due Date': '11/4/2025' (len=9)
+2025-10-01 08:42:58,552 - INFO -   'Due Time': '11:59 PM' (len=8)
+2025-10-01 08:42:58,552 - INFO -   'Visibility': '' (len=0)
+2025-10-01 08:42:58,552 - INFO - DEBUG: Raw due_date='11/4/2025', due_time='11:59 PM'
+2025-10-01 08:42:58,552 - INFO - DEBUG: due_date bool=True, due_time bool=True
+2025-10-01 08:42:58,553 - INFO - CONDITION MET: Setting due date: 11/4/2025 at 11:59 PM
+2025-10-01 08:42:58,553 - INFO - Looking for due date link for assignment: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 08:42:58,553 - INFO - Searching for EXACT match: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 08:42:58,563 - INFO - Trying DASH-FREE search: 'Quiz 5 (8.1 8.3)'
+2025-10-01 08:42:59,248 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 5 (8.1-8.3)'
+2025-10-01 08:42:59,248 - INFO - EXACT MATCH: Found 1 assignment name links
+2025-10-01 08:42:59,266 - INFO -   Exact match 1: 'Quiz 5 (8.1-8.3)'
+2025-10-01 08:42:59,266 - INFO - Found 1 assignment name links
+2025-10-01 08:42:59,271 - INFO - Found parent row for the assignment
+2025-10-01 08:42:59,277 - INFO - Found due date link in the same row
+2025-10-01 08:42:59,842 - INFO - Clicked due date link
+2025-10-01 08:43:01,843 - INFO - Setting date to '11/4/2025' and time to '11:59 PM' in mini editor...
+2025-10-01 08:43:01,853 - INFO - SUCCESS: Dialog appeared
+2025-10-01 08:43:01,857 - INFO - Found 1 iframe(s) in dialog
+2025-10-01 08:43:01,858 - INFO - Switching to iframe 0...
+2025-10-01 08:43:01,869 - INFO - Found date fields in iframe 0!
+2025-10-01 08:43:01,869 - INFO - Setting date to '11/4/2025' and time to '11:59 PM' inside iframe...
+2025-10-01 08:43:01,869 - INFO - Parsed date: 11/4/2025, time: 23:59
+2025-10-01 08:43:01,869 - INFO - Looking for 'Has Due Date' checkbox (#z_k)
+2025-10-01 08:43:01,878 - INFO - Checkbox is already checked
+2025-10-01 08:43:01,881 - INFO - Successfully set date to 11/4/2025
+2025-10-01 08:43:01,881 - INFO - Successfully set time to 23:59
+2025-10-01 08:43:01,948 - INFO - Clicked Save button
+2025-10-01 08:43:02,451 - INFO - Due date set successfully!
+2025-10-01 08:43:02,453 - INFO - Returning to main page before processing start date...
+2025-10-01 08:43:02,953 - INFO - Setting start date: 11/4/2025 at 11:00 AM
+2025-10-01 08:43:02,956 - INFO - Looking for start date link for assignment: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 08:43:02,956 - INFO - Searching for EXACT match: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 08:43:02,964 - INFO - Trying DASH-FREE search: 'Quiz 5 (8.1 8.3)'
+2025-10-01 08:43:03,636 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 5 (8.1-8.3)'
+2025-10-01 08:43:03,636 - INFO - Found 1 assignment name links
+2025-10-01 08:43:03,641 - INFO - Found parent row for the assignment
+2025-10-01 08:43:03,651 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '4/7/2025 9:30 AM'
+2025-10-01 08:43:04,155 - INFO - Attempting to click start date link...
+2025-10-01 08:43:04,211 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 08:43:04,212 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 08:43:07,213 - INFO - Setting start date to '11/4/2025' and time to '11:00 AM' in mini editor...
+2025-10-01 08:43:07,214 - INFO - Waiting for start date dialog to appear...
+2025-10-01 08:43:07,246 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 08:43:07,252 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 08:43:07,253 - INFO - Switching to iframe 0...
+2025-10-01 08:43:07,266 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 08:43:07,267 - INFO - Switching to iframe 1...
+2025-10-01 08:43:07,282 - INFO - Found date fields in iframe 1!
+2025-10-01 08:43:07,282 - INFO - Setting date to '11/4/2025' and time to '11:00 AM' inside iframe...
+2025-10-01 08:43:07,282 - INFO - Parsed date: 11/4/2025, time: 11:00
+2025-10-01 08:43:07,282 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 08:43:07,311 - INFO - Checkbox is already checked
+2025-10-01 08:43:07,315 - INFO - Successfully set date to 11/4/2025
+2025-10-01 08:43:07,315 - INFO - Successfully set time to 11:00
+2025-10-01 08:43:07,366 - INFO - Clicked Save button
+2025-10-01 08:43:07,866 - INFO - Start date set successfully!
+2025-10-01 08:43:07,866 - INFO - Successfully processed 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 08:43:08,367 - INFO - Row 4: Processing assignment name: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:43:08,369 - INFO - Assignment name length: 25 characters
+2025-10-01 08:43:08,369 - INFO - Assignment name repr: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:43:08,370 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 08:43:08,370 - INFO -   'Name': 'Quiz 6 (10.1 - 10.4, 8.5)' (len=25)
+2025-10-01 08:43:08,370 - INFO -   'Start Date': '11/25/2025' (len=10)
+2025-10-01 08:43:08,370 - INFO -   'Start Time': '11:00 AM' (len=8)
+2025-10-01 08:43:08,370 - INFO -   'Due Date': '11/25/2025' (len=10)
+2025-10-01 08:43:08,371 - INFO -   'Due Time': '11:59 PM' (len=8)
+2025-10-01 08:43:08,371 - INFO -   'Visibility': '' (len=0)
+2025-10-01 08:43:08,371 - INFO - DEBUG: Raw due_date='11/25/2025', due_time='11:59 PM'
+2025-10-01 08:43:08,371 - INFO - DEBUG: due_date bool=True, due_time bool=True
+2025-10-01 08:43:08,371 - INFO - CONDITION MET: Setting due date: 11/25/2025 at 11:59 PM
+2025-10-01 08:43:08,371 - INFO - Looking for due date link for assignment: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:43:08,371 - INFO - Searching for EXACT match: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:43:08,380 - INFO - Trying DASH-FREE search: 'Quiz 6 (10.1 10.4, 8.5)'
+2025-10-01 08:43:09,020 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:43:09,020 - INFO - EXACT MATCH: Found 1 assignment name links
+2025-10-01 08:43:09,026 - INFO -   Exact match 1: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:43:09,026 - INFO - Found 1 assignment name links
+2025-10-01 08:43:09,030 - INFO - Found parent row for the assignment
+2025-10-01 08:43:09,036 - INFO - Found due date link in the same row
+2025-10-01 08:43:09,596 - INFO - Clicked due date link
+2025-10-01 08:43:11,597 - INFO - Setting date to '11/25/2025' and time to '11:59 PM' in mini editor...
+2025-10-01 08:43:11,604 - INFO - SUCCESS: Dialog appeared
+2025-10-01 08:43:11,623 - INFO - Found 1 iframe(s) in dialog
+2025-10-01 08:43:11,623 - INFO - Switching to iframe 0...
+2025-10-01 08:43:11,656 - INFO - Found date fields in iframe 0!
+2025-10-01 08:43:11,656 - INFO - Setting date to '11/25/2025' and time to '11:59 PM' inside iframe...
+2025-10-01 08:43:11,657 - INFO - Parsed date: 11/25/2025, time: 23:59
+2025-10-01 08:43:11,657 - INFO - Looking for 'Has Due Date' checkbox (#z_k)
+2025-10-01 08:43:11,666 - INFO - Checkbox is already checked
+2025-10-01 08:43:11,671 - INFO - Successfully set date to 11/25/2025
+2025-10-01 08:43:11,671 - INFO - Successfully set time to 23:59
+2025-10-01 08:43:11,737 - INFO - Clicked Save button
+2025-10-01 08:43:12,238 - INFO - Due date set successfully!
+2025-10-01 08:43:12,239 - INFO - Returning to main page before processing start date...
+2025-10-01 08:43:12,740 - INFO - Setting start date: 11/25/2025 at 11:00 AM
+2025-10-01 08:43:12,741 - INFO - Looking for start date link for assignment: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:43:12,741 - INFO - Searching for EXACT match: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:43:12,748 - INFO - Trying DASH-FREE search: 'Quiz 6 (10.1 10.4, 8.5)'
+2025-10-01 08:43:13,473 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:43:13,475 - INFO - Found 1 assignment name links
+2025-10-01 08:43:13,481 - INFO - Found parent row for the assignment
+2025-10-01 08:43:13,490 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '4/23/2025 8:00 AM'
+2025-10-01 08:43:13,995 - INFO - Attempting to click start date link...
+2025-10-01 08:43:14,052 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 08:43:14,053 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 08:43:17,053 - INFO - Setting start date to '11/25/2025' and time to '11:00 AM' in mini editor...
+2025-10-01 08:43:17,053 - INFO - Waiting for start date dialog to appear...
+2025-10-01 08:43:17,061 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 08:43:17,066 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 08:43:17,066 - INFO - Switching to iframe 0...
+2025-10-01 08:43:17,091 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 08:43:17,093 - INFO - Switching to iframe 1...
+2025-10-01 08:43:17,105 - INFO - Found date fields in iframe 1!
+2025-10-01 08:43:17,105 - INFO - Setting date to '11/25/2025' and time to '11:00 AM' inside iframe...
+2025-10-01 08:43:17,105 - INFO - Parsed date: 11/25/2025, time: 11:00
+2025-10-01 08:43:17,106 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 08:43:17,113 - INFO - Checkbox is already checked
+2025-10-01 08:43:17,116 - INFO - Successfully set date to 11/25/2025
+2025-10-01 08:43:17,116 - INFO - Successfully set time to 11:00
+2025-10-01 08:43:17,188 - INFO - Clicked Save button
+2025-10-01 08:43:17,688 - INFO - Start date set successfully!
+2025-10-01 08:43:17,690 - INFO - Successfully processed 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:43:18,191 - INFO - Row 5: Processing assignment name: 'Quiz 5 (8.1-8.3) key'
+2025-10-01 08:43:18,191 - INFO - Assignment name length: 20 characters
+2025-10-01 08:43:18,191 - INFO - Assignment name repr: 'Quiz 5 (8.1-8.3) key'
+2025-10-01 08:43:18,192 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 08:43:18,192 - INFO -   'Name': 'Quiz 5 (8.1-8.3) key' (len=20)
+2025-10-01 08:43:18,192 - INFO -   'Start Date': '11/5/2025' (len=9)
+2025-10-01 08:43:18,192 - INFO -   'Start Time': '6:00 AM' (len=7)
+2025-10-01 08:43:18,192 - INFO -   'Due Date': '' (len=0)
+2025-10-01 08:43:18,192 - INFO -   'Due Time': '' (len=0)
+2025-10-01 08:43:18,193 - INFO -   'Visibility': '' (len=0)
+2025-10-01 08:43:18,193 - INFO - DEBUG: Raw due_date='', due_time=''
+2025-10-01 08:43:18,193 - INFO - DEBUG: due_date bool=False, due_time bool=False
+2025-10-01 08:43:18,193 - WARNING - SKIPPING due date - due_date='' (False), due_time='' (False)
+2025-10-01 08:43:18,193 - INFO - Setting start date: 11/5/2025 at 6:00 AM
+2025-10-01 08:43:18,193 - INFO - Looking for start date link for assignment: 'Quiz 5 (8.1-8.3) key'
+2025-10-01 08:43:18,193 - INFO - Searching for EXACT match: 'Quiz 5 (8.1-8.3) key'
+2025-10-01 08:43:18,205 - INFO - Trying DASH-FREE search: 'Quiz 5 (8.1 8.3) key'
+2025-10-01 08:43:18,906 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 5 (8.1-8.3) key'
+2025-10-01 08:43:18,906 - INFO - Found 1 assignment name links
+2025-10-01 08:43:18,912 - INFO - Found parent row for the assignment
+2025-10-01 08:43:18,923 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '4/8/2025 6:00 AM'
+2025-10-01 08:43:19,428 - INFO - Attempting to click start date link...
+2025-10-01 08:43:19,497 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 08:43:19,497 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 08:43:22,498 - INFO - Setting start date to '11/5/2025' and time to '6:00 AM' in mini editor...
+2025-10-01 08:43:22,499 - INFO - Waiting for start date dialog to appear...
+2025-10-01 08:43:22,507 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 08:43:22,512 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 08:43:22,512 - INFO - Switching to iframe 0...
+2025-10-01 08:43:22,526 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 08:43:22,527 - INFO - Switching to iframe 1...
+2025-10-01 08:43:22,539 - INFO - Found date fields in iframe 1!
+2025-10-01 08:43:22,539 - INFO - Setting date to '11/5/2025' and time to '6:00 AM' inside iframe...
+2025-10-01 08:43:22,540 - INFO - Parsed date: 11/5/2025, time: 6:00
+2025-10-01 08:43:22,540 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 08:43:22,547 - INFO - Checkbox is already checked
+2025-10-01 08:43:22,550 - INFO - Successfully set date to 11/5/2025
+2025-10-01 08:43:22,551 - INFO - Successfully set time to 6:00
+2025-10-01 08:43:22,606 - INFO - Clicked Save button
+2025-10-01 08:43:23,107 - INFO - Start date set successfully!
+2025-10-01 08:43:23,108 - INFO - Successfully processed 'Quiz 5 (8.1-8.3) key'
+2025-10-01 08:43:23,609 - INFO - Row 6: Processing assignment name: 'Quiz 6 (10.1 - 10.4, 8.5) Key'
+2025-10-01 08:43:23,609 - INFO - Assignment name length: 29 characters
+2025-10-01 08:43:23,611 - INFO - Assignment name repr: 'Quiz 6 (10.1 - 10.4, 8.5) Key'
+2025-10-01 08:43:23,611 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 08:43:23,611 - INFO -   'Name': 'Quiz 6 (10.1 - 10.4, 8.5) Key' (len=29)
+2025-10-01 08:43:23,612 - INFO -   'Start Date': '11/26/2025' (len=10)
+2025-10-01 08:43:23,612 - INFO -   'Start Time': '6:00 AM' (len=7)
+2025-10-01 08:43:23,612 - INFO -   'Due Date': '' (len=0)
+2025-10-01 08:43:23,612 - INFO -   'Due Time': '' (len=0)
+2025-10-01 08:43:23,612 - INFO -   'Visibility': '' (len=0)
+2025-10-01 08:43:23,613 - INFO - DEBUG: Raw due_date='', due_time=''
+2025-10-01 08:43:23,613 - INFO - DEBUG: due_date bool=False, due_time bool=False
+2025-10-01 08:43:23,613 - WARNING - SKIPPING due date - due_date='' (False), due_time='' (False)
+2025-10-01 08:43:23,613 - INFO - Setting start date: 11/26/2025 at 6:00 AM
+2025-10-01 08:43:23,613 - INFO - Looking for start date link for assignment: 'Quiz 6 (10.1 - 10.4, 8.5) Key'
+2025-10-01 08:43:23,613 - INFO - Searching for EXACT match: 'Quiz 6 (10.1 - 10.4, 8.5) Key'
+2025-10-01 08:43:23,649 - INFO - Trying DASH-FREE search: 'Quiz 6 (10.1 10.4, 8.5) Key'
+2025-10-01 08:43:24,291 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 6 (10.1 - 10.4, 8.5) Key'
+2025-10-01 08:43:24,292 - INFO - Found 1 assignment name links
+2025-10-01 08:43:24,297 - INFO - Found parent row for the assignment
+2025-10-01 08:43:24,308 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '4/24/2025 10:00 AM'
+2025-10-01 08:43:24,812 - INFO - Attempting to click start date link...
+2025-10-01 08:43:24,868 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 08:43:24,869 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 08:43:27,869 - INFO - Setting start date to '11/26/2025' and time to '6:00 AM' in mini editor...
+2025-10-01 08:43:27,871 - INFO - Waiting for start date dialog to appear...
+2025-10-01 08:43:27,879 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 08:43:27,884 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 08:43:27,886 - INFO - Switching to iframe 0...
+2025-10-01 08:43:27,897 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 08:43:27,898 - INFO - Switching to iframe 1...
+2025-10-01 08:43:27,927 - INFO - Found date fields in iframe 1!
+2025-10-01 08:43:27,928 - INFO - Setting date to '11/26/2025' and time to '6:00 AM' inside iframe...
+2025-10-01 08:43:27,928 - INFO - Parsed date: 11/26/2025, time: 6:00
+2025-10-01 08:43:27,928 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 08:43:27,937 - INFO - Checkbox is already checked
+2025-10-01 08:43:27,940 - INFO - Successfully set date to 11/26/2025
+2025-10-01 08:43:27,941 - INFO - Successfully set time to 6:00
+2025-10-01 08:43:27,992 - INFO - Clicked Save button
+2025-10-01 08:43:28,493 - INFO - Start date set successfully!
+2025-10-01 08:43:28,493 - INFO - Successfully processed 'Quiz 6 (10.1 - 10.4, 8.5) Key'
+2025-10-01 08:43:28,994 - INFO - Row 7: Processing assignment name: 'YouTube: 7.1 - 7.4 Quiz Worked Out'
+2025-10-01 08:43:28,995 - INFO - Assignment name length: 34 characters
+2025-10-01 08:43:28,995 - INFO - Assignment name repr: 'YouTube: 7.1 - 7.4 Quiz Worked Out'
+2025-10-01 08:43:28,995 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 08:43:28,996 - INFO -   'Name': 'YouTube: 7.1 - 7.4 Quiz Worked Out' (len=34)
+2025-10-01 08:43:28,996 - INFO -   'Start Date': '10/22/2025' (len=10)
+2025-10-01 08:43:28,996 - INFO -   'Start Time': '6:00 AM' (len=7)
+2025-10-01 08:43:28,997 - INFO -   'Due Date': '' (len=0)
+2025-10-01 08:43:28,997 - INFO -   'Due Time': '' (len=0)
+2025-10-01 08:43:28,997 - INFO -   'Visibility': '' (len=0)
+2025-10-01 08:43:28,997 - INFO - DEBUG: Raw due_date='', due_time=''
+2025-10-01 08:43:28,997 - INFO - DEBUG: due_date bool=False, due_time bool=False
+2025-10-01 08:43:28,998 - WARNING - SKIPPING due date - due_date='' (False), due_time='' (False)
+2025-10-01 08:43:28,998 - INFO - Setting start date: 10/22/2025 at 6:00 AM
+2025-10-01 08:43:28,998 - INFO - Looking for start date link for assignment: 'YouTube: 7.1 - 7.4 Quiz Worked Out'
+2025-10-01 08:43:28,998 - INFO - Searching for EXACT match: 'YouTube: 7.1 - 7.4 Quiz Worked Out'
+2025-10-01 08:43:29,011 - INFO - Trying DASH-FREE search: 'YouTube: 7.1 7.4 Quiz Worked Out'
+2025-10-01 08:43:29,833 - INFO - SUCCESS: Found DASH-FREE match! 'YouTube: 7.1 - 7.4 Quiz Worked Out'
+2025-10-01 08:43:29,834 - INFO - Found 1 assignment name links
+2025-10-01 08:43:29,840 - INFO - Found parent row for the assignment
+2025-10-01 08:43:29,851 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '4/1/2025 6:00 AM'
+2025-10-01 08:43:30,364 - INFO - Attempting to click start date link...
+2025-10-01 08:43:30,431 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 08:43:30,431 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 08:43:33,432 - INFO - Setting start date to '10/22/2025' and time to '6:00 AM' in mini editor...
+2025-10-01 08:43:33,434 - INFO - Waiting for start date dialog to appear...
+2025-10-01 08:43:33,442 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 08:43:33,447 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 08:43:33,447 - INFO - Switching to iframe 0...
+2025-10-01 08:43:33,460 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 08:43:33,461 - INFO - Switching to iframe 1...
+2025-10-01 08:43:33,473 - INFO - Found date fields in iframe 1!
+2025-10-01 08:43:33,474 - INFO - Setting date to '10/22/2025' and time to '6:00 AM' inside iframe...
+2025-10-01 08:43:33,474 - INFO - Parsed date: 10/22/2025, time: 6:00
+2025-10-01 08:43:33,474 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 08:43:33,481 - INFO - Checkbox is already checked
+2025-10-01 08:43:33,485 - INFO - Successfully set date to 10/22/2025
+2025-10-01 08:43:33,486 - INFO - Successfully set time to 6:00
+2025-10-01 08:43:33,537 - INFO - Clicked Save button
+2025-10-01 08:43:34,037 - INFO - Start date set successfully!
+2025-10-01 08:43:34,038 - INFO - Successfully processed 'YouTube: 7.1 - 7.4 Quiz Worked Out'
+2025-10-01 08:43:34,539 - INFO - Row 8: Processing assignment name: 'Quiz 4 (7.1-7.4) key'
+2025-10-01 08:43:34,540 - INFO - Assignment name length: 20 characters
+2025-10-01 08:43:34,540 - INFO - Assignment name repr: 'Quiz 4 (7.1-7.4) key'
+2025-10-01 08:43:34,541 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 08:43:34,541 - INFO -   'Name': 'Quiz 4 (7.1-7.4) key' (len=20)
+2025-10-01 08:43:34,541 - INFO -   'Start Date': '10/22/2025' (len=10)
+2025-10-01 08:43:34,542 - INFO -   'Start Time': '6:00 AM' (len=7)
+2025-10-01 08:43:34,542 - INFO -   'Due Date': '' (len=0)
+2025-10-01 08:43:34,542 - INFO -   'Due Time': '' (len=0)
+2025-10-01 08:43:34,542 - INFO -   'Visibility': '' (len=0)
+2025-10-01 08:43:34,543 - INFO - DEBUG: Raw due_date='', due_time=''
+2025-10-01 08:43:34,543 - INFO - DEBUG: due_date bool=False, due_time bool=False
+2025-10-01 08:43:34,543 - WARNING - SKIPPING due date - due_date='' (False), due_time='' (False)
+2025-10-01 08:43:34,543 - INFO - Setting start date: 10/22/2025 at 6:00 AM
+2025-10-01 08:43:34,543 - INFO - Looking for start date link for assignment: 'Quiz 4 (7.1-7.4) key'
+2025-10-01 08:43:34,543 - INFO - Searching for EXACT match: 'Quiz 4 (7.1-7.4) key'
+2025-10-01 08:43:34,556 - INFO - Trying DASH-FREE search: 'Quiz 4 (7.1 7.4) key'
+2025-10-01 08:43:35,230 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 4 (7.1-7.4) key'
+2025-10-01 08:43:35,232 - INFO - Found 1 assignment name links
+2025-10-01 08:43:35,237 - INFO - Found parent row for the assignment
+2025-10-01 08:43:35,246 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '4/1/2025 6:00 AM'
+2025-10-01 08:43:35,760 - INFO - Attempting to click start date link...
+2025-10-01 08:43:35,821 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 08:43:35,822 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 08:43:38,823 - INFO - Setting start date to '10/22/2025' and time to '6:00 AM' in mini editor...
+2025-10-01 08:43:38,823 - INFO - Waiting for start date dialog to appear...
+2025-10-01 08:43:38,832 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 08:43:38,855 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 08:43:38,856 - INFO - Switching to iframe 0...
+2025-10-01 08:43:38,868 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 08:43:38,870 - INFO - Switching to iframe 1...
+2025-10-01 08:43:38,881 - INFO - Found date fields in iframe 1!
+2025-10-01 08:43:38,881 - INFO - Setting date to '10/22/2025' and time to '6:00 AM' inside iframe...
+2025-10-01 08:43:38,881 - INFO - Parsed date: 10/22/2025, time: 6:00
+2025-10-01 08:43:38,881 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 08:43:38,891 - INFO - Checkbox is already checked
+2025-10-01 08:43:38,895 - INFO - Successfully set date to 10/22/2025
+2025-10-01 08:43:38,896 - INFO - Successfully set time to 6:00
+2025-10-01 08:43:38,943 - INFO - Clicked Save button
+2025-10-01 08:43:39,443 - INFO - Start date set successfully!
+2025-10-01 08:43:39,444 - INFO - Successfully processed 'Quiz 4 (7.1-7.4) key'
+2025-10-01 08:43:39,944 - INFO - Row 9: Processing assignment name: 'YouTube: Quiz 5 (8.1-8.3) Worked Out'
+2025-10-01 08:43:39,945 - INFO - Assignment name length: 36 characters
+2025-10-01 08:43:39,947 - INFO - Assignment name repr: 'YouTube: Quiz 5 (8.1-8.3) Worked Out'
+2025-10-01 08:43:39,947 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 08:43:39,947 - INFO -   'Name': 'YouTube: Quiz 5 (8.1-8.3) Worked Out' (len=36)
+2025-10-01 08:43:39,947 - INFO -   'Start Date': '11/5/2025' (len=9)
+2025-10-01 08:43:39,947 - INFO -   'Start Time': '6:00 AM' (len=7)
+2025-10-01 08:43:39,948 - INFO -   'Due Date': '' (len=0)
+2025-10-01 08:43:39,948 - INFO -   'Due Time': '' (len=0)
+2025-10-01 08:43:39,948 - INFO -   'Visibility': '' (len=0)
+2025-10-01 08:43:39,948 - INFO - DEBUG: Raw due_date='', due_time=''
+2025-10-01 08:43:39,949 - INFO - DEBUG: due_date bool=False, due_time bool=False
+2025-10-01 08:43:39,949 - WARNING - SKIPPING due date - due_date='' (False), due_time='' (False)
+2025-10-01 08:43:39,949 - INFO - Setting start date: 11/5/2025 at 6:00 AM
+2025-10-01 08:43:39,951 - INFO - Looking for start date link for assignment: 'YouTube: Quiz 5 (8.1-8.3) Worked Out'
+2025-10-01 08:43:39,951 - INFO - Searching for EXACT match: 'YouTube: Quiz 5 (8.1-8.3) Worked Out'
+2025-10-01 08:43:39,961 - INFO - Trying DASH-FREE search: 'YouTube: Quiz 5 (8.1 8.3) Worked Out'
+2025-10-01 08:43:40,774 - INFO - SUCCESS: Found DASH-FREE match! 'YouTube: Quiz 5 (8.1-8.3) Worked Out'
+2025-10-01 08:43:40,775 - INFO - Found 1 assignment name links
+2025-10-01 08:43:40,782 - INFO - Found parent row for the assignment
+2025-10-01 08:43:40,792 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '4/8/2025 6:00 AM'
+2025-10-01 08:43:41,299 - INFO - Attempting to click start date link...
+2025-10-01 08:43:41,356 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 08:43:41,356 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 08:43:44,357 - INFO - Setting start date to '11/5/2025' and time to '6:00 AM' in mini editor...
+2025-10-01 08:43:44,358 - INFO - Waiting for start date dialog to appear...
+2025-10-01 08:43:44,366 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 08:43:44,379 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 08:43:44,379 - INFO - Switching to iframe 0...
+2025-10-01 08:43:44,392 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 08:43:44,393 - INFO - Switching to iframe 1...
+2025-10-01 08:43:44,405 - INFO - Found date fields in iframe 1!
+2025-10-01 08:43:44,405 - INFO - Setting date to '11/5/2025' and time to '6:00 AM' inside iframe...
+2025-10-01 08:43:44,405 - INFO - Parsed date: 11/5/2025, time: 6:00
+2025-10-01 08:43:44,405 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 08:43:44,413 - INFO - Checkbox is already checked
+2025-10-01 08:43:44,418 - INFO - Successfully set date to 11/5/2025
+2025-10-01 08:43:44,418 - INFO - Successfully set time to 6:00
+2025-10-01 08:43:44,465 - INFO - Clicked Save button
+2025-10-01 08:43:44,965 - INFO - Start date set successfully!
+2025-10-01 08:43:44,966 - INFO - Successfully processed 'YouTube: Quiz 5 (8.1-8.3) Worked Out'
+2025-10-01 08:43:45,466 - INFO - CSV processing completed: 8 successful, 0 errors
+2025-10-01 08:49:43,230 - INFO - ====== WebDriver manager ======
+2025-10-01 08:49:43,970 - INFO - Get LATEST chromedriver version for google-chrome
+2025-10-01 08:49:44,229 - INFO - Get LATEST chromedriver version for google-chrome
+2025-10-01 08:49:44,458 - INFO - Driver [C:\Users\chase\.wdm\drivers\chromedriver\win64\141.0.7390.54\chromedriver-win32/chromedriver.exe] found in cache
+2025-10-01 08:49:46,602 - INFO - Chrome driver initialized successfully
+2025-10-01 08:50:10,557 - INFO - Processing CSV file: C:/Users/chase/My Drive/scripts/School Scripts/D2L Macro/D2L Assignments.csv
+2025-10-01 08:50:10,557 - INFO - CSV headers found: ['Name', 'Start Date', 'Start Time', 'Due Date', 'Due Time', 'Visibility']
+2025-10-01 08:50:10,557 - INFO - Row 2: Processing assignment name: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:50:10,558 - INFO - Assignment name length: 18 characters
+2025-10-01 08:50:10,558 - INFO - Assignment name repr: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:50:10,558 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 08:50:10,558 - INFO -   'Name': 'Quiz 4 (7.1 - 7.4)' (len=18)
+2025-10-01 08:50:10,558 - INFO -   'Start Date': '10/22/2025' (len=10)
+2025-10-01 08:50:10,558 - INFO -   'Start Time': '11:00 AM' (len=8)
+2025-10-01 08:50:10,559 - INFO -   'Due Date': '10/22/2025' (len=10)
+2025-10-01 08:50:10,559 - INFO -   'Due Time': '11:59 PM' (len=8)
+2025-10-01 08:50:10,559 - INFO -   'Visibility': '' (len=0)
+2025-10-01 08:50:10,559 - INFO - DEBUG: Raw due_date='10/22/2025', due_time='11:59 PM'
+2025-10-01 08:50:10,559 - INFO - DEBUG: due_date bool=True, due_time bool=True
+2025-10-01 08:50:10,559 - INFO - CONDITION MET: Setting due date: 10/22/2025 at 11:59 PM
+2025-10-01 08:50:10,560 - INFO - Looking for due date link for assignment: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:50:10,560 - INFO - Searching for EXACT match: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:50:10,580 - INFO - Trying DASH-FREE search: 'Quiz 4 (7.1 7.4)'
+2025-10-01 08:50:11,196 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:50:11,198 - INFO - EXACT MATCH: Found 1 assignment name links
+2025-10-01 08:50:11,204 - INFO -   Exact match 1: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:50:11,204 - INFO - Found 1 assignment name links
+2025-10-01 08:50:11,212 - INFO - Found parent row for the assignment
+2025-10-01 08:50:11,220 - INFO - Found due date link in the same row
+2025-10-01 08:50:11,801 - INFO - Clicked due date link
+2025-10-01 08:50:13,803 - INFO - Setting date to '10/22/2025' and time to '11:59 PM' in mini editor...
+2025-10-01 08:50:13,815 - INFO - SUCCESS: Dialog appeared
+2025-10-01 08:50:13,851 - INFO - Found 1 iframe(s) in dialog
+2025-10-01 08:50:13,853 - INFO - Switching to iframe 0...
+2025-10-01 08:50:13,865 - INFO - Found date fields in iframe 0!
+2025-10-01 08:50:13,865 - INFO - Setting date to '10/22/2025' and time to '11:59 PM' inside iframe...
+2025-10-01 08:50:13,865 - INFO - Parsed date: 10/22/2025, time: 23:59
+2025-10-01 08:50:13,865 - INFO - Looking for 'Has Due Date' checkbox (#z_k)
+2025-10-01 08:50:13,876 - INFO - Checkbox is already checked
+2025-10-01 08:50:13,880 - INFO - Successfully set date to 10/22/2025
+2025-10-01 08:50:13,880 - INFO - Successfully set time to 23:59
+2025-10-01 08:50:13,960 - INFO - Clicked Save button
+2025-10-01 08:50:14,461 - INFO - Due date set successfully!
+2025-10-01 08:50:14,462 - INFO - Returning to main page before processing start date...
+2025-10-01 08:50:14,963 - INFO - Setting start date: 10/22/2025 at 11:00 AM
+2025-10-01 08:50:14,963 - INFO - Looking for start date link for assignment: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:50:14,965 - INFO - Searching for EXACT match: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:50:14,977 - INFO - Trying DASH-FREE search: 'Quiz 4 (7.1 7.4)'
+2025-10-01 08:50:16,037 - INFO - Trying without quotes: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:50:16,044 - ERROR - NO EXACT MATCHES FOUND for 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:50:16,044 - ERROR - Available content names on page:
+2025-10-01 08:50:16,071 - ERROR - Found 170 total content items:
+2025-10-01 08:50:16,076 - ERROR -   Available 1: '10.1 - 10.3 Homework'
+2025-10-01 08:50:16,080 - ERROR -   Available 2: '10.1 - 10.3 Homework Key'
+2025-10-01 08:50:16,085 - ERROR -   Available 3: '10.1 Frequency Distributions'
+2025-10-01 08:50:16,092 - ERROR -   Available 4: '10.1 Frequency Distributions Class Notes'
+2025-10-01 08:50:16,096 - ERROR -   Available 5: '10.2 Measures of Central Tendency'
+2025-10-01 08:50:16,100 - ERROR -   Available 6: '10.2 Measures of Central Tendency Class Notes'
+2025-10-01 08:50:16,119 - ERROR -   Available 7: '10.3 Measures of Dispersion'
+2025-10-01 08:50:16,125 - ERROR -   Available 8: '10.3 Measures of Dispersion Class Notes'
+2025-10-01 08:50:16,131 - ERROR -   Available 9: '10.4 Bernoulli Trials and Binomial Distributions'
+2025-10-01 08:50:16,149 - ERROR -   Available 10: '10.4 Bernoulli Trials and Binomial Distributions Class Notes'
+2025-10-01 08:50:16,182 - ERROR -   Available 11: '3.1 - 3.4 Quiz Worked Out'
+2025-10-01 08:50:16,213 - ERROR -   Available 12: '3.1, 3.2'
+2025-10-01 08:50:16,219 - ERROR -   Available 13: '3.1,3.2 Class Notes'
+2025-10-01 08:50:16,224 - ERROR -   Available 14: '3.1-3.2'
+2025-10-01 08:50:16,229 - ERROR -   Available 15: '3.3'
+2025-10-01 08:50:16,237 - INFO - Found 1 cells containing assignment name
+2025-10-01 08:50:16,263 - INFO - Found start date link (including dash): '3/26/2025 9:30 AM'
+2025-10-01 08:50:16,767 - INFO - Attempting to click start date link...
+2025-10-01 08:50:16,826 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 08:50:16,826 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 08:50:19,826 - INFO - Setting start date to '10/22/2025' and time to '11:00 AM' in mini editor...
+2025-10-01 08:50:19,827 - INFO - Waiting for start date dialog to appear...
+2025-10-01 08:50:19,854 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 08:50:19,864 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 08:50:19,865 - INFO - Switching to iframe 0...
+2025-10-01 08:50:19,879 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 08:50:19,880 - INFO - Switching to iframe 1...
+2025-10-01 08:50:19,894 - INFO - Found date fields in iframe 1!
+2025-10-01 08:50:19,894 - INFO - Setting date to '10/22/2025' and time to '11:00 AM' inside iframe...
+2025-10-01 08:50:19,894 - INFO - Parsed date: 10/22/2025, time: 11:00
+2025-10-01 08:50:19,894 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 08:50:19,905 - INFO - Checkbox is already checked
+2025-10-01 08:50:19,908 - INFO - Successfully set date to 10/22/2025
+2025-10-01 08:50:19,909 - INFO - Successfully set time to 11:00
+2025-10-01 08:50:19,959 - INFO - Clicked Save button
+2025-10-01 08:50:20,460 - INFO - Start date set successfully!
+2025-10-01 08:50:20,460 - INFO - Successfully processed 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 08:50:20,961 - INFO - Row 3: Processing assignment name: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 08:50:20,962 - INFO - Assignment name length: 18 characters
+2025-10-01 08:50:20,963 - INFO - Assignment name repr: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 08:50:20,963 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 08:50:20,963 - INFO -   'Name': 'Quiz 5 (8.1 - 8.3)' (len=18)
+2025-10-01 08:50:20,964 - INFO -   'Start Date': '11/3/2025' (len=9)
+2025-10-01 08:50:20,964 - INFO -   'Start Time': '11:00 AM' (len=8)
+2025-10-01 08:50:20,964 - INFO -   'Due Date': '11/3/2025' (len=9)
+2025-10-01 08:50:20,964 - INFO -   'Due Time': '11:59 PM' (len=8)
+2025-10-01 08:50:20,964 - INFO -   'Visibility': '' (len=0)
+2025-10-01 08:50:20,964 - INFO - DEBUG: Raw due_date='11/3/2025', due_time='11:59 PM'
+2025-10-01 08:50:20,965 - INFO - DEBUG: due_date bool=True, due_time bool=True
+2025-10-01 08:50:20,965 - INFO - CONDITION MET: Setting due date: 11/3/2025 at 11:59 PM
+2025-10-01 08:50:20,965 - INFO - Looking for due date link for assignment: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 08:50:20,965 - INFO - Searching for EXACT match: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 08:50:20,993 - INFO - Trying DASH-FREE search: 'Quiz 5 (8.1 8.3)'
+2025-10-01 08:50:21,650 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 5 (8.1-8.3)'
+2025-10-01 08:50:21,651 - INFO - EXACT MATCH: Found 1 assignment name links
+2025-10-01 08:50:21,656 - INFO -   Exact match 1: 'Quiz 5 (8.1-8.3)'
+2025-10-01 08:50:21,656 - INFO - Found 1 assignment name links
+2025-10-01 08:50:21,661 - INFO - Found parent row for the assignment
+2025-10-01 08:50:21,666 - INFO - Found due date link in the same row
+2025-10-01 08:50:22,250 - INFO - Clicked due date link
+2025-10-01 08:50:24,251 - INFO - Setting date to '11/3/2025' and time to '11:59 PM' in mini editor...
+2025-10-01 08:50:24,262 - INFO - SUCCESS: Dialog appeared
+2025-10-01 08:50:24,266 - INFO - Found 1 iframe(s) in dialog
+2025-10-01 08:50:24,266 - INFO - Switching to iframe 0...
+2025-10-01 08:50:24,278 - INFO - Found date fields in iframe 0!
+2025-10-01 08:50:24,279 - INFO - Setting date to '11/3/2025' and time to '11:59 PM' inside iframe...
+2025-10-01 08:50:24,279 - INFO - Parsed date: 11/3/2025, time: 23:59
+2025-10-01 08:50:24,279 - INFO - Looking for 'Has Due Date' checkbox (#z_k)
+2025-10-01 08:50:24,301 - INFO - Checkbox is already checked
+2025-10-01 08:50:24,305 - INFO - Successfully set date to 11/3/2025
+2025-10-01 08:50:24,305 - INFO - Successfully set time to 23:59
+2025-10-01 08:50:24,349 - INFO - Clicked Save button
+2025-10-01 08:50:24,850 - INFO - Due date set successfully!
+2025-10-01 08:50:24,851 - INFO - Returning to main page before processing start date...
+2025-10-01 08:50:25,352 - INFO - Setting start date: 11/3/2025 at 11:00 AM
+2025-10-01 08:50:25,352 - INFO - Looking for start date link for assignment: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 08:50:25,353 - INFO - Searching for EXACT match: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 08:50:25,364 - INFO - Trying DASH-FREE search: 'Quiz 5 (8.1 8.3)'
+2025-10-01 08:50:26,039 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 5 (8.1-8.3)'
+2025-10-01 08:50:26,041 - INFO - Found 1 assignment name links
+2025-10-01 08:50:26,046 - INFO - Found parent row for the assignment
+2025-10-01 08:50:26,058 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '4/7/2025 9:30 AM'
+2025-10-01 08:50:26,561 - INFO - Attempting to click start date link...
+2025-10-01 08:50:26,616 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 08:50:26,616 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 08:50:29,617 - INFO - Setting start date to '11/3/2025' and time to '11:00 AM' in mini editor...
+2025-10-01 08:50:29,618 - INFO - Waiting for start date dialog to appear...
+2025-10-01 08:50:29,626 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 08:50:29,631 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 08:50:29,631 - INFO - Switching to iframe 0...
+2025-10-01 08:50:29,644 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 08:50:29,645 - INFO - Switching to iframe 1...
+2025-10-01 08:50:29,659 - INFO - Found date fields in iframe 1!
+2025-10-01 08:50:29,659 - INFO - Setting date to '11/3/2025' and time to '11:00 AM' inside iframe...
+2025-10-01 08:50:29,659 - INFO - Parsed date: 11/3/2025, time: 11:00
+2025-10-01 08:50:29,659 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 08:50:29,666 - INFO - Checkbox is already checked
+2025-10-01 08:50:29,671 - INFO - Successfully set date to 11/3/2025
+2025-10-01 08:50:29,672 - INFO - Successfully set time to 11:00
+2025-10-01 08:50:29,745 - INFO - Clicked Save button
+2025-10-01 08:50:30,246 - INFO - Start date set successfully!
+2025-10-01 08:50:30,247 - INFO - Successfully processed 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 08:50:30,747 - INFO - Row 4: Processing assignment name: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:50:30,748 - INFO - Assignment name length: 25 characters
+2025-10-01 08:50:30,749 - INFO - Assignment name repr: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:50:30,749 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 08:50:30,750 - INFO -   'Name': 'Quiz 6 (10.1 - 10.4, 8.5)' (len=25)
+2025-10-01 08:50:30,750 - INFO -   'Start Date': '11/24/2025' (len=10)
+2025-10-01 08:50:30,750 - INFO -   'Start Time': '11:00 AM' (len=8)
+2025-10-01 08:50:30,750 - INFO -   'Due Date': '11/24/2025' (len=10)
+2025-10-01 08:50:30,750 - INFO -   'Due Time': '11:59 PM' (len=8)
+2025-10-01 08:50:30,751 - INFO -   'Visibility': '' (len=0)
+2025-10-01 08:50:30,752 - INFO - DEBUG: Raw due_date='11/24/2025', due_time='11:59 PM'
+2025-10-01 08:50:30,753 - INFO - DEBUG: due_date bool=True, due_time bool=True
+2025-10-01 08:50:30,753 - INFO - CONDITION MET: Setting due date: 11/24/2025 at 11:59 PM
+2025-10-01 08:50:30,753 - INFO - Looking for due date link for assignment: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:50:30,754 - INFO - Searching for EXACT match: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:50:30,763 - INFO - Trying DASH-FREE search: 'Quiz 6 (10.1 10.4, 8.5)'
+2025-10-01 08:50:31,382 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:50:31,383 - INFO - EXACT MATCH: Found 1 assignment name links
+2025-10-01 08:50:31,387 - INFO -   Exact match 1: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:50:31,388 - INFO - Found 1 assignment name links
+2025-10-01 08:50:31,393 - INFO - Found parent row for the assignment
+2025-10-01 08:50:31,398 - INFO - Found due date link in the same row
+2025-10-01 08:50:31,964 - INFO - Clicked due date link
+2025-10-01 08:50:33,964 - INFO - Setting date to '11/24/2025' and time to '11:59 PM' in mini editor...
+2025-10-01 08:50:33,975 - INFO - SUCCESS: Dialog appeared
+2025-10-01 08:50:33,979 - INFO - Found 1 iframe(s) in dialog
+2025-10-01 08:50:33,980 - INFO - Switching to iframe 0...
+2025-10-01 08:50:33,991 - INFO - Found date fields in iframe 0!
+2025-10-01 08:50:33,991 - INFO - Setting date to '11/24/2025' and time to '11:59 PM' inside iframe...
+2025-10-01 08:50:33,991 - INFO - Parsed date: 11/24/2025, time: 23:59
+2025-10-01 08:50:33,991 - INFO - Looking for 'Has Due Date' checkbox (#z_k)
+2025-10-01 08:50:33,998 - INFO - Checkbox is already checked
+2025-10-01 08:50:34,004 - INFO - Successfully set date to 11/24/2025
+2025-10-01 08:50:34,004 - INFO - Successfully set time to 23:59
+2025-10-01 08:50:34,050 - INFO - Clicked Save button
+2025-10-01 08:50:34,551 - INFO - Due date set successfully!
+2025-10-01 08:50:34,553 - INFO - Returning to main page before processing start date...
+2025-10-01 08:50:35,054 - INFO - Setting start date: 11/24/2025 at 11:00 AM
+2025-10-01 08:50:35,054 - INFO - Looking for start date link for assignment: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:50:35,055 - INFO - Searching for EXACT match: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:50:35,063 - INFO - Trying DASH-FREE search: 'Quiz 6 (10.1 10.4, 8.5)'
+2025-10-01 08:50:35,688 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:50:35,690 - INFO - Found 1 assignment name links
+2025-10-01 08:50:35,695 - INFO - Found parent row for the assignment
+2025-10-01 08:50:35,705 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '4/23/2025 8:00 AM'
+2025-10-01 08:50:36,208 - INFO - Attempting to click start date link...
+2025-10-01 08:50:36,262 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 08:50:36,263 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 08:50:39,264 - INFO - Setting start date to '11/24/2025' and time to '11:00 AM' in mini editor...
+2025-10-01 08:50:39,266 - INFO - Waiting for start date dialog to appear...
+2025-10-01 08:50:39,276 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 08:50:39,296 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 08:50:39,297 - INFO - Switching to iframe 0...
+2025-10-01 08:50:39,310 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 08:50:39,311 - INFO - Switching to iframe 1...
+2025-10-01 08:50:39,324 - INFO - Found date fields in iframe 1!
+2025-10-01 08:50:39,324 - INFO - Setting date to '11/24/2025' and time to '11:00 AM' inside iframe...
+2025-10-01 08:50:39,324 - INFO - Parsed date: 11/24/2025, time: 11:00
+2025-10-01 08:50:39,324 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 08:50:39,332 - INFO - Checkbox is already checked
+2025-10-01 08:50:39,335 - INFO - Successfully set date to 11/24/2025
+2025-10-01 08:50:39,335 - INFO - Successfully set time to 11:00
+2025-10-01 08:50:39,384 - INFO - Clicked Save button
+2025-10-01 08:50:39,886 - INFO - Start date set successfully!
+2025-10-01 08:50:39,887 - INFO - Successfully processed 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 08:50:40,389 - INFO - Row 5: Processing assignment name: 'Quiz 5 (8.1-8.3) key'
+2025-10-01 08:50:40,389 - INFO - Assignment name length: 20 characters
+2025-10-01 08:50:40,390 - INFO - Assignment name repr: 'Quiz 5 (8.1-8.3) key'
+2025-10-01 08:50:40,390 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 08:50:40,391 - INFO -   'Name': 'Quiz 5 (8.1-8.3) key' (len=20)
+2025-10-01 08:50:40,391 - INFO -   'Start Date': '11/4/2025' (len=9)
+2025-10-01 08:50:40,391 - INFO -   'Start Time': '6:00 AM' (len=7)
+2025-10-01 08:50:40,392 - INFO -   'Due Date': '' (len=0)
+2025-10-01 08:50:40,392 - INFO -   'Due Time': '' (len=0)
+2025-10-01 08:50:40,392 - INFO -   'Visibility': '' (len=0)
+2025-10-01 08:50:40,392 - INFO - DEBUG: Raw due_date='', due_time=''
+2025-10-01 08:50:40,392 - INFO - DEBUG: due_date bool=False, due_time bool=False
+2025-10-01 08:50:40,392 - WARNING - SKIPPING due date - due_date='' (False), due_time='' (False)
+2025-10-01 08:50:40,393 - INFO - Setting start date: 11/4/2025 at 6:00 AM
+2025-10-01 08:50:40,393 - INFO - Looking for start date link for assignment: 'Quiz 5 (8.1-8.3) key'
+2025-10-01 08:50:40,393 - INFO - Searching for EXACT match: 'Quiz 5 (8.1-8.3) key'
+2025-10-01 08:50:40,405 - INFO - Trying DASH-FREE search: 'Quiz 5 (8.1 8.3) key'
+2025-10-01 08:50:41,080 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 5 (8.1-8.3) key'
+2025-10-01 08:50:41,080 - INFO - Found 1 assignment name links
+2025-10-01 08:50:41,101 - INFO - Found parent row for the assignment
+2025-10-01 08:50:41,111 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '4/8/2025 6:00 AM'
+2025-10-01 08:50:41,616 - INFO - Attempting to click start date link...
+2025-10-01 08:50:41,681 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 08:50:41,681 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 08:50:44,681 - INFO - Setting start date to '11/4/2025' and time to '6:00 AM' in mini editor...
+2025-10-01 08:50:44,683 - INFO - Waiting for start date dialog to appear...
+2025-10-01 08:50:44,690 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 08:50:44,696 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 08:50:44,696 - INFO - Switching to iframe 0...
+2025-10-01 08:50:44,709 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 08:50:44,710 - INFO - Switching to iframe 1...
+2025-10-01 08:50:44,722 - INFO - Found date fields in iframe 1!
+2025-10-01 08:50:44,722 - INFO - Setting date to '11/4/2025' and time to '6:00 AM' inside iframe...
+2025-10-01 08:50:44,722 - INFO - Parsed date: 11/4/2025, time: 6:00
+2025-10-01 08:50:44,722 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 08:50:44,729 - INFO - Checkbox is already checked
+2025-10-01 08:50:44,732 - INFO - Successfully set date to 11/4/2025
+2025-10-01 08:50:44,733 - INFO - Successfully set time to 6:00
+2025-10-01 08:50:44,785 - INFO - Clicked Save button
+2025-10-01 08:50:45,286 - INFO - Start date set successfully!
+2025-10-01 08:50:45,287 - INFO - Successfully processed 'Quiz 5 (8.1-8.3) key'
+2025-10-01 08:50:45,788 - INFO - Row 6: Processing assignment name: 'Quiz 6 (10.1 - 10.4, 8.5) Key'
+2025-10-01 08:50:45,788 - INFO - Assignment name length: 29 characters
+2025-10-01 08:50:45,789 - INFO - Assignment name repr: 'Quiz 6 (10.1 - 10.4, 8.5) Key'
+2025-10-01 08:50:45,789 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 08:50:45,789 - INFO -   'Name': 'Quiz 6 (10.1 - 10.4, 8.5) Key' (len=29)
+2025-10-01 08:50:45,789 - INFO -   'Start Date': '11/25/2025' (len=10)
+2025-10-01 08:50:45,789 - INFO -   'Start Time': '6:00 AM' (len=7)
+2025-10-01 08:50:45,790 - INFO -   'Due Date': '' (len=0)
+2025-10-01 08:50:45,790 - INFO -   'Due Time': '' (len=0)
+2025-10-01 08:50:45,790 - INFO -   'Visibility': '' (len=0)
+2025-10-01 08:50:45,790 - INFO - DEBUG: Raw due_date='', due_time=''
+2025-10-01 08:50:45,790 - INFO - DEBUG: due_date bool=False, due_time bool=False
+2025-10-01 08:50:45,790 - WARNING - SKIPPING due date - due_date='' (False), due_time='' (False)
+2025-10-01 08:50:45,790 - INFO - Setting start date: 11/25/2025 at 6:00 AM
+2025-10-01 08:50:45,790 - INFO - Looking for start date link for assignment: 'Quiz 6 (10.1 - 10.4, 8.5) Key'
+2025-10-01 08:50:45,790 - INFO - Searching for EXACT match: 'Quiz 6 (10.1 - 10.4, 8.5) Key'
+2025-10-01 08:50:45,800 - INFO - Trying DASH-FREE search: 'Quiz 6 (10.1 10.4, 8.5) Key'
+2025-10-01 08:50:46,424 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 6 (10.1 - 10.4, 8.5) Key'
+2025-10-01 08:50:46,425 - INFO - Found 1 assignment name links
+2025-10-01 08:50:46,431 - INFO - Found parent row for the assignment
+2025-10-01 08:50:46,441 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '4/24/2025 10:00 AM'
+2025-10-01 08:50:46,946 - INFO - Attempting to click start date link...
+2025-10-01 08:50:47,006 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 08:50:47,007 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 08:50:50,007 - INFO - Setting start date to '11/25/2025' and time to '6:00 AM' in mini editor...
+2025-10-01 08:50:50,008 - INFO - Waiting for start date dialog to appear...
+2025-10-01 08:50:50,015 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 08:50:50,030 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 08:50:50,030 - INFO - Switching to iframe 0...
+2025-10-01 08:50:50,044 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 08:50:50,045 - INFO - Switching to iframe 1...
+2025-10-01 08:50:50,058 - INFO - Found date fields in iframe 1!
+2025-10-01 08:50:50,058 - INFO - Setting date to '11/25/2025' and time to '6:00 AM' inside iframe...
+2025-10-01 08:50:50,058 - INFO - Parsed date: 11/25/2025, time: 6:00
+2025-10-01 08:50:50,059 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 08:50:50,066 - INFO - Checkbox is already checked
+2025-10-01 08:50:50,071 - INFO - Successfully set date to 11/25/2025
+2025-10-01 08:50:50,071 - INFO - Successfully set time to 6:00
+2025-10-01 08:50:50,123 - INFO - Clicked Save button
+2025-10-01 08:50:50,624 - INFO - Start date set successfully!
+2025-10-01 08:50:50,625 - INFO - Successfully processed 'Quiz 6 (10.1 - 10.4, 8.5) Key'
+2025-10-01 08:50:51,126 - INFO - Row 7: Processing assignment name: 'YouTube: 7.1 - 7.4 Quiz Worked Out'
+2025-10-01 08:50:51,129 - INFO - Assignment name length: 34 characters
+2025-10-01 08:50:51,130 - INFO - Assignment name repr: 'YouTube: 7.1 - 7.4 Quiz Worked Out'
+2025-10-01 08:50:51,130 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 08:50:51,130 - INFO -   'Name': 'YouTube: 7.1 - 7.4 Quiz Worked Out' (len=34)
+2025-10-01 08:50:51,131 - INFO -   'Start Date': '10/23/2025' (len=10)
+2025-10-01 08:50:51,131 - INFO -   'Start Time': '6:00 AM' (len=7)
+2025-10-01 08:50:51,132 - INFO -   'Due Date': '' (len=0)
+2025-10-01 08:50:51,132 - INFO -   'Due Time': '' (len=0)
+2025-10-01 08:50:51,132 - INFO -   'Visibility': '' (len=0)
+2025-10-01 08:50:51,133 - INFO - DEBUG: Raw due_date='', due_time=''
+2025-10-01 08:50:51,133 - INFO - DEBUG: due_date bool=False, due_time bool=False
+2025-10-01 08:50:51,133 - WARNING - SKIPPING due date - due_date='' (False), due_time='' (False)
+2025-10-01 08:50:51,133 - INFO - Setting start date: 10/23/2025 at 6:00 AM
+2025-10-01 08:50:51,133 - INFO - Looking for start date link for assignment: 'YouTube: 7.1 - 7.4 Quiz Worked Out'
+2025-10-01 08:50:51,135 - INFO - Searching for EXACT match: 'YouTube: 7.1 - 7.4 Quiz Worked Out'
+2025-10-01 08:50:51,146 - INFO - Trying DASH-FREE search: 'YouTube: 7.1 7.4 Quiz Worked Out'
+2025-10-01 08:50:52,026 - INFO - SUCCESS: Found DASH-FREE match! 'YouTube: 7.1 - 7.4 Quiz Worked Out'
+2025-10-01 08:50:52,026 - INFO - Found 1 assignment name links
+2025-10-01 08:50:52,031 - INFO - Found parent row for the assignment
+2025-10-01 08:50:52,042 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '4/1/2025 6:00 AM'
+2025-10-01 08:50:52,557 - INFO - Attempting to click start date link...
+2025-10-01 08:50:52,607 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 08:50:52,608 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 08:50:55,608 - INFO - Setting start date to '10/23/2025' and time to '6:00 AM' in mini editor...
+2025-10-01 08:50:55,610 - INFO - Waiting for start date dialog to appear...
+2025-10-01 08:50:55,620 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 08:50:55,625 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 08:50:55,626 - INFO - Switching to iframe 0...
+2025-10-01 08:50:55,640 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 08:50:55,641 - INFO - Switching to iframe 1...
+2025-10-01 08:50:55,653 - INFO - Found date fields in iframe 1!
+2025-10-01 08:50:55,653 - INFO - Setting date to '10/23/2025' and time to '6:00 AM' inside iframe...
+2025-10-01 08:50:55,654 - INFO - Parsed date: 10/23/2025, time: 6:00
+2025-10-01 08:50:55,654 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 08:50:55,661 - INFO - Checkbox is already checked
+2025-10-01 08:50:55,664 - INFO - Successfully set date to 10/23/2025
+2025-10-01 08:50:55,664 - INFO - Successfully set time to 6:00
+2025-10-01 08:50:55,732 - INFO - Clicked Save button
+2025-10-01 08:50:56,234 - INFO - Start date set successfully!
+2025-10-01 08:50:56,234 - INFO - Successfully processed 'YouTube: 7.1 - 7.4 Quiz Worked Out'
+2025-10-01 08:50:56,735 - INFO - Row 8: Processing assignment name: 'Quiz 4 (7.1-7.4) key'
+2025-10-01 08:50:56,735 - INFO - Assignment name length: 20 characters
+2025-10-01 08:50:56,737 - INFO - Assignment name repr: 'Quiz 4 (7.1-7.4) key'
+2025-10-01 08:50:56,740 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 08:50:56,740 - INFO -   'Name': 'Quiz 4 (7.1-7.4) key' (len=20)
+2025-10-01 08:50:56,741 - INFO -   'Start Date': '10/23/2025' (len=10)
+2025-10-01 08:50:56,741 - INFO -   'Start Time': '6:00 AM' (len=7)
+2025-10-01 08:50:56,741 - INFO -   'Due Date': '' (len=0)
+2025-10-01 08:50:56,741 - INFO -   'Due Time': '' (len=0)
+2025-10-01 08:50:56,741 - INFO -   'Visibility': '' (len=0)
+2025-10-01 08:50:56,741 - INFO - DEBUG: Raw due_date='', due_time=''
+2025-10-01 08:50:56,741 - INFO - DEBUG: due_date bool=False, due_time bool=False
+2025-10-01 08:50:56,741 - WARNING - SKIPPING due date - due_date='' (False), due_time='' (False)
+2025-10-01 08:50:56,741 - INFO - Setting start date: 10/23/2025 at 6:00 AM
+2025-10-01 08:50:56,741 - INFO - Looking for start date link for assignment: 'Quiz 4 (7.1-7.4) key'
+2025-10-01 08:50:56,741 - INFO - Searching for EXACT match: 'Quiz 4 (7.1-7.4) key'
+2025-10-01 08:50:56,750 - INFO - Trying DASH-FREE search: 'Quiz 4 (7.1 7.4) key'
+2025-10-01 08:50:57,372 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 4 (7.1-7.4) key'
+2025-10-01 08:50:57,372 - INFO - Found 1 assignment name links
+2025-10-01 08:50:57,378 - INFO - Found parent row for the assignment
+2025-10-01 08:50:57,388 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '4/1/2025 6:00 AM'
+2025-10-01 08:50:57,901 - INFO - Attempting to click start date link...
+2025-10-01 08:50:57,957 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 08:50:57,957 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 08:51:00,958 - INFO - Setting start date to '10/23/2025' and time to '6:00 AM' in mini editor...
+2025-10-01 08:51:00,960 - INFO - Waiting for start date dialog to appear...
+2025-10-01 08:51:00,971 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 08:51:00,976 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 08:51:00,976 - INFO - Switching to iframe 0...
+2025-10-01 08:51:00,988 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 08:51:00,990 - INFO - Switching to iframe 1...
+2025-10-01 08:51:01,004 - INFO - Found date fields in iframe 1!
+2025-10-01 08:51:01,004 - INFO - Setting date to '10/23/2025' and time to '6:00 AM' inside iframe...
+2025-10-01 08:51:01,005 - INFO - Parsed date: 10/23/2025, time: 6:00
+2025-10-01 08:51:01,005 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 08:51:01,013 - INFO - Checkbox is already checked
+2025-10-01 08:51:01,016 - INFO - Successfully set date to 10/23/2025
+2025-10-01 08:51:01,016 - INFO - Successfully set time to 6:00
+2025-10-01 08:51:01,064 - INFO - Clicked Save button
+2025-10-01 08:51:01,565 - INFO - Start date set successfully!
+2025-10-01 08:51:01,565 - INFO - Successfully processed 'Quiz 4 (7.1-7.4) key'
+2025-10-01 08:51:02,066 - INFO - Row 9: Processing assignment name: 'YouTube: Quiz 5 (8.1-8.3) Worked Out'
+2025-10-01 08:51:02,068 - INFO - Assignment name length: 36 characters
+2025-10-01 08:51:02,068 - INFO - Assignment name repr: 'YouTube: Quiz 5 (8.1-8.3) Worked Out'
+2025-10-01 08:51:02,069 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 08:51:02,069 - INFO -   'Name': 'YouTube: Quiz 5 (8.1-8.3) Worked Out' (len=36)
+2025-10-01 08:51:02,069 - INFO -   'Start Date': '11/4/2025' (len=9)
+2025-10-01 08:51:02,069 - INFO -   'Start Time': '6:00 AM' (len=7)
+2025-10-01 08:51:02,069 - INFO -   'Due Date': '' (len=0)
+2025-10-01 08:51:02,069 - INFO -   'Due Time': '' (len=0)
+2025-10-01 08:51:02,070 - INFO -   'Visibility': '' (len=0)
+2025-10-01 08:51:02,070 - INFO - DEBUG: Raw due_date='', due_time=''
+2025-10-01 08:51:02,070 - INFO - DEBUG: due_date bool=False, due_time bool=False
+2025-10-01 08:51:02,070 - WARNING - SKIPPING due date - due_date='' (False), due_time='' (False)
+2025-10-01 08:51:02,070 - INFO - Setting start date: 11/4/2025 at 6:00 AM
+2025-10-01 08:51:02,070 - INFO - Looking for start date link for assignment: 'YouTube: Quiz 5 (8.1-8.3) Worked Out'
+2025-10-01 08:51:02,071 - INFO - Searching for EXACT match: 'YouTube: Quiz 5 (8.1-8.3) Worked Out'
+2025-10-01 08:51:02,079 - INFO - Trying DASH-FREE search: 'YouTube: Quiz 5 (8.1 8.3) Worked Out'
+2025-10-01 08:51:02,978 - INFO - SUCCESS: Found DASH-FREE match! 'YouTube: Quiz 5 (8.1-8.3) Worked Out'
+2025-10-01 08:51:02,978 - INFO - Found 1 assignment name links
+2025-10-01 08:51:02,986 - INFO - Found parent row for the assignment
+2025-10-01 08:51:02,998 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '4/8/2025 6:00 AM'
+2025-10-01 08:51:03,504 - INFO - Attempting to click start date link...
+2025-10-01 08:51:03,560 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 08:51:03,560 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 08:51:06,561 - INFO - Setting start date to '11/4/2025' and time to '6:00 AM' in mini editor...
+2025-10-01 08:51:06,561 - INFO - Waiting for start date dialog to appear...
+2025-10-01 08:51:06,575 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 08:51:06,581 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 08:51:06,581 - INFO - Switching to iframe 0...
+2025-10-01 08:51:06,593 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 08:51:06,594 - INFO - Switching to iframe 1...
+2025-10-01 08:51:06,605 - INFO - Found date fields in iframe 1!
+2025-10-01 08:51:06,606 - INFO - Setting date to '11/4/2025' and time to '6:00 AM' inside iframe...
+2025-10-01 08:51:06,606 - INFO - Parsed date: 11/4/2025, time: 6:00
+2025-10-01 08:51:06,606 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 08:51:06,615 - INFO - Checkbox is already checked
+2025-10-01 08:51:06,621 - INFO - Successfully set date to 11/4/2025
+2025-10-01 08:51:06,622 - INFO - Successfully set time to 6:00
+2025-10-01 08:51:06,709 - INFO - Clicked Save button
+2025-10-01 08:51:07,210 - INFO - Start date set successfully!
+2025-10-01 08:51:07,211 - INFO - Successfully processed 'YouTube: Quiz 5 (8.1-8.3) Worked Out'
+2025-10-01 08:51:07,712 - INFO - CSV processing completed: 8 successful, 0 errors
+2025-10-01 12:34:32,533 - INFO - ====== WebDriver manager ======
+2025-10-01 12:34:33,903 - INFO - Get LATEST chromedriver version for google-chrome
+2025-10-01 12:34:34,158 - INFO - Get LATEST chromedriver version for google-chrome
+2025-10-01 12:34:34,390 - INFO - Driver [C:\Users\chase\.wdm\drivers\chromedriver\win64\141.0.7390.54\chromedriver-win32/chromedriver.exe] found in cache
+2025-10-01 12:34:37,279 - INFO - Chrome driver initialized successfully
+2025-10-01 12:35:46,349 - INFO - Processing CSV file: C:/Users/chase/My Drive/scripts/School Scripts/D2L Macro/D2L Assignments.csv
+2025-10-01 12:35:46,349 - INFO - CSV headers found: ['Name', 'Start Date', 'Start Time', 'Due Date', 'Due Time', 'Visibility']
+2025-10-01 12:35:46,350 - INFO - Row 2: Processing assignment name: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:35:46,350 - INFO - Assignment name length: 18 characters
+2025-10-01 12:35:46,350 - INFO - Assignment name repr: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:35:46,350 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 12:35:46,350 - INFO -   'Name': 'Quiz 4 (7.1 - 7.4)' (len=18)
+2025-10-01 12:35:46,350 - INFO -   'Start Date': '10/22/2025' (len=10)
+2025-10-01 12:35:46,350 - INFO -   'Start Time': '11:00 AM' (len=8)
+2025-10-01 12:35:46,350 - INFO -   'Due Date': '10/22/2025' (len=10)
+2025-10-01 12:35:46,350 - INFO -   'Due Time': '11:59 PM' (len=8)
+2025-10-01 12:35:46,350 - INFO -   'Visibility': '' (len=0)
+2025-10-01 12:35:46,350 - INFO - DEBUG: Raw due_date='10/22/2025', due_time='11:59 PM'
+2025-10-01 12:35:46,350 - INFO - DEBUG: due_date bool=True, due_time bool=True
+2025-10-01 12:35:46,350 - INFO - CONDITION MET: Setting due date: 10/22/2025 at 11:59 PM
+2025-10-01 12:35:46,351 - INFO - Looking for due date link for assignment: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:35:46,351 - INFO - Searching for EXACT match: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:35:46,365 - INFO - Trying DASH-FREE search: 'Quiz 4 (7.1 7.4)'
+2025-10-01 12:35:47,213 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:35:47,213 - INFO - EXACT MATCH: Found 1 assignment name links
+2025-10-01 12:35:47,219 - INFO -   Exact match 1: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:35:47,219 - INFO - Found 1 assignment name links
+2025-10-01 12:35:47,229 - INFO - Found parent row for the assignment
+2025-10-01 12:35:47,241 - INFO - Found due date link in the same row
+2025-10-01 12:35:47,850 - INFO - Clicked due date link
+2025-10-01 12:35:49,851 - INFO - Setting date to '10/22/2025' and time to '11:59 PM' in mini editor...
+2025-10-01 12:35:49,859 - INFO - SUCCESS: Dialog appeared
+2025-10-01 12:35:49,870 - INFO - Found 1 iframe(s) in dialog
+2025-10-01 12:35:49,870 - INFO - Switching to iframe 0...
+2025-10-01 12:35:49,889 - INFO - Found date fields in iframe 0!
+2025-10-01 12:35:49,889 - INFO - Setting date to '10/22/2025' and time to '11:59 PM' inside iframe...
+2025-10-01 12:35:49,889 - INFO - Parsed date: 10/22/2025, time: 23:59
+2025-10-01 12:35:49,890 - INFO - Looking for 'Has Due Date' checkbox (#z_k)
+2025-10-01 12:35:49,904 - INFO - Checkbox is already checked
+2025-10-01 12:35:49,909 - INFO - Successfully set date to 10/22/2025
+2025-10-01 12:35:49,909 - INFO - Successfully set time to 23:59
+2025-10-01 12:35:50,025 - INFO - Clicked Save button
+2025-10-01 12:35:50,526 - INFO - Due date set successfully!
+2025-10-01 12:35:50,526 - INFO - Returning to main page before processing start date...
+2025-10-01 12:35:51,027 - INFO - Setting start date: 10/22/2025 at 11:00 AM
+2025-10-01 12:35:51,027 - INFO - Looking for start date link for assignment: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:35:51,027 - INFO - Searching for EXACT match: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:35:51,041 - INFO - Trying DASH-FREE search: 'Quiz 4 (7.1 7.4)'
+2025-10-01 12:35:51,878 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:35:51,878 - INFO - Found 1 assignment name links
+2025-10-01 12:35:51,886 - INFO - Found parent row for the assignment
+2025-10-01 12:35:51,906 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '10/22/2025 11:00 AM'
+2025-10-01 12:35:52,412 - INFO - Attempting to click start date link...
+2025-10-01 12:35:52,497 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 12:35:52,498 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 12:35:55,499 - INFO - Setting start date to '10/22/2025' and time to '11:00 AM' in mini editor...
+2025-10-01 12:35:55,499 - INFO - Waiting for start date dialog to appear...
+2025-10-01 12:35:55,508 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 12:35:55,519 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 12:35:55,519 - INFO - Switching to iframe 0...
+2025-10-01 12:35:55,550 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 12:35:55,553 - INFO - Switching to iframe 1...
+2025-10-01 12:35:55,574 - INFO - Found date fields in iframe 1!
+2025-10-01 12:35:55,699 - INFO - Setting date to '10/22/2025' and time to '11:00 AM' inside iframe...
+2025-10-01 12:35:55,700 - INFO - Parsed date: 10/22/2025, time: 11:00
+2025-10-01 12:35:55,700 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 12:35:55,732 - INFO - Checkbox is already checked
+2025-10-01 12:35:55,749 - INFO - Successfully set date to 10/22/2025
+2025-10-01 12:35:55,749 - INFO - Successfully set time to 11:00
+2025-10-01 12:35:55,839 - INFO - Clicked Save button
+2025-10-01 12:35:56,340 - INFO - Start date set successfully!
+2025-10-01 12:35:56,340 - INFO - Successfully processed 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:35:56,841 - INFO - Row 3: Processing assignment name: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 12:35:56,842 - INFO - Assignment name length: 18 characters
+2025-10-01 12:35:56,842 - INFO - Assignment name repr: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 12:35:56,842 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 12:35:56,842 - INFO -   'Name': 'Quiz 5 (8.1 - 8.3)' (len=18)
+2025-10-01 12:35:56,843 - INFO -   'Start Date': '11/3/2025' (len=9)
+2025-10-01 12:35:56,843 - INFO -   'Start Time': '11:00 AM' (len=8)
+2025-10-01 12:35:56,843 - INFO -   'Due Date': '11/3/2025' (len=9)
+2025-10-01 12:35:56,843 - INFO -   'Due Time': '11:59 PM' (len=8)
+2025-10-01 12:35:56,843 - INFO -   'Visibility': '' (len=0)
+2025-10-01 12:35:56,843 - INFO - DEBUG: Raw due_date='11/3/2025', due_time='11:59 PM'
+2025-10-01 12:35:56,843 - INFO - DEBUG: due_date bool=True, due_time bool=True
+2025-10-01 12:35:56,843 - INFO - CONDITION MET: Setting due date: 11/3/2025 at 11:59 PM
+2025-10-01 12:35:56,843 - INFO - Looking for due date link for assignment: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 12:35:56,843 - INFO - Searching for EXACT match: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 12:35:56,860 - INFO - Trying DASH-FREE search: 'Quiz 5 (8.1 8.3)'
+2025-10-01 12:35:57,965 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 5 (8.1-8.3)'
+2025-10-01 12:35:57,965 - INFO - EXACT MATCH: Found 1 assignment name links
+2025-10-01 12:35:57,973 - INFO -   Exact match 1: 'Quiz 5 (8.1-8.3)'
+2025-10-01 12:35:57,973 - INFO - Found 1 assignment name links
+2025-10-01 12:35:57,982 - INFO - Found parent row for the assignment
+2025-10-01 12:35:57,990 - INFO - Found due date link in the same row
+2025-10-01 12:35:58,567 - INFO - Clicked due date link
+2025-10-01 12:36:00,568 - INFO - Setting date to '11/3/2025' and time to '11:59 PM' in mini editor...
+2025-10-01 12:36:00,579 - INFO - SUCCESS: Dialog appeared
+2025-10-01 12:36:00,584 - INFO - Found 1 iframe(s) in dialog
+2025-10-01 12:36:00,585 - INFO - Switching to iframe 0...
+2025-10-01 12:36:00,601 - INFO - Found date fields in iframe 0!
+2025-10-01 12:36:00,602 - INFO - Setting date to '11/3/2025' and time to '11:59 PM' inside iframe...
+2025-10-01 12:36:00,602 - INFO - Parsed date: 11/3/2025, time: 23:59
+2025-10-01 12:36:00,602 - INFO - Looking for 'Has Due Date' checkbox (#z_k)
+2025-10-01 12:36:00,619 - INFO - Checkbox is already checked
+2025-10-01 12:36:00,628 - INFO - Successfully set date to 11/3/2025
+2025-10-01 12:36:00,628 - INFO - Successfully set time to 23:59
+2025-10-01 12:36:00,700 - INFO - Clicked Save button
+2025-10-01 12:36:01,201 - INFO - Due date set successfully!
+2025-10-01 12:36:01,202 - INFO - Returning to main page before processing start date...
+2025-10-01 12:36:01,702 - INFO - Setting start date: 11/3/2025 at 11:00 AM
+2025-10-01 12:36:01,706 - INFO - Looking for start date link for assignment: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 12:36:01,706 - INFO - Searching for EXACT match: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 12:36:01,717 - INFO - Trying DASH-FREE search: 'Quiz 5 (8.1 8.3)'
+2025-10-01 12:36:02,744 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 5 (8.1-8.3)'
+2025-10-01 12:36:02,744 - INFO - Found 1 assignment name links
+2025-10-01 12:36:02,756 - INFO - Found parent row for the assignment
+2025-10-01 12:36:02,774 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '11/3/2025 11:00 AM'
+2025-10-01 12:36:03,280 - INFO - Attempting to click start date link...
+2025-10-01 12:36:03,349 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 12:36:03,350 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 12:36:06,350 - INFO - Setting start date to '11/3/2025' and time to '11:00 AM' in mini editor...
+2025-10-01 12:36:06,351 - INFO - Waiting for start date dialog to appear...
+2025-10-01 12:36:06,361 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 12:36:06,369 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 12:36:06,369 - INFO - Switching to iframe 0...
+2025-10-01 12:36:06,390 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 12:36:06,392 - INFO - Switching to iframe 1...
+2025-10-01 12:36:06,411 - INFO - Found date fields in iframe 1!
+2025-10-01 12:36:06,411 - INFO - Setting date to '11/3/2025' and time to '11:00 AM' inside iframe...
+2025-10-01 12:36:06,413 - INFO - Parsed date: 11/3/2025, time: 11:00
+2025-10-01 12:36:06,413 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 12:36:06,427 - INFO - Checkbox is already checked
+2025-10-01 12:36:06,433 - INFO - Successfully set date to 11/3/2025
+2025-10-01 12:36:06,433 - INFO - Successfully set time to 11:00
+2025-10-01 12:36:06,507 - INFO - Clicked Save button
+2025-10-01 12:36:07,008 - INFO - Start date set successfully!
+2025-10-01 12:36:07,008 - INFO - Successfully processed 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 12:36:07,509 - INFO - Row 4: Processing assignment name: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 12:36:07,511 - INFO - Assignment name length: 25 characters
+2025-10-01 12:36:07,512 - INFO - Assignment name repr: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 12:36:07,512 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 12:36:07,512 - INFO -   'Name': 'Quiz 6 (10.1 - 10.4, 8.5)' (len=25)
+2025-10-01 12:36:07,512 - INFO -   'Start Date': '11/24/2025' (len=10)
+2025-10-01 12:36:07,513 - INFO -   'Start Time': '11:00 AM' (len=8)
+2025-10-01 12:36:07,513 - INFO -   'Due Date': '11/24/2025' (len=10)
+2025-10-01 12:36:07,513 - INFO -   'Due Time': '11:59 PM' (len=8)
+2025-10-01 12:36:07,513 - INFO -   'Visibility': '' (len=0)
+2025-10-01 12:36:07,513 - INFO - DEBUG: Raw due_date='11/24/2025', due_time='11:59 PM'
+2025-10-01 12:36:07,513 - INFO - DEBUG: due_date bool=True, due_time bool=True
+2025-10-01 12:36:07,513 - INFO - CONDITION MET: Setting due date: 11/24/2025 at 11:59 PM
+2025-10-01 12:36:07,514 - INFO - Looking for due date link for assignment: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 12:36:07,514 - INFO - Searching for EXACT match: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 12:36:07,529 - INFO - Trying DASH-FREE search: 'Quiz 6 (10.1 10.4, 8.5)'
+2025-10-01 12:36:08,620 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 12:36:08,621 - INFO - EXACT MATCH: Found 1 assignment name links
+2025-10-01 12:36:08,630 - INFO -   Exact match 1: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 12:36:08,630 - INFO - Found 1 assignment name links
+2025-10-01 12:36:08,639 - INFO - Found parent row for the assignment
+2025-10-01 12:36:08,648 - INFO - Found due date link in the same row
+2025-10-01 12:36:09,232 - INFO - Clicked due date link
+2025-10-01 12:36:11,232 - INFO - Setting date to '11/24/2025' and time to '11:59 PM' in mini editor...
+2025-10-01 12:36:11,242 - INFO - SUCCESS: Dialog appeared
+2025-10-01 12:36:11,250 - INFO - Found 1 iframe(s) in dialog
+2025-10-01 12:36:11,250 - INFO - Switching to iframe 0...
+2025-10-01 12:36:11,269 - INFO - Found date fields in iframe 0!
+2025-10-01 12:36:11,270 - INFO - Setting date to '11/24/2025' and time to '11:59 PM' inside iframe...
+2025-10-01 12:36:11,270 - INFO - Parsed date: 11/24/2025, time: 23:59
+2025-10-01 12:36:11,270 - INFO - Looking for 'Has Due Date' checkbox (#z_k)
+2025-10-01 12:36:11,284 - INFO - Checkbox is already checked
+2025-10-01 12:36:11,296 - INFO - Successfully set date to 11/24/2025
+2025-10-01 12:36:11,296 - INFO - Successfully set time to 23:59
+2025-10-01 12:36:11,366 - INFO - Clicked Save button
+2025-10-01 12:36:11,866 - INFO - Due date set successfully!
+2025-10-01 12:36:11,867 - INFO - Returning to main page before processing start date...
+2025-10-01 12:36:12,368 - INFO - Setting start date: 11/24/2025 at 11:00 AM
+2025-10-01 12:36:12,368 - INFO - Looking for start date link for assignment: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 12:36:12,369 - INFO - Searching for EXACT match: 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 12:36:12,380 - INFO - Trying DASH-FREE search: 'Quiz 6 (10.1 10.4, 8.5)'
+2025-10-01 12:36:13,404 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 12:36:13,406 - INFO - Found 1 assignment name links
+2025-10-01 12:36:13,414 - INFO - Found parent row for the assignment
+2025-10-01 12:36:13,431 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '11/24/2025 11:00 AM'
+2025-10-01 12:36:13,935 - INFO - Attempting to click start date link...
+2025-10-01 12:36:14,018 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 12:36:14,018 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 12:36:17,019 - INFO - Setting start date to '11/24/2025' and time to '11:00 AM' in mini editor...
+2025-10-01 12:36:17,021 - INFO - Waiting for start date dialog to appear...
+2025-10-01 12:36:17,031 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 12:36:17,039 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 12:36:17,040 - INFO - Switching to iframe 0...
+2025-10-01 12:36:17,058 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 12:36:17,060 - INFO - Switching to iframe 1...
+2025-10-01 12:36:17,078 - INFO - Found date fields in iframe 1!
+2025-10-01 12:36:17,078 - INFO - Setting date to '11/24/2025' and time to '11:00 AM' inside iframe...
+2025-10-01 12:36:17,078 - INFO - Parsed date: 11/24/2025, time: 11:00
+2025-10-01 12:36:17,078 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 12:36:17,090 - INFO - Checkbox is already checked
+2025-10-01 12:36:17,094 - INFO - Successfully set date to 11/24/2025
+2025-10-01 12:36:17,095 - INFO - Successfully set time to 11:00
+2025-10-01 12:36:17,165 - INFO - Clicked Save button
+2025-10-01 12:36:17,666 - INFO - Start date set successfully!
+2025-10-01 12:36:17,667 - INFO - Successfully processed 'Quiz 6 (10.1 - 10.4, 8.5)'
+2025-10-01 12:36:18,169 - INFO - Row 5: Processing assignment name: 'Quiz 5 (8.1-8.3) key'
+2025-10-01 12:36:18,169 - INFO - Assignment name length: 20 characters
+2025-10-01 12:36:18,170 - INFO - Assignment name repr: 'Quiz 5 (8.1-8.3) key'
+2025-10-01 12:36:18,170 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 12:36:18,170 - INFO -   'Name': 'Quiz 5 (8.1-8.3) key' (len=20)
+2025-10-01 12:36:18,170 - INFO -   'Start Date': '11/4/2025' (len=9)
+2025-10-01 12:36:18,170 - INFO -   'Start Time': '6:00 AM' (len=7)
+2025-10-01 12:36:18,171 - INFO -   'Due Date': '' (len=0)
+2025-10-01 12:36:18,171 - INFO -   'Due Time': '' (len=0)
+2025-10-01 12:36:18,171 - INFO -   'Visibility': '' (len=0)
+2025-10-01 12:36:18,171 - INFO - DEBUG: Raw due_date='', due_time=''
+2025-10-01 12:36:18,171 - INFO - DEBUG: due_date bool=False, due_time bool=False
+2025-10-01 12:36:18,171 - WARNING - SKIPPING due date - due_date='' (False), due_time='' (False)
+2025-10-01 12:36:18,171 - INFO - Setting start date: 11/4/2025 at 6:00 AM
+2025-10-01 12:36:18,172 - INFO - Looking for start date link for assignment: 'Quiz 5 (8.1-8.3) key'
+2025-10-01 12:36:18,172 - INFO - Searching for EXACT match: 'Quiz 5 (8.1-8.3) key'
+2025-10-01 12:36:18,181 - INFO - Trying DASH-FREE search: 'Quiz 5 (8.1 8.3) key'
+2025-10-01 12:36:19,269 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 5 (8.1-8.3) key'
+2025-10-01 12:36:19,272 - INFO - Found 1 assignment name links
+2025-10-01 12:36:19,284 - INFO - Found parent row for the assignment
+2025-10-01 12:36:19,304 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '11/4/2025 6:00 AM'
+2025-10-01 12:36:19,815 - INFO - Attempting to click start date link...
+2025-10-01 12:36:19,893 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 12:36:19,894 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 12:36:22,894 - INFO - Setting start date to '11/4/2025' and time to '6:00 AM' in mini editor...
+2025-10-01 12:36:22,895 - INFO - Waiting for start date dialog to appear...
+2025-10-01 12:36:22,909 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 12:36:22,919 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 12:36:22,919 - INFO - Switching to iframe 0...
+2025-10-01 12:36:22,941 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 12:36:22,942 - INFO - Switching to iframe 1...
+2025-10-01 12:36:22,962 - INFO - Found date fields in iframe 1!
+2025-10-01 12:36:22,962 - INFO - Setting date to '11/4/2025' and time to '6:00 AM' inside iframe...
+2025-10-01 12:36:22,962 - INFO - Parsed date: 11/4/2025, time: 6:00
+2025-10-01 12:36:22,962 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 12:36:22,982 - INFO - Checkbox is already checked
+2025-10-01 12:36:22,993 - INFO - Successfully set date to 11/4/2025
+2025-10-01 12:36:22,993 - INFO - Successfully set time to 6:00
+2025-10-01 12:36:23,075 - INFO - Clicked Save button
+2025-10-01 12:36:23,578 - INFO - Start date set successfully!
+2025-10-01 12:36:23,579 - INFO - Successfully processed 'Quiz 5 (8.1-8.3) key'
+2025-10-01 12:36:24,079 - INFO - Row 6: Processing assignment name: 'Quiz 6 (10.1 - 10.4, 8.5) Key'
+2025-10-01 12:36:24,081 - INFO - Assignment name length: 29 characters
+2025-10-01 12:36:24,081 - INFO - Assignment name repr: 'Quiz 6 (10.1 - 10.4, 8.5) Key'
+2025-10-01 12:36:24,081 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 12:36:24,081 - INFO -   'Name': 'Quiz 6 (10.1 - 10.4, 8.5) Key' (len=29)
+2025-10-01 12:36:24,082 - INFO -   'Start Date': '11/25/2025' (len=10)
+2025-10-01 12:36:24,082 - INFO -   'Start Time': '6:00 AM' (len=7)
+2025-10-01 12:36:24,082 - INFO -   'Due Date': '' (len=0)
+2025-10-01 12:36:24,082 - INFO -   'Due Time': '' (len=0)
+2025-10-01 12:36:24,082 - INFO -   'Visibility': '' (len=0)
+2025-10-01 12:36:24,082 - INFO - DEBUG: Raw due_date='', due_time=''
+2025-10-01 12:36:24,082 - INFO - DEBUG: due_date bool=False, due_time bool=False
+2025-10-01 12:36:24,082 - WARNING - SKIPPING due date - due_date='' (False), due_time='' (False)
+2025-10-01 12:36:24,082 - INFO - Setting start date: 11/25/2025 at 6:00 AM
+2025-10-01 12:36:24,083 - INFO - Looking for start date link for assignment: 'Quiz 6 (10.1 - 10.4, 8.5) Key'
+2025-10-01 12:36:24,083 - INFO - Searching for EXACT match: 'Quiz 6 (10.1 - 10.4, 8.5) Key'
+2025-10-01 12:36:24,096 - INFO - Trying DASH-FREE search: 'Quiz 6 (10.1 10.4, 8.5) Key'
+2025-10-01 12:36:25,076 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 6 (10.1 - 10.4, 8.5) Key'
+2025-10-01 12:36:25,077 - INFO - Found 1 assignment name links
+2025-10-01 12:36:25,090 - INFO - Found parent row for the assignment
+2025-10-01 12:36:25,107 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '11/25/2025 6:00 AM'
+2025-10-01 12:36:25,617 - INFO - Attempting to click start date link...
+2025-10-01 12:36:25,696 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 12:36:25,697 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 12:36:28,697 - INFO - Setting start date to '11/25/2025' and time to '6:00 AM' in mini editor...
+2025-10-01 12:36:28,698 - INFO - Waiting for start date dialog to appear...
+2025-10-01 12:36:28,707 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 12:36:28,714 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 12:36:28,715 - INFO - Switching to iframe 0...
+2025-10-01 12:36:28,735 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 12:36:28,738 - INFO - Switching to iframe 1...
+2025-10-01 12:36:28,759 - INFO - Found date fields in iframe 1!
+2025-10-01 12:36:28,759 - INFO - Setting date to '11/25/2025' and time to '6:00 AM' inside iframe...
+2025-10-01 12:36:28,760 - INFO - Parsed date: 11/25/2025, time: 6:00
+2025-10-01 12:36:28,760 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 12:36:28,775 - INFO - Checkbox is already checked
+2025-10-01 12:36:28,780 - INFO - Successfully set date to 11/25/2025
+2025-10-01 12:36:28,780 - INFO - Successfully set time to 6:00
+2025-10-01 12:36:28,852 - INFO - Clicked Save button
+2025-10-01 12:36:29,354 - INFO - Start date set successfully!
+2025-10-01 12:36:29,354 - INFO - Successfully processed 'Quiz 6 (10.1 - 10.4, 8.5) Key'
+2025-10-01 12:36:29,855 - INFO - Row 7: Processing assignment name: 'YouTube: 7.1 - 7.4 Quiz Worked Out'
+2025-10-01 12:36:29,857 - INFO - Assignment name length: 34 characters
+2025-10-01 12:36:29,857 - INFO - Assignment name repr: 'YouTube: 7.1 - 7.4 Quiz Worked Out'
+2025-10-01 12:36:29,857 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 12:36:29,857 - INFO -   'Name': 'YouTube: 7.1 - 7.4 Quiz Worked Out' (len=34)
+2025-10-01 12:36:29,857 - INFO -   'Start Date': '10/23/2025' (len=10)
+2025-10-01 12:36:29,858 - INFO -   'Start Time': '6:00 AM' (len=7)
+2025-10-01 12:36:29,858 - INFO -   'Due Date': '' (len=0)
+2025-10-01 12:36:29,858 - INFO -   'Due Time': '' (len=0)
+2025-10-01 12:36:29,858 - INFO -   'Visibility': '' (len=0)
+2025-10-01 12:36:29,858 - INFO - DEBUG: Raw due_date='', due_time=''
+2025-10-01 12:36:29,858 - INFO - DEBUG: due_date bool=False, due_time bool=False
+2025-10-01 12:36:29,858 - WARNING - SKIPPING due date - due_date='' (False), due_time='' (False)
+2025-10-01 12:36:29,859 - INFO - Setting start date: 10/23/2025 at 6:00 AM
+2025-10-01 12:36:29,859 - INFO - Looking for start date link for assignment: 'YouTube: 7.1 - 7.4 Quiz Worked Out'
+2025-10-01 12:36:29,859 - INFO - Searching for EXACT match: 'YouTube: 7.1 - 7.4 Quiz Worked Out'
+2025-10-01 12:36:29,873 - INFO - Trying DASH-FREE search: 'YouTube: 7.1 7.4 Quiz Worked Out'
+2025-10-01 12:36:31,097 - INFO - SUCCESS: Found DASH-FREE match! 'YouTube: 7.1 - 7.4 Quiz Worked Out'
+2025-10-01 12:36:31,099 - INFO - Found 1 assignment name links
+2025-10-01 12:36:31,108 - INFO - Found parent row for the assignment
+2025-10-01 12:36:31,122 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '10/23/2025 6:00 AM'
+2025-10-01 12:36:31,638 - INFO - Attempting to click start date link...
+2025-10-01 12:36:31,722 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 12:36:31,722 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 12:36:34,723 - INFO - Setting start date to '10/23/2025' and time to '6:00 AM' in mini editor...
+2025-10-01 12:36:34,724 - INFO - Waiting for start date dialog to appear...
+2025-10-01 12:36:34,734 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 12:36:34,740 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 12:36:34,740 - INFO - Switching to iframe 0...
+2025-10-01 12:36:34,754 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 12:36:34,756 - INFO - Switching to iframe 1...
+2025-10-01 12:36:34,768 - INFO - Found date fields in iframe 1!
+2025-10-01 12:36:34,769 - INFO - Setting date to '10/23/2025' and time to '6:00 AM' inside iframe...
+2025-10-01 12:36:34,769 - INFO - Parsed date: 10/23/2025, time: 6:00
+2025-10-01 12:36:34,769 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 12:36:34,780 - INFO - Checkbox is already checked
+2025-10-01 12:36:34,785 - INFO - Successfully set date to 10/23/2025
+2025-10-01 12:36:34,785 - INFO - Successfully set time to 6:00
+2025-10-01 12:36:34,845 - INFO - Clicked Save button
+2025-10-01 12:36:35,345 - INFO - Start date set successfully!
+2025-10-01 12:36:35,346 - INFO - Successfully processed 'YouTube: 7.1 - 7.4 Quiz Worked Out'
+2025-10-01 12:36:35,847 - INFO - Row 8: Processing assignment name: 'Quiz 4 (7.1-7.4) key'
+2025-10-01 12:36:35,847 - INFO - Assignment name length: 20 characters
+2025-10-01 12:36:35,847 - INFO - Assignment name repr: 'Quiz 4 (7.1-7.4) key'
+2025-10-01 12:36:35,848 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 12:36:35,848 - INFO -   'Name': 'Quiz 4 (7.1-7.4) key' (len=20)
+2025-10-01 12:36:35,848 - INFO -   'Start Date': '10/23/2025' (len=10)
+2025-10-01 12:36:35,848 - INFO -   'Start Time': '6:00 AM' (len=7)
+2025-10-01 12:36:35,848 - INFO -   'Due Date': '' (len=0)
+2025-10-01 12:36:35,848 - INFO -   'Due Time': '' (len=0)
+2025-10-01 12:36:35,848 - INFO -   'Visibility': '' (len=0)
+2025-10-01 12:36:35,848 - INFO - DEBUG: Raw due_date='', due_time=''
+2025-10-01 12:36:35,849 - INFO - DEBUG: due_date bool=False, due_time bool=False
+2025-10-01 12:36:35,849 - WARNING - SKIPPING due date - due_date='' (False), due_time='' (False)
+2025-10-01 12:36:35,849 - INFO - Setting start date: 10/23/2025 at 6:00 AM
+2025-10-01 12:36:35,849 - INFO - Looking for start date link for assignment: 'Quiz 4 (7.1-7.4) key'
+2025-10-01 12:36:35,849 - INFO - Searching for EXACT match: 'Quiz 4 (7.1-7.4) key'
+2025-10-01 12:36:35,863 - INFO - Trying DASH-FREE search: 'Quiz 4 (7.1 7.4) key'
+2025-10-01 12:36:37,111 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 4 (7.1-7.4) key'
+2025-10-01 12:36:37,111 - INFO - Found 1 assignment name links
+2025-10-01 12:36:37,120 - INFO - Found parent row for the assignment
+2025-10-01 12:36:37,139 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '10/23/2025 6:00 AM'
+2025-10-01 12:36:37,657 - INFO - Attempting to click start date link...
+2025-10-01 12:36:37,735 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 12:36:37,736 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 12:36:40,736 - INFO - Setting start date to '10/23/2025' and time to '6:00 AM' in mini editor...
+2025-10-01 12:36:40,739 - INFO - Waiting for start date dialog to appear...
+2025-10-01 12:36:40,752 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 12:36:40,762 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 12:36:40,762 - INFO - Switching to iframe 0...
+2025-10-01 12:36:40,782 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 12:36:40,784 - INFO - Switching to iframe 1...
+2025-10-01 12:36:40,806 - INFO - Found date fields in iframe 1!
+2025-10-01 12:36:40,808 - INFO - Setting date to '10/23/2025' and time to '6:00 AM' inside iframe...
+2025-10-01 12:36:40,808 - INFO - Parsed date: 10/23/2025, time: 6:00
+2025-10-01 12:36:40,809 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 12:36:40,851 - INFO - Checkbox is already checked
+2025-10-01 12:36:40,858 - INFO - Successfully set date to 10/23/2025
+2025-10-01 12:36:40,858 - INFO - Successfully set time to 6:00
+2025-10-01 12:36:40,951 - INFO - Clicked Save button
+2025-10-01 12:36:41,452 - INFO - Start date set successfully!
+2025-10-01 12:36:41,453 - INFO - Successfully processed 'Quiz 4 (7.1-7.4) key'
+2025-10-01 12:36:41,953 - INFO - Row 9: Processing assignment name: 'YouTube: Quiz 5 (8.1-8.3) Worked Out'
+2025-10-01 12:36:41,956 - INFO - Assignment name length: 36 characters
+2025-10-01 12:36:41,956 - INFO - Assignment name repr: 'YouTube: Quiz 5 (8.1-8.3) Worked Out'
+2025-10-01 12:36:41,957 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 12:36:41,957 - INFO -   'Name': 'YouTube: Quiz 5 (8.1-8.3) Worked Out' (len=36)
+2025-10-01 12:36:41,957 - INFO -   'Start Date': '11/4/2025' (len=9)
+2025-10-01 12:36:41,957 - INFO -   'Start Time': '6:00 AM' (len=7)
+2025-10-01 12:36:41,957 - INFO -   'Due Date': '' (len=0)
+2025-10-01 12:36:41,957 - INFO -   'Due Time': '' (len=0)
+2025-10-01 12:36:41,957 - INFO -   'Visibility': '' (len=0)
+2025-10-01 12:36:41,957 - INFO - DEBUG: Raw due_date='', due_time=''
+2025-10-01 12:36:41,958 - INFO - DEBUG: due_date bool=False, due_time bool=False
+2025-10-01 12:36:41,958 - WARNING - SKIPPING due date - due_date='' (False), due_time='' (False)
+2025-10-01 12:36:41,958 - INFO - Setting start date: 11/4/2025 at 6:00 AM
+2025-10-01 12:36:41,958 - INFO - Looking for start date link for assignment: 'YouTube: Quiz 5 (8.1-8.3) Worked Out'
+2025-10-01 12:36:41,958 - INFO - Searching for EXACT match: 'YouTube: Quiz 5 (8.1-8.3) Worked Out'
+2025-10-01 12:36:41,969 - INFO - Trying DASH-FREE search: 'YouTube: Quiz 5 (8.1 8.3) Worked Out'
+2025-10-01 12:36:43,284 - INFO - SUCCESS: Found DASH-FREE match! 'YouTube: Quiz 5 (8.1-8.3) Worked Out'
+2025-10-01 12:36:43,285 - INFO - Found 1 assignment name links
+2025-10-01 12:36:43,293 - INFO - Found parent row for the assignment
+2025-10-01 12:36:43,311 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '11/4/2025 6:00 AM'
+2025-10-01 12:36:43,819 - INFO - Attempting to click start date link...
+2025-10-01 12:36:43,891 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 12:36:43,892 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 12:36:46,893 - INFO - Setting start date to '11/4/2025' and time to '6:00 AM' in mini editor...
+2025-10-01 12:36:46,893 - INFO - Waiting for start date dialog to appear...
+2025-10-01 12:36:46,905 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 12:36:46,911 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 12:36:46,911 - INFO - Switching to iframe 0...
+2025-10-01 12:36:46,927 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 12:36:46,928 - INFO - Switching to iframe 1...
+2025-10-01 12:36:46,944 - INFO - Found date fields in iframe 1!
+2025-10-01 12:36:46,944 - INFO - Setting date to '11/4/2025' and time to '6:00 AM' inside iframe...
+2025-10-01 12:36:46,945 - INFO - Parsed date: 11/4/2025, time: 6:00
+2025-10-01 12:36:46,945 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 12:36:46,955 - INFO - Checkbox is already checked
+2025-10-01 12:36:46,959 - INFO - Successfully set date to 11/4/2025
+2025-10-01 12:36:46,959 - INFO - Successfully set time to 6:00
+2025-10-01 12:36:47,026 - INFO - Clicked Save button
+2025-10-01 12:36:47,528 - INFO - Start date set successfully!
+2025-10-01 12:36:47,528 - INFO - Successfully processed 'YouTube: Quiz 5 (8.1-8.3) Worked Out'
+2025-10-01 12:36:48,029 - INFO - CSV processing completed: 8 successful, 0 errors
+2025-10-01 12:42:16,580 - INFO - ====== WebDriver manager ======
+2025-10-01 12:42:17,522 - INFO - Get LATEST chromedriver version for google-chrome
+2025-10-01 12:42:17,770 - INFO - Get LATEST chromedriver version for google-chrome
+2025-10-01 12:42:18,020 - INFO - Driver [C:\Users\chase\.wdm\drivers\chromedriver\win64\141.0.7390.54\chromedriver-win32/chromedriver.exe] found in cache
+2025-10-01 12:42:20,403 - INFO - Chrome driver initialized successfully
+2025-10-01 12:42:39,023 - INFO - Processing CSV file: C:/Users/chase/My Drive/scripts/School Scripts/D2L Macro/D2L Assignments - Copy.csv
+2025-10-01 12:42:39,024 - INFO - CSV headers found: ['Name', 'Start Date', 'Start Time', 'Due Date', 'Due Time', 'Visibility']
+2025-10-01 12:42:39,024 - INFO - Row 2: Processing assignment name: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:42:39,025 - INFO - Assignment name length: 18 characters
+2025-10-01 12:42:39,026 - INFO - Assignment name repr: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:42:39,026 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 12:42:39,026 - INFO -   'Name': 'Quiz 4 (7.1 - 7.4)' (len=18)
+2025-10-01 12:42:39,026 - INFO -   'Start Date': '10/22/2025' (len=10)
+2025-10-01 12:42:39,026 - INFO -   'Start Time': '11:00 AM' (len=8)
+2025-10-01 12:42:39,026 - INFO -   'Due Date': '10/22/2025' (len=10)
+2025-10-01 12:42:39,027 - INFO -   'Due Time': '11:59 PM' (len=8)
+2025-10-01 12:42:39,027 - INFO -   'Visibility': '' (len=0)
+2025-10-01 12:42:39,027 - INFO - DEBUG: Raw due_date='10/22/2025', due_time='11:59 PM'
+2025-10-01 12:42:39,028 - INFO - DEBUG: due_date bool=True, due_time bool=True
+2025-10-01 12:42:39,028 - INFO - CONDITION MET: Setting due date: 10/22/2025 at 11:59 PM
+2025-10-01 12:42:39,028 - INFO - Looking for due date link for assignment: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:42:39,028 - INFO - Searching for EXACT match: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:42:39,071 - INFO - Trying DASH-FREE search: 'Quiz 4 (7.1 7.4)'
+2025-10-01 12:42:40,155 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:42:40,156 - INFO - EXACT MATCH: Found 1 assignment name links
+2025-10-01 12:42:40,162 - INFO -   Exact match 1: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:42:40,163 - INFO - Found 1 assignment name links
+2025-10-01 12:42:40,173 - INFO - Found parent row for the assignment
+2025-10-01 12:42:40,183 - INFO - Found due date link in the same row
+2025-10-01 12:42:40,836 - INFO - Clicked due date link
+2025-10-01 12:42:42,837 - INFO - Setting date to '10/22/2025' and time to '11:59 PM' in mini editor...
+2025-10-01 12:42:42,890 - INFO - SUCCESS: Dialog appeared
+2025-10-01 12:42:42,914 - INFO - Found 1 iframe(s) in dialog
+2025-10-01 12:42:42,915 - INFO - Switching to iframe 0...
+2025-10-01 12:42:42,960 - INFO - Found date fields in iframe 0!
+2025-10-01 12:42:42,961 - INFO - Setting date to '10/22/2025' and time to '11:59 PM' inside iframe...
+2025-10-01 12:42:42,961 - INFO - Parsed date: 10/22/2025, time: 23:59
+2025-10-01 12:42:42,961 - INFO - Looking for 'Has Due Date' checkbox (#z_k)
+2025-10-01 12:42:42,990 - INFO - Checkbox is already checked
+2025-10-01 12:42:43,000 - INFO - Successfully set date to 10/22/2025
+2025-10-01 12:42:43,001 - INFO - Successfully set time to 23:59
+2025-10-01 12:42:43,120 - INFO - Clicked Save button
+2025-10-01 12:42:43,620 - INFO - Due date set successfully!
+2025-10-01 12:42:43,628 - INFO - Returning to main page before processing start date...
+2025-10-01 12:42:44,130 - INFO - Setting start date: 10/22/2025 at 11:00 AM
+2025-10-01 12:42:44,133 - INFO - Looking for start date link for assignment: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:42:44,134 - INFO - Searching for EXACT match: 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:42:44,154 - INFO - Trying DASH-FREE search: 'Quiz 4 (7.1 7.4)'
+2025-10-01 12:42:45,603 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:42:45,603 - INFO - Found 1 assignment name links
+2025-10-01 12:42:45,615 - INFO - Found parent row for the assignment
+2025-10-01 12:42:45,643 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '10/22/2025 11:00 AM'
+2025-10-01 12:42:46,155 - INFO - Attempting to click start date link...
+2025-10-01 12:42:46,295 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 12:42:46,302 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 12:42:49,303 - INFO - Setting start date to '10/22/2025' and time to '11:00 AM' in mini editor...
+2025-10-01 12:42:49,304 - INFO - Waiting for start date dialog to appear...
+2025-10-01 12:42:49,328 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 12:42:49,355 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 12:42:49,355 - INFO - Switching to iframe 0...
+2025-10-01 12:42:49,402 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 12:42:49,405 - INFO - Switching to iframe 1...
+2025-10-01 12:42:49,442 - INFO - Found date fields in iframe 1!
+2025-10-01 12:42:49,443 - INFO - Setting date to '10/22/2025' and time to '11:00 AM' inside iframe...
+2025-10-01 12:42:49,443 - INFO - Parsed date: 10/22/2025, time: 11:00
+2025-10-01 12:42:49,443 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 12:42:49,468 - INFO - Checkbox is already checked
+2025-10-01 12:42:49,477 - INFO - Successfully set date to 10/22/2025
+2025-10-01 12:42:49,477 - INFO - Successfully set time to 11:00
+2025-10-01 12:42:49,582 - INFO - Clicked Save button
+2025-10-01 12:42:50,089 - INFO - Start date set successfully!
+2025-10-01 12:42:50,094 - INFO - Successfully processed 'Quiz 4 (7.1 - 7.4)'
+2025-10-01 12:42:50,595 - INFO - Row 3: Processing assignment name: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 12:42:50,596 - INFO - Assignment name length: 18 characters
+2025-10-01 12:42:50,597 - INFO - Assignment name repr: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 12:42:50,598 - INFO - DEBUG: ALL CSV ROW VALUES:
+2025-10-01 12:42:50,600 - INFO -   'Name': 'Quiz 5 (8.1 - 8.3)' (len=18)
+2025-10-01 12:42:50,600 - INFO -   'Start Date': '11/3/2025' (len=9)
+2025-10-01 12:42:50,601 - INFO -   'Start Time': '11:00 AM' (len=8)
+2025-10-01 12:42:50,601 - INFO -   'Due Date': '11/3/2025' (len=9)
+2025-10-01 12:42:50,601 - INFO -   'Due Time': '11:59 PM' (len=8)
+2025-10-01 12:42:50,601 - INFO -   'Visibility': '' (len=0)
+2025-10-01 12:42:50,601 - INFO - DEBUG: Raw due_date='11/3/2025', due_time='11:59 PM'
+2025-10-01 12:42:50,601 - INFO - DEBUG: due_date bool=True, due_time bool=True
+2025-10-01 12:42:50,601 - INFO - CONDITION MET: Setting due date: 11/3/2025 at 11:59 PM
+2025-10-01 12:42:50,602 - INFO - Looking for due date link for assignment: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 12:42:50,602 - INFO - Searching for EXACT match: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 12:42:50,626 - INFO - Trying DASH-FREE search: 'Quiz 5 (8.1 8.3)'
+2025-10-01 12:42:52,093 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 5 (8.1-8.3)'
+2025-10-01 12:42:52,094 - INFO - EXACT MATCH: Found 1 assignment name links
+2025-10-01 12:42:52,106 - INFO -   Exact match 1: 'Quiz 5 (8.1-8.3)'
+2025-10-01 12:42:52,107 - INFO - Found 1 assignment name links
+2025-10-01 12:42:52,117 - INFO - Found parent row for the assignment
+2025-10-01 12:42:52,128 - INFO - Found due date link in the same row
+2025-10-01 12:42:52,783 - INFO - Clicked due date link
+2025-10-01 12:42:54,788 - INFO - Setting date to '11/3/2025' and time to '11:59 PM' in mini editor...
+2025-10-01 12:42:54,795 - INFO - SUCCESS: Dialog appeared
+2025-10-01 12:42:54,803 - INFO - Found 1 iframe(s) in dialog
+2025-10-01 12:42:54,803 - INFO - Switching to iframe 0...
+2025-10-01 12:42:54,820 - INFO - Found date fields in iframe 0!
+2025-10-01 12:42:54,820 - INFO - Setting date to '11/3/2025' and time to '11:59 PM' inside iframe...
+2025-10-01 12:42:54,821 - INFO - Parsed date: 11/3/2025, time: 23:59
+2025-10-01 12:42:54,821 - INFO - Looking for 'Has Due Date' checkbox (#z_k)
+2025-10-01 12:42:54,834 - INFO - Checkbox is already checked
+2025-10-01 12:42:54,841 - INFO - Successfully set date to 11/3/2025
+2025-10-01 12:42:54,843 - INFO - Successfully set time to 23:59
+2025-10-01 12:42:54,893 - INFO - Clicked Save button
+2025-10-01 12:42:55,397 - INFO - Due date set successfully!
+2025-10-01 12:42:55,425 - INFO - Returning to main page before processing start date...
+2025-10-01 12:42:55,941 - INFO - Setting start date: 11/3/2025 at 11:00 AM
+2025-10-01 12:42:55,943 - INFO - Looking for start date link for assignment: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 12:42:55,944 - INFO - Searching for EXACT match: 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 12:42:55,964 - INFO - Trying DASH-FREE search: 'Quiz 5 (8.1 8.3)'
+2025-10-01 12:42:57,469 - INFO - SUCCESS: Found DASH-FREE match! 'Quiz 5 (8.1-8.3)'
+2025-10-01 12:42:57,470 - INFO - Found 1 assignment name links
+2025-10-01 12:42:57,485 - INFO - Found parent row for the assignment
+2025-10-01 12:42:57,510 - INFO - Found start date link with selector './/td[contains(@class, 'd_dg_col_StartDate')]//a': '11/3/2025 11:00 AM'
+2025-10-01 12:42:58,023 - INFO - Attempting to click start date link...
+2025-10-01 12:42:58,173 - INFO - SUCCESS: Selenium click on start date link executed
+2025-10-01 12:42:58,177 - INFO - Waiting for start date mini-editor to load...
+2025-10-01 12:43:01,178 - INFO - Setting start date to '11/3/2025' and time to '11:00 AM' in mini editor...
+2025-10-01 12:43:01,179 - INFO - Waiting for start date dialog to appear...
+2025-10-01 12:43:01,212 - INFO - SUCCESS: Dialog found with selector: css selector = '[role='dialog']'
+2025-10-01 12:43:01,233 - INFO - Found 2 iframe(s) in dialog
+2025-10-01 12:43:01,236 - INFO - Switching to iframe 0...
+2025-10-01 12:43:01,275 - INFO - No date fields in iframe 0, trying next...
+2025-10-01 12:43:01,282 - INFO - Switching to iframe 1...
+2025-10-01 12:43:01,376 - INFO - Found date fields in iframe 1!
+2025-10-01 12:43:01,377 - INFO - Setting date to '11/3/2025' and time to '11:00 AM' inside iframe...
+2025-10-01 12:43:01,377 - INFO - Parsed date: 11/3/2025, time: 11:00
+2025-10-01 12:43:01,377 - INFO - Looking for 'Has Start Date' checkbox (#z_o)
+2025-10-01 12:43:01,392 - INFO - Checkbox is already checked
+2025-10-01 12:43:01,399 - INFO - Successfully set date to 11/3/2025
+2025-10-01 12:43:01,400 - INFO - Successfully set time to 11:00
+2025-10-01 12:43:01,471 - INFO - Clicked Save button
+2025-10-01 12:43:01,972 - INFO - Start date set successfully!
+2025-10-01 12:43:01,972 - INFO - Successfully processed 'Quiz 5 (8.1 - 8.3)'
+2025-10-01 12:43:02,474 - WARNING - Row 4: Empty assignment name, skipping
+2025-10-01 12:43:02,476 - WARNING - Row 5: Empty assignment name, skipping
+2025-10-01 12:43:02,476 - WARNING - Row 6: Empty assignment name, skipping
+2025-10-01 12:43:02,477 - WARNING - Row 7: Empty assignment name, skipping
+2025-10-01 12:43:02,478 - WARNING - Row 8: Empty assignment name, skipping
+2025-10-01 12:43:02,478 - WARNING - Row 9: Empty assignment name, skipping
+2025-10-01 12:43:02,479 - INFO - CSV processing completed: 2 successful, 0 errors
