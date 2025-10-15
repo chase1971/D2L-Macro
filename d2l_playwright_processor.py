@@ -22,7 +22,7 @@ class D2LPlaywrightProcessor:
             self.playwright = await async_playwright().start()
             
             # Create browser_data directory if it doesn't exist
-            browser_data_dir = "../../Shared-Browser-Data/D2L-Macro-browser_data"
+            browser_data_dir = "../Make-Up-Exam-Macro/browser_data"
             if not os.path.exists(browser_data_dir):
                 os.makedirs(browser_data_dir)
                 print(f"Created browser data directory: {browser_data_dir}")
