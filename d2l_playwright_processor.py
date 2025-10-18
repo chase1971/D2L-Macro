@@ -25,11 +25,11 @@ SHARED_BROWSER_DIR = r"C:\Users\chase\Documents\Shared-Browser-Data"
 D2L_BASE_URL = "https://d2l.lonestar.edu/"
 
 COURSE_URLS = {
-    "FM4202": "https://d2l.lonestar.edu/d2l/lms/managefiles/main.d2l?ou=4202",
-    "FM4103": "https://d2l.lonestar.edu/d2l/lms/managefiles/main.d2l?ou=4103",
-    "CA4203": "https://d2l.lonestar.edu/d2l/lms/managefiles/main.d2l?ou=4203",
-    "CA4201": "https://d2l.lonestar.edu/d2l/lms/managefiles/main.d2l?ou=4201",
-    "CA4105": "https://d2l.lonestar.edu/d2l/lms/managefiles/main.d2l?ou=4105"
+    "FM4202": "https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1580392",
+    "FM4103": "https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1580390",
+    "CA4203": "https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1580436",
+    "CA4201": "https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1580434",
+    "CA4105": "https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1580431",
 }
 
 LOG_PATH = os.path.join(os.path.dirname(__file__), "d2l_processor.log")
@@ -63,41 +63,32 @@ class D2LProcessor:
             # ===========================================================
             # 🧩 CONNECT TO EXISTING CHROME ONLY
             # ===========================================================
+            await asyncio.sleep(0.5)
             try:
-                await asyncio.sleep(0.5)
-                logger.info("🔗 Attempting to connect to existing Chrome on port 9223...")
-                self.browser = await self.playwright.chromium.connect_over_cdp("http://localhost:9223")
-
-                contexts = self.browser.contexts
-                if contexts:
-                    self.context = contexts[0]
-                    self.page = self.context.pages[0] if self.context.pages else await self.context.new_page()
-                else:
-                    self.context = await self.browser.new_context()
-                    self.page = await self.context.new_page()
-
-                logger.info("✅ Connected successfully to running Chrome session.")
-
+                logger.info("🔗 Connecting to existing Chrome session on port 9223...")
+                browser = await self.playwright.chromium.connect_over_cdp("http://localhost:9223")
+                self.context = browser.contexts[0]
+                self.page = self.context.pages[0] if self.context.pages else await self.context.new_page()
+                logger.info("✅ Attached to existing Chrome session (no relaunch).")
             except Exception as e:
-                # Don't launch Chromium – just log and exit
-                logger.error("❌ Could not connect to Chrome. Is it running with --remote-debugging-port=9223?")
-                logger.error(f"⚠️ Connection error: {e}")
-                raise SystemExit("Chrome not found or not started by Node. Please launch via D2L Login button first.")
+                logger.error(f"❌ Could not connect to existing browser: {e}")
+                raise RuntimeError("Chrome must be opened first via the Login button.")
 
             # ===========================================================
             # 🌐 NAVIGATION & ACTIONS
             # ===========================================================
-            logger.info(f"🌍 Navigating to {D2L_BASE_URL}")
-            await self.page.goto(D2L_BASE_URL, wait_until="networkidle")
-            await asyncio.sleep(3)
-            logger.info("✅ Browser ready for manual login or D2L interaction.")
-
-            # Optional: perform follow-up actions
             if action == "open-course" and course_code:
+                # Skip homepage reload — directly open the course
+                logger.info(f"🎯 Opening course directly: {course_code}")
                 await self.open_course(course_code)
             else:
+                # Normal login flow — go to D2L home page
+                logger.info(f"🌍 Navigating to D2L base URL: {D2L_BASE_URL}")
+                await self.page.goto(D2L_BASE_URL, wait_until="networkidle")
+                await asyncio.sleep(3)
+                logger.info("✅ Browser ready for manual login.")
                 logger.info("🕓 Holding browser open indefinitely (D2L session active).")
-                await asyncio.Event().wait()  # Keeps Chrome session alive indefinitely
+                await asyncio.Event().wait()
 
         except Exception as e:
             self._write_debug_report("automate_d2l", e)

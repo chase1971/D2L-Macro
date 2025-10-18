@@ -216,3 +216,232 @@ Call log:
 2025-10-18 14:23:50,654 | INFO | 🌍 Navigating to https://d2l.lonestar.edu/
 2025-10-18 14:23:55,701 | INFO | ✅ Browser ready for manual login or D2L interaction.
 2025-10-18 14:23:55,701 | INFO | 🕓 Holding browser open indefinitely (D2L session active).
+2025-10-18 14:28:45,715 | INFO | 🐍 D2L Processor started via CLI.
+2025-10-18 14:28:45,715 | INFO | 🧠 Starting D2L automation process...
+2025-10-18 14:28:45,715 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:28:45,717 | INFO | 🚀 Starting D2L automation (attach-only mode)...
+2025-10-18 14:28:46,781 | INFO | 🔗 Attempting to connect to existing Chrome on port 9223...
+2025-10-18 14:28:47,166 | INFO | ✅ Connected successfully to running Chrome session.
+2025-10-18 14:28:47,166 | INFO | 🌍 Navigating to https://d2l.lonestar.edu/
+2025-10-18 14:28:49,204 | INFO | 🐍 D2L Processor started via CLI.
+2025-10-18 14:28:49,204 | INFO | 🧠 Starting D2L automation process...
+2025-10-18 14:28:49,204 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:28:49,205 | INFO | 🚀 Starting D2L automation (attach-only mode)...
+2025-10-18 14:28:50,251 | INFO | 🔗 Attempting to connect to existing Chrome on port 9223...
+2025-10-18 14:28:50,641 | INFO | ✅ Connected successfully to running Chrome session.
+2025-10-18 14:28:50,641 | INFO | 🌍 Navigating to https://d2l.lonestar.edu/
+2025-10-18 14:28:53,580 | INFO | ✅ Browser ready for manual login or D2L interaction.
+2025-10-18 14:28:53,580 | INFO | 🕓 Holding browser open indefinitely (D2L session active).
+2025-10-18 14:28:57,902 | INFO | ✅ Browser ready for manual login or D2L interaction.
+2025-10-18 14:28:57,906 | ERROR | ❌ Error at open_course: BrowserContext.new_page: Target page, context or browser has been closed
+2025-10-18 14:28:57,906 | INFO | Debug log saved at: C:\Users\chase\Documents\School Scrips\D2L-Macro\debug_logs\debug_open_course_2025-10-18_14-28-57.txt
+2025-10-18 14:28:57,915 | ERROR | ❌ Error at automate_d2l: BrowserContext.new_page: Target page, context or browser has been closed
+2025-10-18 14:28:57,915 | INFO | Debug log saved at: C:\Users\chase\Documents\School Scrips\D2L-Macro\debug_logs\debug_automate_d2l_2025-10-18_14-28-57.txt
+2025-10-18 14:28:57,923 | ERROR | ❌ D2L Automation error: BrowserContext.new_page: Target page, context or browser has been closed
+2025-10-18 14:28:57,923 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:28:57,924 | INFO | ✅ Browser context closed.
+2025-10-18 14:28:57,924 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:28:57,925 | WARNING | ⚠️ Cleanup error: Event loop is closed
+2025-10-18 14:29:02,223 | INFO | 🐍 D2L Processor started via CLI.
+2025-10-18 14:29:02,223 | INFO | 🧠 Starting D2L automation process...
+2025-10-18 14:29:02,223 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:29:02,225 | INFO | 🚀 Starting D2L automation (attach-only mode)...
+2025-10-18 14:29:03,329 | INFO | 🔗 Attempting to connect to existing Chrome on port 9223...
+2025-10-18 14:29:03,684 | INFO | ✅ Connected successfully to running Chrome session.
+2025-10-18 14:29:03,684 | INFO | 🌍 Navigating to https://d2l.lonestar.edu/
+2025-10-18 14:29:07,517 | INFO | ✅ Browser ready for manual login or D2L interaction.
+2025-10-18 14:29:07,517 | INFO | 🕓 Holding browser open indefinitely (D2L session active).
+2025-10-18 14:29:10,405 | INFO | 🐍 D2L Processor started via CLI.
+2025-10-18 14:29:10,405 | INFO | 🧠 Starting D2L automation process...
+2025-10-18 14:29:10,405 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:29:10,407 | INFO | 🚀 Starting D2L automation (attach-only mode)...
+2025-10-18 14:29:11,439 | INFO | 🔗 Attempting to connect to existing Chrome on port 9223...
+2025-10-18 14:29:11,808 | INFO | ✅ Connected successfully to running Chrome session.
+2025-10-18 14:29:11,808 | INFO | 🌍 Navigating to https://d2l.lonestar.edu/
+2025-10-18 14:29:16,946 | INFO | 🐍 D2L Processor started via CLI.
+2025-10-18 14:29:16,946 | INFO | 🧠 Starting D2L automation process...
+2025-10-18 14:29:16,946 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:29:16,948 | INFO | 🚀 Starting D2L automation (attach-only mode)...
+2025-10-18 14:29:17,986 | INFO | 🔗 Attempting to connect to existing Chrome on port 9223...
+2025-10-18 14:29:18,203 | INFO | ✅ Browser ready for manual login or D2L interaction.
+2025-10-18 14:29:18,203 | INFO | 📘 Opening course page: https://d2l.lonestar.edu/d2l/lms/managefiles/main.d2l?ou=4202
+2025-10-18 14:29:18,455 | INFO | ✅ Connected successfully to running Chrome session.
+2025-10-18 14:29:18,455 | INFO | 🌍 Navigating to https://d2l.lonestar.edu/
+2025-10-18 14:29:21,781 | INFO | 🐍 D2L Processor started via CLI.
+2025-10-18 14:29:21,781 | INFO | 🧠 Starting D2L automation process...
+2025-10-18 14:29:21,781 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:29:21,783 | INFO | 🚀 Starting D2L automation (attach-only mode)...
+2025-10-18 14:29:22,835 | INFO | 🔗 Attempting to connect to existing Chrome on port 9223...
+2025-10-18 14:29:23,214 | INFO | ✅ Connected successfully to running Chrome session.
+2025-10-18 14:29:23,214 | INFO | 🌍 Navigating to https://d2l.lonestar.edu/
+2025-10-18 14:29:24,404 | INFO | ✅ Browser ready for manual login or D2L interaction.
+2025-10-18 14:29:24,404 | INFO | 📘 Opening course page: https://d2l.lonestar.edu/d2l/lms/managefiles/main.d2l?ou=4103
+2025-10-18 14:29:24,404 | INFO | ✅ D2L Automation completed successfully.
+2025-10-18 14:29:24,404 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:29:24,408 | WARNING | ⚠️ Cleanup error: BrowserContext.close: 'NoneType' object has no attribute 'send'
+2025-10-18 14:29:27,687 | INFO | 🐍 D2L Processor started via CLI.
+2025-10-18 14:29:27,687 | INFO | 🧠 Starting D2L automation process...
+2025-10-18 14:29:27,687 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:29:27,688 | INFO | 🚀 Starting D2L automation (attach-only mode)...
+2025-10-18 14:29:28,732 | INFO | 🔗 Attempting to connect to existing Chrome on port 9223...
+2025-10-18 14:29:29,086 | INFO | ✅ Connected successfully to running Chrome session.
+2025-10-18 14:29:29,086 | INFO | 🌍 Navigating to https://d2l.lonestar.edu/
+2025-10-18 14:29:29,254 | INFO | ✅ Course FM4103 loaded successfully.
+2025-10-18 14:29:29,254 | INFO | ✅ Browser ready for manual login or D2L interaction.
+2025-10-18 14:29:29,254 | INFO | 📘 Opening course page: https://d2l.lonestar.edu/d2l/lms/managefiles/main.d2l?ou=4202
+2025-10-18 14:29:29,255 | INFO | ✅ D2L Automation completed successfully.
+2025-10-18 14:29:29,255 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:29:29,257 | WARNING | ⚠️ Cleanup error: BrowserContext.close: 'NoneType' object has no attribute 'send'
+2025-10-18 14:29:29,259 | ERROR | ❌ Error at automate_d2l: Page.goto: net::ERR_ABORTED at https://d2l.lonestar.edu/
+Call log:
+  - navigating to "https://d2l.lonestar.edu/", waiting until "networkidle"
+
+2025-10-18 14:29:29,259 | INFO | Debug log saved at: C:\Users\chase\Documents\School Scrips\D2L-Macro\debug_logs\debug_automate_d2l_2025-10-18_14-29-29.txt
+2025-10-18 14:29:29,267 | ERROR | ❌ D2L Automation error: Page.goto: net::ERR_ABORTED at https://d2l.lonestar.edu/
+Call log:
+  - navigating to "https://d2l.lonestar.edu/", waiting until "networkidle"
+
+2025-10-18 14:29:29,268 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:29:29,271 | WARNING | ⚠️ Cleanup error: BrowserContext.close: 'NoneType' object has no attribute 'send'
+2025-10-18 14:29:32,596 | INFO | 🐍 D2L Processor started via CLI.
+2025-10-18 14:29:32,596 | INFO | 🧠 Starting D2L automation process...
+2025-10-18 14:29:32,596 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:29:32,597 | INFO | 🚀 Starting D2L automation (attach-only mode)...
+2025-10-18 14:29:33,434 | INFO | ✅ Course FM4202 loaded successfully.
+2025-10-18 14:29:33,436 | INFO | ✅ D2L Automation completed successfully.
+2025-10-18 14:29:33,436 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:29:33,438 | WARNING | ⚠️ Cleanup error: BrowserContext.close: 'NoneType' object has no attribute 'send'
+2025-10-18 14:29:33,671 | INFO | 🔗 Attempting to connect to existing Chrome on port 9223...
+2025-10-18 14:29:34,028 | INFO | ✅ Connected successfully to running Chrome session.
+2025-10-18 14:29:34,028 | INFO | 🌍 Navigating to https://d2l.lonestar.edu/
+2025-10-18 14:29:39,918 | INFO | ✅ Browser ready for manual login or D2L interaction.
+2025-10-18 14:29:39,918 | INFO | 📘 Opening course page: https://d2l.lonestar.edu/d2l/lms/managefiles/main.d2l?ou=4103
+2025-10-18 14:29:44,121 | INFO | ✅ Course FM4103 loaded successfully.
+2025-10-18 14:29:44,121 | INFO | ✅ D2L Automation completed successfully.
+2025-10-18 14:29:44,121 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:29:44,124 | WARNING | ⚠️ Cleanup error: BrowserContext.close: 'NoneType' object has no attribute 'send'
+2025-10-18 14:32:23,371 | INFO | 🐍 D2L Processor started via CLI.
+2025-10-18 14:32:23,372 | INFO | 🧠 Starting D2L automation process...
+2025-10-18 14:32:23,372 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:32:23,373 | INFO | 🚀 Starting D2L automation (attach-only mode)...
+2025-10-18 14:32:24,492 | INFO | 🔗 Attempting to connect to existing Chrome on port 9223...
+2025-10-18 14:32:24,847 | INFO | ✅ Connected successfully to running Chrome session.
+2025-10-18 14:32:24,847 | INFO | 🌍 Navigating to https://d2l.lonestar.edu/
+2025-10-18 14:32:28,686 | INFO | ✅ Browser ready for manual login or D2L interaction.
+2025-10-18 14:32:28,686 | INFO | 🕓 Holding browser open indefinitely (D2L session active).
+2025-10-18 14:32:34,798 | INFO | 🐍 D2L Processor started via CLI.
+2025-10-18 14:32:34,798 | INFO | 🧠 Starting D2L automation process...
+2025-10-18 14:32:34,798 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:32:34,799 | INFO | 🚀 Starting D2L automation (attach-only mode)...
+2025-10-18 14:32:35,807 | INFO | 🔗 Attempting to connect to existing Chrome on port 9223...
+2025-10-18 14:32:36,185 | INFO | ✅ Connected successfully to running Chrome session.
+2025-10-18 14:32:36,185 | INFO | 🌍 Navigating to https://d2l.lonestar.edu/
+2025-10-18 14:32:40,692 | INFO | 🐍 D2L Processor started via CLI.
+2025-10-18 14:32:40,692 | INFO | 🧠 Starting D2L automation process...
+2025-10-18 14:32:40,692 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:32:40,693 | INFO | 🚀 Starting D2L automation (attach-only mode)...
+2025-10-18 14:32:41,392 | INFO | ✅ Browser ready for manual login or D2L interaction.
+2025-10-18 14:32:41,392 | INFO | 📘 Opening course page: https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1580392
+2025-10-18 14:32:41,734 | INFO | 🔗 Attempting to connect to existing Chrome on port 9223...
+2025-10-18 14:32:42,751 | INFO | ✅ Connected successfully to running Chrome session.
+2025-10-18 14:32:42,751 | INFO | 🌍 Navigating to https://d2l.lonestar.edu/
+2025-10-18 14:32:48,895 | INFO | ✅ Browser ready for manual login or D2L interaction.
+2025-10-18 14:32:48,895 | INFO | 📘 Opening course page: https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1580392
+2025-10-18 14:32:48,896 | INFO | ✅ D2L Automation completed successfully.
+2025-10-18 14:32:48,896 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:32:48,898 | WARNING | ⚠️ Cleanup error: BrowserContext.close: 'NoneType' object has no attribute 'send'
+2025-10-18 14:32:53,829 | INFO | ✅ Course FM4202 loaded successfully.
+2025-10-18 14:32:53,830 | INFO | ✅ D2L Automation completed successfully.
+2025-10-18 14:32:53,830 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:32:53,835 | WARNING | ⚠️ Cleanup error: BrowserContext.close: 'NoneType' object has no attribute 'send'
+2025-10-18 14:35:17,520 | INFO | 🐍 D2L Processor started via CLI.
+2025-10-18 14:35:17,520 | INFO | 🧠 Starting D2L automation process...
+2025-10-18 14:35:17,520 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:35:17,522 | INFO | 🚀 Starting D2L automation (attach-only mode)...
+2025-10-18 14:35:18,619 | INFO | 🔗 Connecting to existing Chrome session on port 9223...
+2025-10-18 14:35:18,974 | INFO | ✅ Attached to existing Chrome session (no relaunch).
+2025-10-18 14:35:18,974 | INFO | 🌍 Navigating to https://d2l.lonestar.edu/
+2025-10-18 14:35:22,856 | INFO | ✅ Browser ready for manual login or D2L interaction.
+2025-10-18 14:35:22,856 | INFO | 🕓 Holding browser open indefinitely (D2L session active).
+2025-10-18 14:35:33,199 | INFO | 🐍 D2L Processor started via CLI.
+2025-10-18 14:35:33,199 | INFO | 🧠 Starting D2L automation process...
+2025-10-18 14:35:33,200 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:35:33,201 | INFO | 🚀 Starting D2L automation (attach-only mode)...
+2025-10-18 14:35:34,228 | INFO | 🔗 Connecting to existing Chrome session on port 9223...
+2025-10-18 14:35:34,598 | INFO | ✅ Attached to existing Chrome session (no relaunch).
+2025-10-18 14:35:34,598 | INFO | 🌍 Navigating to https://d2l.lonestar.edu/
+2025-10-18 14:35:39,906 | INFO | ✅ Browser ready for manual login or D2L interaction.
+2025-10-18 14:35:39,906 | INFO | 📘 Opening course page: https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1580392
+2025-10-18 14:35:45,583 | INFO | ✅ Course FM4202 loaded successfully.
+2025-10-18 14:35:45,584 | INFO | ✅ D2L Automation completed successfully.
+2025-10-18 14:35:45,584 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:35:45,587 | WARNING | ⚠️ Cleanup error: BrowserContext.close: 'NoneType' object has no attribute 'send'
+2025-10-18 14:38:24,304 | INFO | 🐍 D2L Processor started via CLI.
+2025-10-18 14:38:24,305 | INFO | 🧠 Starting D2L automation process...
+2025-10-18 14:38:24,305 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:38:24,306 | INFO | 🚀 Starting D2L automation (attach-only mode)...
+2025-10-18 14:38:25,411 | INFO | 🔗 Connecting to existing Chrome session on port 9223...
+2025-10-18 14:38:25,767 | INFO | ✅ Attached to existing Chrome session (no relaunch).
+2025-10-18 14:38:25,767 | INFO | 🌍 Navigating to D2L base URL: https://d2l.lonestar.edu/
+2025-10-18 14:38:29,723 | INFO | ✅ Browser ready for manual login.
+2025-10-18 14:38:29,723 | INFO | 🕓 Holding browser open indefinitely (D2L session active).
+2025-10-18 14:38:38,004 | INFO | 🐍 D2L Processor started via CLI.
+2025-10-18 14:38:38,004 | INFO | 🧠 Starting D2L automation process...
+2025-10-18 14:38:38,004 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:38:38,005 | INFO | 🚀 Starting D2L automation (attach-only mode)...
+2025-10-18 14:38:39,001 | INFO | 🔗 Connecting to existing Chrome session on port 9223...
+2025-10-18 14:38:39,377 | INFO | ✅ Attached to existing Chrome session (no relaunch).
+2025-10-18 14:38:39,378 | INFO | 🎯 Opening course directly: FM4202
+2025-10-18 14:38:39,378 | INFO | 📘 Opening course page: https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1580392
+2025-10-18 14:38:43,208 | INFO | 🐍 D2L Processor started via CLI.
+2025-10-18 14:38:43,208 | INFO | 🧠 Starting D2L automation process...
+2025-10-18 14:38:43,208 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:38:43,209 | INFO | 🚀 Starting D2L automation (attach-only mode)...
+2025-10-18 14:38:44,259 | INFO | 🔗 Connecting to existing Chrome session on port 9223...
+2025-10-18 14:38:44,478 | INFO | ✅ Course FM4202 loaded successfully.
+2025-10-18 14:38:44,479 | INFO | ✅ D2L Automation completed successfully.
+2025-10-18 14:38:44,479 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:38:44,481 | WARNING | ⚠️ Cleanup error: BrowserContext.close: 'NoneType' object has no attribute 'send'
+2025-10-18 14:38:44,615 | INFO | ✅ Attached to existing Chrome session (no relaunch).
+2025-10-18 14:38:44,615 | INFO | 🎯 Opening course directly: FM4103
+2025-10-18 14:38:44,615 | INFO | 📘 Opening course page: https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1580390
+2025-10-18 14:38:49,608 | INFO | 🐍 D2L Processor started via CLI.
+2025-10-18 14:38:49,609 | INFO | 🧠 Starting D2L automation process...
+2025-10-18 14:38:49,609 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:38:49,609 | INFO | 🚀 Starting D2L automation (attach-only mode)...
+2025-10-18 14:38:50,562 | INFO | ✅ Course FM4103 loaded successfully.
+2025-10-18 14:38:50,563 | INFO | ✅ D2L Automation completed successfully.
+2025-10-18 14:38:50,563 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:38:50,565 | WARNING | ⚠️ Cleanup error: BrowserContext.close: 'NoneType' object has no attribute 'send'
+2025-10-18 14:38:50,592 | INFO | 🔗 Connecting to existing Chrome session on port 9223...
+2025-10-18 14:38:50,985 | INFO | ✅ Attached to existing Chrome session (no relaunch).
+2025-10-18 14:38:50,985 | INFO | 🎯 Opening course directly: CA4203
+2025-10-18 14:38:50,985 | INFO | 📘 Opening course page: https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1580436
+2025-10-18 14:38:55,315 | INFO | 🐍 D2L Processor started via CLI.
+2025-10-18 14:38:55,315 | INFO | 🧠 Starting D2L automation process...
+2025-10-18 14:38:55,315 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:38:55,316 | INFO | 🚀 Starting D2L automation (attach-only mode)...
+2025-10-18 14:38:56,335 | INFO | 🔗 Connecting to existing Chrome session on port 9223...
+2025-10-18 14:38:56,747 | INFO | ✅ Attached to existing Chrome session (no relaunch).
+2025-10-18 14:38:56,748 | INFO | 🎯 Opening course directly: CA4201
+2025-10-18 14:38:56,748 | INFO | 📘 Opening course page: https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1580434
+2025-10-18 14:38:57,722 | INFO | ✅ Course CA4203 loaded successfully.
+2025-10-18 14:38:57,722 | INFO | ✅ D2L Automation completed successfully.
+2025-10-18 14:38:57,722 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:38:57,726 | WARNING | ⚠️ Cleanup error: BrowserContext.close: 'NoneType' object has no attribute 'send'
+2025-10-18 14:39:01,247 | INFO | 🐍 D2L Processor started via CLI.
+2025-10-18 14:39:01,247 | INFO | 🧠 Starting D2L automation process...
+2025-10-18 14:39:01,248 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:39:01,248 | INFO | 🚀 Starting D2L automation (attach-only mode)...
+2025-10-18 14:39:02,247 | INFO | 🔗 Connecting to existing Chrome session on port 9223...
+2025-10-18 14:39:02,644 | INFO | ✅ Attached to existing Chrome session (no relaunch).
+2025-10-18 14:39:02,644 | INFO | 🎯 Opening course directly: CA4105
+2025-10-18 14:39:02,644 | INFO | 📘 Opening course page: https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1580431
+2025-10-18 14:39:02,988 | INFO | ✅ Course CA4201 loaded successfully.
+2025-10-18 14:39:02,988 | INFO | ✅ D2L Automation completed successfully.
+2025-10-18 14:39:02,988 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:39:02,991 | WARNING | ⚠️ Cleanup error: BrowserContext.close: 'NoneType' object has no attribute 'send'
+2025-10-18 14:39:08,835 | INFO | ✅ Course CA4105 loaded successfully.
+2025-10-18 14:39:08,835 | INFO | ✅ D2L Automation completed successfully.
+2025-10-18 14:39:08,835 | DEBUG | Using proactor: IocpProactor
+2025-10-18 14:39:08,838 | WARNING | ⚠️ Cleanup error: BrowserContext.close: 'NoneType' object has no attribute 'send'
