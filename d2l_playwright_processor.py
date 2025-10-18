@@ -21,11 +21,12 @@ class D2LPlaywrightProcessor:
         try:
             self.playwright = await async_playwright().start()
             
-            # Create browser_data directory if it doesn't exist
-            browser_data_dir = "../Make-Up-Exam-Macro/browser_data"
+            # Use shared browser data directory
+            browser_data_dir = r"C:\Users\chase\Documents\Shared-Browser-Data"
             if not os.path.exists(browser_data_dir):
                 os.makedirs(browser_data_dir)
-                print(f"Created browser data directory: {browser_data_dir}")
+                print(f"Created shared browser data directory: {browser_data_dir}")
+            print("✅ Using shared browser data from:", browser_data_dir)
             
             # Launch persistent context exactly like agent.py
             self.context = await self.playwright.chromium.launch_persistent_context(

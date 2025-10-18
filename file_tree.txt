@@ -1,0 +1,12 @@
+.gitattributes
+D2L Assignments - Copy.csv
+D2L Assignments.csv
+D2L_Gui.py
+Install.bat
+Install.txt
+__pycache__/d2l_date_processing.cpython-313.pyc
+d2l_class_buttons.log
+d2l_date_processing.py
+d2l_date_processing_new.py
+d2l_playwright_processor.py
+d2l_process_csv_cli.py

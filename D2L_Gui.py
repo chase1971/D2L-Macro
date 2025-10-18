@@ -39,7 +39,7 @@ class D2LClassButtons:
         """Launch Chrome directly with persistent profile (exactly like Interface-Project)"""
         try:
             # Use shared browser data directory
-            browser_data_dir = os.path.abspath("../Make-Up-Exam-Macro/browser_data")
+            browser_data_dir = r"C:\Users\chase\Documents\Shared-Browser-Data"
             os.makedirs(browser_data_dir, exist_ok=True)
             
             # Launch Chrome directly with command line (exactly like Interface-Project)
