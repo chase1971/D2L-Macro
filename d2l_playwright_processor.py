@@ -1,274 +1,184 @@
 #!/usr/bin/env python3
 """
-D2L Date Processor using Playwright - Persistent browser session (no second tab)
+D2L Playwright Processor (Fixed to match Automation Agent behavior)
+------------------------------------------------------------------
+- Connects ONLY to the Chrome instance launched by Node.
+- Does NOT start its own Chromium (avoids blue icon & file locks).
+- Keeps session persistent using Shared-Browser-Data.
+- Provides clear logging if Chrome is not running.
 """
 
-import asyncio
-import csv
-import json
-import os
 import sys
+import os
+import json
+import asyncio
+import logging
+import traceback
+import subprocess
+from datetime import datetime
 from playwright.async_api import async_playwright
 
-class D2LPlaywrightProcessor:
+# ========================================
+# 🔧 CONFIGURATION
+# ========================================
+SHARED_BROWSER_DIR = r"C:\Users\chase\Documents\Shared-Browser-Data"
+D2L_BASE_URL = "https://d2l.lonestar.edu/"
+
+COURSE_URLS = {
+    "FM4202": "https://d2l.lonestar.edu/d2l/lms/managefiles/main.d2l?ou=4202",
+    "FM4103": "https://d2l.lonestar.edu/d2l/lms/managefiles/main.d2l?ou=4103",
+    "CA4203": "https://d2l.lonestar.edu/d2l/lms/managefiles/main.d2l?ou=4203",
+    "CA4201": "https://d2l.lonestar.edu/d2l/lms/managefiles/main.d2l?ou=4201",
+    "CA4105": "https://d2l.lonestar.edu/d2l/lms/managefiles/main.d2l?ou=4105"
+}
+
+LOG_PATH = os.path.join(os.path.dirname(__file__), "d2l_processor.log")
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s | %(levelname)s | %(message)s",
+    handlers=[
+        logging.FileHandler(LOG_PATH, mode="a", encoding="utf-8"),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
+
+# ========================================
+# 🧠 MAIN CLASS
+# ========================================
+
+class D2LProcessor:
     def __init__(self):
         self.playwright = None
+        self.browser = None
         self.context = None
         self.page = None
 
-    async def setup_browser(self):
-        """Setup Playwright browser - persistent user session (copied from agent.py)"""
+    async def automate_d2l(self, action=None, course_code=None):
+        """Main coroutine that connects to Chrome and performs automation."""
         try:
+            logger.info("🚀 Starting D2L automation (attach-only mode)...")
             self.playwright = await async_playwright().start()
-            
-            # Use shared browser data directory
-            browser_data_dir = r"C:\Users\chase\Documents\Shared-Browser-Data"
-            if not os.path.exists(browser_data_dir):
-                os.makedirs(browser_data_dir)
-                print(f"Created shared browser data directory: {browser_data_dir}")
-            print("✅ Using shared browser data from:", browser_data_dir)
-            
-            # Launch persistent context exactly like agent.py
-            self.context = await self.playwright.chromium.launch_persistent_context(
-                user_data_dir=browser_data_dir,
-                headless=False,
-                args=['--remote-debugging-port=9223', '--window-position=100,100', '--window-size=1920,1080']
-            )
-            
-            # Reuse existing page or create new one (exactly like agent.py)
-            self.page = self.context.pages[0] if self.context.pages else await self.context.new_page()
-            
-            print("Browser started with persistent session")
+
+            # ===========================================================
+            # 🧩 CONNECT TO EXISTING CHROME ONLY
+            # ===========================================================
+            try:
+                await asyncio.sleep(0.5)
+                logger.info("🔗 Attempting to connect to existing Chrome on port 9223...")
+                self.browser = await self.playwright.chromium.connect_over_cdp("http://localhost:9223")
+
+                contexts = self.browser.contexts
+                if contexts:
+                    self.context = contexts[0]
+                    self.page = self.context.pages[0] if self.context.pages else await self.context.new_page()
+                else:
+                    self.context = await self.browser.new_context()
+                    self.page = await self.context.new_page()
+
+                logger.info("✅ Connected successfully to running Chrome session.")
+
+            except Exception as e:
+                # Don't launch Chromium – just log and exit
+                logger.error("❌ Could not connect to Chrome. Is it running with --remote-debugging-port=9223?")
+                logger.error(f"⚠️ Connection error: {e}")
+                raise SystemExit("Chrome not found or not started by Node. Please launch via D2L Login button first.")
+
+            # ===========================================================
+            # 🌐 NAVIGATION & ACTIONS
+            # ===========================================================
+            logger.info(f"🌍 Navigating to {D2L_BASE_URL}")
+            await self.page.goto(D2L_BASE_URL, wait_until="networkidle")
+            await asyncio.sleep(3)
+            logger.info("✅ Browser ready for manual login or D2L interaction.")
+
+            # Optional: perform follow-up actions
+            if action == "open-course" and course_code:
+                await self.open_course(course_code)
+            else:
+                logger.info("🕓 Holding browser open indefinitely (D2L session active).")
+                await asyncio.Event().wait()  # Keeps Chrome session alive indefinitely
+
+        except Exception as e:
+            self._write_debug_report("automate_d2l", e)
+            raise
+
+    async def open_course(self, course_code: str):
+        """Navigate to specific course page."""
+        try:
+            if not self.context:
+                raise RuntimeError("Browser not initialized.")
+            url = COURSE_URLS.get(course_code)
+            if not url:
+                raise KeyError(f"Course {course_code} not found.")
+            page = self.context.pages[0] if self.context.pages else await self.context.new_page()
+            logger.info(f"📘 Opening course page: {url}")
+            await page.goto(url, wait_until='networkidle')
+            await asyncio.sleep(3)
+            logger.info(f"✅ Course {course_code} loaded successfully.")
+        except Exception as e:
+            self._write_debug_report("open_course", e)
+            raise
+
+    def run_automation(self, action=None, course_code=None):
+        """Launch coroutine safely."""
+        try:
+            logger.info("🧠 Starting D2L automation process...")
+            asyncio.run(self.automate_d2l(action, course_code))
+            logger.info("✅ D2L Automation completed successfully.")
             return True
-            
-        except Exception as e:
-            print(f"Error setting up browser: {e}")
+        except SystemExit as e:
+            logger.error(f"⛔ {e}")
             return False
-
-    async def navigate_to_class(self, class_url):
-        try:
-            await self.page.bring_to_front()
-            current_url = self.page.url.lower()
-            if class_url.lower() != current_url:
-                await self.page.goto(class_url)
-            await self.page.wait_for_load_state('networkidle')
-            print(f"Navigated to class: {class_url}")
-            return True
         except Exception as e:
-            print(f"Error navigating to class: {e}")
+            logger.error(f"❌ D2L Automation error: {str(e)}")
             return False
+        finally:
+            # Cleanup
+            try:
+                if self.context:
+                    asyncio.run(self.context.close())
+                    logger.info("✅ Browser context closed.")
+                if self.playwright:
+                    asyncio.run(self.playwright.stop())
+                    logger.info("✅ Playwright stopped.")
+            except Exception as cleanup_error:
+                logger.warning(f"⚠️ Cleanup error: {cleanup_error}")
 
-    async def process_csv_file(self, csv_file_path):
+    def _write_debug_report(self, stage, exception):
+        """Write detailed debug info to file."""
         try:
-            print(f"Processing CSV file: {csv_file_path}")
-            with open(csv_file_path, 'r', newline='', encoding='utf-8') as csvfile:
-                reader = csv.DictReader(csvfile)
-                required_headers = ['Name', 'Start Date', 'Start Time', 'Due Date', 'Due Time']
-                if not all(header in reader.fieldnames for header in required_headers):
-                    raise ValueError(f"CSV must have required headers: {required_headers}")
+            debug_dir = os.path.join(os.path.dirname(__file__), "debug_logs")
+            os.makedirs(debug_dir, exist_ok=True)
+            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            debug_path = os.path.join(debug_dir, f"debug_{stage}_{timestamp}.txt")
 
-                processed_count, error_count = 0, 0
-                for row_num, row in enumerate(reader, start=2):
-                    try:
-                        assignment_name = row['Name'].strip()
-                        if not assignment_name:
-                            print(f"Row {row_num}: Empty assignment name, skipping")
-                            continue
+            with open(debug_path, "w", encoding="utf-8") as f:
+                f.write(f"Stage: {stage}\n")
+                f.write(f"Error: {repr(exception)}\n\n")
+                f.write(traceback.format_exc())
 
-                        clean_assignment_name = assignment_name.strip('"').strip("'").strip()
-                        due_date, due_time = row['Due Date'].strip(), row['Due Time'].strip()
-                        start_date, start_time = row['Start Date'].strip(), row['Start Time'].strip()
+            logger.error(f"❌ Error at {stage}: {exception}")
+            logger.info(f"Debug log saved at: {debug_path}")
+            subprocess.Popen(['notepad.exe', debug_path], shell=True)
+        except Exception as log_err:
+            print(f"Failed to write debug log: {log_err}")
 
-                        if due_date and due_time:
-                            print(f"Setting due date for '{clean_assignment_name}': {due_date} at {due_time}")
-                            if await self.set_assignment_due_date(clean_assignment_name, due_date, due_time):
-                                processed_count += 1
-                            else:
-                                error_count += 1
-
-                        if start_date and start_time:
-                            print(f"Setting start date for '{clean_assignment_name}': {start_date} at {start_time}")
-                            if not await self.set_assignment_start_date(clean_assignment_name, start_date, start_time):
-                                error_count += 1
-
-                        await asyncio.sleep(0.5)
-                    except Exception as e:
-                        print(f"Error processing row {row_num}: {e}")
-                        error_count += 1
-
-                print(f"CSV processing completed: {processed_count} successful, {error_count} errors")
-                return processed_count, error_count
-        except Exception as e:
-            print(f"Error processing CSV file: {e}")
-            return 0, 1
-
-    async def set_assignment_due_date(self, assignment_name, due_date, due_time):
-        try:
-            assignment_row = await self.find_assignment_row(assignment_name)
-            if not assignment_row:
-                print(f"Could not find assignment: {assignment_name}")
-                return False
-
-            due_date_link = await assignment_row.locator("a[title='Edit the due date']").first
-            if await due_date_link.count() == 0:
-                print(f"No due date link found for: {assignment_name}")
-                return False
-
-            await due_date_link.click()
-            await self.page.wait_for_timeout(2000)
-
-            return await self.set_date_in_dialog(due_date, due_time)
-        except Exception as e:
-            print(f"Error setting due date for '{assignment_name}': {e}")
-            return False
-
-    async def set_assignment_start_date(self, assignment_name, start_date, start_time):
-        try:
-            assignment_row = await self.find_assignment_row(assignment_name)
-            if not assignment_row:
-                print(f"Could not find assignment: {assignment_name}")
-                return False
-
-            start_date_link = await assignment_row.locator("a[title='Edit the start date']").first
-            if await start_date_link.count() == 0:
-                print(f"No start date link found for: {assignment_name}")
-                return False
-
-            await start_date_link.click()
-            await self.page.wait_for_timeout(3000)
-
-            return await self.set_date_in_dialog(start_date, start_time, is_start_date=True)
-        except Exception as e:
-            print(f"Error setting start date for '{assignment_name}': {e}")
-            return False
-
-    async def find_assignment_row(self, assignment_name):
-        try:
-            assignment_cell = self.page.locator(f"td:has-text('{assignment_name}')").first
-            if await assignment_cell.count() > 0:
-                return assignment_cell.locator("xpath=./ancestor::tr")
-            return None
-        except Exception as e:
-            print(f"Error finding assignment row: {e}")
-            return None
-
-    async def set_date_in_dialog(self, date_str, time_str, is_start_date=False):
-        try:
-            await self.page.wait_for_selector("[role='dialog']", timeout=10000)
-            iframe = self.page.frame_locator("iframe").first
-            await iframe.wait_for()
-
-            if is_start_date:
-                checkbox = iframe.locator("#z_o")
-                if await checkbox.count() > 0:
-                    await checkbox.check()
-                    await self.page.wait_for_timeout(500)
-
-            month, day, year = self.parse_date(date_str)
-            hour, minute = self.parse_time(time_str)
-
-            await iframe.locator('input[name*="$year"]').fill(year)
-            await iframe.locator('input[name*="$month"]').fill(month)
-            await iframe.locator('input[name*="$day"]').fill(day)
-            await iframe.locator('input[name*="$hour"]').fill(hour)
-            await iframe.locator('input[name*="$minute"]').fill(minute)
-
-            save_button = self.page.locator("button:has-text('Save')").first
-            await save_button.click()
-            await self.page.wait_for_timeout(1000)
-            return True
-        except Exception as e:
-            print(f"Error setting date in dialog: {e}")
-            return False
-
-    def parse_date(self, date_str):
-        if '/' in date_str:
-            month, day, year = date_str.split('/')
-        else:
-            from datetime import datetime
-            dt = datetime.strptime(date_str, '%B %d, %Y')
-            month, day, year = str(dt.month), str(dt.day), str(dt.year)
-        return month, day, year
-
-    def parse_time(self, time_str):
-        if 'PM' in time_str.upper():
-            time_part = time_str.upper().replace('PM', '').strip()
-            hour, minute = time_part.split(':') if ':' in time_part else (time_part, '0')
-            hour = str(int(hour) + 12 if int(hour) != 12 else 12)
-        elif 'AM' in time_str.upper():
-            time_part = time_str.upper().replace('AM', '').strip()
-            hour, minute = time_part.split(':') if ':' in time_part else (time_part, '0')
-            hour = str(int(hour) if int(hour) != 12 else 0)
-        else:
-            hour, minute = time_str.split(':') if ':' in time_str else (time_str, '0')
-        return hour, minute
-
-    async def close(self):
-        try:
-            if self.context:
-                await self.context.close()
-            if self.playwright:
-                await self.playwright.stop()
-        except Exception as e:
-            print(f"Error closing browser: {e}")
-
-async def main():
-    if len(sys.argv) < 3:
-        print(json.dumps({"success": False, "error": "Usage: python d2l_playwright_processor.py <command> <url_or_csv>"}))
-        sys.exit(1)
-
-    command = sys.argv[1]
-    url_or_csv = sys.argv[2]
-
-    processor = D2LPlaywrightProcessor()
-    try:
-        if not await processor.setup_browser():
-            print(json.dumps({"success": False, "error": "Failed to setup browser"}))
-            sys.exit(1)
-
-        if command == "login":
-            # Just open browser and navigate to URL for manual login
-            await processor.page.goto(url_or_csv)
-            await processor.page.wait_for_load_state('networkidle')
-            print(json.dumps({"success": True, "message": "Browser opened for login"}))
-            
-            # Don't close browser - let it stay open
-            # The browser will stay open even after this script exits
-            
-        elif command == "navigate":
-            # Navigate to class URL in existing browser
-            await processor.page.goto(url_or_csv)
-            await processor.page.wait_for_load_state('networkidle')
-            print(json.dumps({"success": True, "message": "Navigated to class"}))
-            
-            # Don't close browser - let it stay open
-            
-        elif command == "process":
-            # Process CSV file
-            if not await processor.navigate_to_class(url_or_csv):
-                print(json.dumps({"success": False, "error": "Failed to navigate to class"}))
-                sys.exit(1)
-            
-            # Get CSV file path from 3rd argument
-            if len(sys.argv) < 4:
-                print(json.dumps({"success": False, "error": "CSV file path required for process command"}))
-                sys.exit(1)
-            
-            csv_file_path = sys.argv[3]
-            processed, errors = await processor.process_csv_file(csv_file_path)
-            print(json.dumps({"success": True, "processed": processed, "errors": errors, "message": f"Processed {processed} assignments with {errors} errors"}))
-        else:
-            print(json.dumps({"success": False, "error": "Unknown command. Use 'login', 'navigate', or 'process'"}))
-            sys.exit(1)
-
-    except Exception as e:
-        print(json.dumps({"success": False, "error": str(e)}))
-        sys.exit(1)
-    finally:
-        # For login and navigate, don't close anything - keep browser open (like agent.py)
-        if command not in ["login", "navigate"]:
-            await processor.close()
-        # For login and navigate commands, do NOTHING - let browser stay open
+# ========================================
+# 🚀 CLI ENTRY POINT
+# ========================================
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        logger.info("🐍 D2L Processor started via CLI.")
+        action = sys.argv[1] if len(sys.argv) > 1 else "login"
+        course_code = sys.argv[2] if len(sys.argv) > 2 else None
+
+        processor = D2LProcessor()
+        success = processor.run_automation(action, course_code)
+
+        result = {"success": success, "message": "D2L Automation completed" if success else "D2L Automation failed"}
+        print(json.dumps(result))
+    except Exception as e:
+        logger.error(f"❌ Fatal D2L Processor Error: {e}")
+        traceback.print_exc()

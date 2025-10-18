@@ -1,0 +1,13 @@
+Stage: main
+Error: AttributeError("'NoneType' object has no attribute 'pages'")
+
+Traceback (most recent call last):
+  File "C:\Users\chase\Documents\School Scrips\D2L-Macro\d2l_playwright_processor.py", line 183, in main
+    await processor.process_tasks(action, course_code)
+  File "C:\Users\chase\Documents\School Scrips\D2L-Macro\d2l_playwright_processor.py", line 113, in process_tasks
+    page = await self.launch_browser()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\chase\Documents\School Scrips\D2L-Macro\d2l_playwright_processor.py", line 70, in launch_browser
+    page = self.browser.pages[0] if self.browser.pages else await self.browser.new_page()
+                                    ^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'pages'
