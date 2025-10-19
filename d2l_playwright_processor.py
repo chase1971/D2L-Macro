@@ -163,8 +163,14 @@ class D2LProcessor:
             url = COURSE_URLS.get(course_code, course_code)
             page = self.context.pages[0] if self.context.pages else await self.context.new_page()
             logger.info(f"📘 Opening course page: {url}")
-            await page.goto(url, wait_until='networkidle')
-            await asyncio.sleep(3)
+            
+            # Only navigate if we aren't already on the target page
+            current_url = page.url
+            if not current_url.startswith(url):
+                await page.goto(url, wait_until='networkidle')
+                await asyncio.sleep(3)
+            else:
+                logger.info(f"✅ Already on target page: {current_url}")
             logger.info(f"✅ Course {course_code} loaded successfully.")
         except Exception as e:
             self._write_debug_report("open_course", e)
@@ -189,12 +195,16 @@ class D2LProcessor:
         try:
             if not self.context:
                 raise RuntimeError("Browser not initialized.")
-            # Resolve the URL similarly to open_course
+            
             url = COURSE_URLS.get(course_code, course_code)
-            page = self.context.pages[0] if self.context.pages else await self.context.new_page()
+            # reuse the current page instead of opening a new one
+            page = self.page if self.page else (self.context.pages[0] if self.context.pages else await self.context.new_page())
             logger.info(f"📘 Opening course for processing: {url}")
-            await page.goto(url, wait_until='networkidle')
-            await asyncio.sleep(3)
+            
+            # navigate the current tab to the Manage Dates URL
+            await page.goto(url, wait_until='domcontentloaded')
+            # wait for the assignments table to load
+            await page.wait_for_selector("//td[contains(@class,'d_dg_col_Name')]", timeout=15000)
             logger.info(f"✅ Course page loaded. Preparing to process CSV: {csv_path}")
 
             # Read the CSV file and log each assignment for debugging
@@ -270,8 +280,13 @@ class D2LProcessor:
 
             if assignments_processed > 0:
                 try:
-                    # Ensure the page is ready for interaction
-                    await page.wait_for_load_state('domcontentloaded')
+                    # After navigating to the Manage Dates page
+                    await page.goto(url, wait_until='domcontentloaded')
+                    
+                    # Wait until at least one assignment row is present or until a reasonable timeout
+                    await page.wait_for_selector("//td[contains(@class,'d_dg_col_Name')]", timeout=20000)
+                    
+                    # Now the table should be populated; proceed to process rows
                     logger.info("🛠️ Beginning automated date updates for CSV assignments...")
                     await self.perform_date_updates(page, assignments)
                 except Exception as update_err:
