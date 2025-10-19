@@ -57,6 +57,8 @@ class D2LProcessor:
         self.browser = None
         self.context = None
         self.page = None
+        # Track how many assignments were logged/processed in a run
+        self.assignments_processed = 0
 
     async def automate_d2l(self, action=None, course_code=None, csv_path=None):
         """
@@ -178,8 +180,91 @@ class D2LProcessor:
             logger.info(f"📘 Opening course for processing: {url}")
             await page.goto(url, wait_until='networkidle')
             await asyncio.sleep(3)
-            logger.info(f"✅ Course page loaded. Ready to process CSV at: {csv_path}")
-            # Future implementation: parse CSV and automate date updates here
+            logger.info(f"✅ Course page loaded. Preparing to process CSV: {csv_path}")
+
+            # Read the CSV file and log each assignment for debugging
+            assignments_processed = 0
+            assignments: list[dict] = []
+            if csv_path and os.path.isfile(csv_path):
+                try:
+                    # Attempt to use pandas if available for flexible parsing
+                    try:
+                        import pandas as pd  # type: ignore
+                        df = pd.read_csv(csv_path)
+                        logger.info(f"📄 CSV loaded: {len(df)} rows")
+                        for idx, row in df.iterrows():
+                            # Support both 'Assignment Name' and legacy 'Name' headers
+                            assignment = str(row.get('Assignment Name') or row.get('Name') or '').strip()
+                            # Standard date fields
+                            start_date = str(row.get('Start Date') or row.get('Start') or '').strip()
+                            due_date = str(row.get('Due Date') or row.get('Due') or '').strip()
+                            end_date = str(row.get('End Date') or row.get('End') or '').strip()
+                            # Time fields may be missing; try multiple headers
+                            start_time = str(row.get('Start Time') or row.get('Start Time (Local)') or '').strip()
+                            due_time = str(row.get('Due Time') or row.get('Due Time (Local)') or '').strip()
+                            logger.info(
+                                f"🔍 [Row {idx+1}] assignment='{assignment}', start='{start_date}'{f' {start_time}' if start_time else ''}, due='{due_date}'{f' {due_time}' if due_time else ''}, end='{end_date}'"
+                            )
+                            assignments_processed += 1
+                            assignments.append({
+                                'assignment': assignment,
+                                'start_date': start_date,
+                                'start_time': start_time,
+                                'due_date': due_date,
+                                'due_time': due_time,
+                                'end_date': end_date
+                            })
+                    except ImportError:
+                        # Fallback to csv module if pandas isn't available
+                        import csv as csv_module
+                        with open(csv_path, newline='', encoding='utf-8') as csvfile:
+                            reader = csv_module.DictReader(csvfile)
+                            rows = list(reader)
+                        logger.info(f"📄 CSV loaded: {len(rows)} rows")
+                        for idx, row in enumerate(rows):
+                            assignment = (row.get('Assignment Name') or row.get('Name') or '').strip()
+                            start_date = (row.get('Start Date') or row.get('Start') or '').strip()
+                            due_date = (row.get('Due Date') or row.get('Due') or '').strip()
+                            end_date = (row.get('End Date') or row.get('End') or '').strip()
+                            start_time = (row.get('Start Time') or row.get('Start Time (Local)') or '').strip()
+                            due_time = (row.get('Due Time') or row.get('Due Time (Local)') or '').strip()
+                            logger.info(
+                                f"🔍 [Row {idx+1}] assignment='{assignment}', start='{start_date}'{f' {start_time}' if start_time else ''}, due='{due_date}'{f' {due_time}' if due_time else ''}, end='{end_date}'"
+                            )
+                            assignments_processed += 1
+                            assignments.append({
+                                'assignment': assignment,
+                                'start_date': start_date,
+                                'start_time': start_time,
+                                'due_date': due_date,
+                                'due_time': due_time,
+                                'end_date': end_date
+                            })
+                except Exception as csv_err:
+                    logger.error(f"❌ Error reading CSV at {csv_path}: {csv_err}")
+            else:
+                logger.warning(f"⚠️ CSV path missing or file not found: {csv_path}")
+
+            # If CSV rows were found and a valid page is loaded, attempt to update dates
+            # for each assignment. This preserves the existing logging-only behaviour if
+            # no CSV is provided or the file cannot be read.  The actual Playwright
+            # automation code has been separated into helper methods to keep
+            # ``process_course`` focused on high-level orchestration.  After
+            # performing date updates, the number of processed assignments will
+            # reflect both logging and update attempts.
+
+            if assignments_processed > 0:
+                try:
+                    # Ensure the page is ready for interaction
+                    await page.wait_for_load_state('domcontentloaded')
+                    logger.info("🛠️ Beginning automated date updates for CSV assignments...")
+                    await self.perform_date_updates(page, assignments)
+                except Exception as update_err:
+                    logger.error(f"❌ Error updating assignment dates: {update_err}")
+
+            # Record the number of assignments processed for reporting back via CLI
+            self.assignments_processed = assignments_processed
+            logger.info(f"✅ CSV processing completed. Assignments logged: {assignments_processed}")
         except Exception as e:
             self._write_debug_report("process_course", e)
             raise
@@ -233,6 +318,348 @@ class D2LProcessor:
         except Exception as log_err:
             print(f"Failed to write debug log: {log_err}")
 
+    def _parse_time_str(self, time_str: str):
+        """
+        Parse a time string from the CSV into a 24‑hour hour and minute pair.
+        Supported formats include 'HH:MM', 'H:MM', 'HH:MM AM/PM', 'H AM', etc.
+        If the string is empty or cannot be parsed, returns (None, None) so
+        that the time fields will not be modified.
+
+        Parameters
+        ----------
+        time_str : str
+            The raw time string from the CSV.
+
+        Returns
+        -------
+        Tuple[str|None, str|None]
+            A tuple (hour, minute) in 24‑hour format, or (None, None) if
+            parsing fails or the input is empty.
+        """
+        if not time_str:
+            return None, None
+        try:
+            s = time_str.strip()
+            import re
+            # Detect AM/PM
+            am_pm_match = re.search(r'(AM|PM)$', s, re.IGNORECASE)
+            if am_pm_match:
+                # Split off AM/PM
+                am_pm = am_pm_match.group().upper()
+                s = s[:-len(am_pm)].strip()
+                # Extract hour and minute
+                if ':' in s:
+                    hour_str, minute_str = s.split(':', 1)
+                else:
+                    hour_str, minute_str = s, '0'
+                hour = int(hour_str)
+                minute = int(minute_str)
+                if am_pm == 'PM' and hour != 12:
+                    hour += 12
+                if am_pm == 'AM' and hour == 12:
+                    hour = 0
+                return f"{hour:02d}", f"{minute:02d}"
+            else:
+                # 24‑hour format (with or without colon)
+                if ':' in s:
+                    hour_str, minute_str = s.split(':', 1)
+                else:
+                    hour_str, minute_str = s, '0'
+                hour = int(hour_str)
+                minute = int(minute_str)
+                return f"{hour:02d}", f"{minute:02d}"
+        except Exception:
+            logger.error(f"⚠️ Could not parse time string '{time_str}'. Leaving unchanged.")
+            return None, None
+
+    # ------------------------------------------------------------------
+    # 🔧 Helper methods for CSV-based date updates
+    #
+    # The following methods provide a basic implementation for automating
+    # date updates in the D2L Manage Dates interface using Playwright.
+    # They are intentionally conservative: they attempt straightforward
+    # selectors and log their progress.  If a selector fails, the error
+    # is logged and the script continues to the next assignment.  These
+    # methods can be extended with more robust fuzzy matching and
+    # additional fallback strategies as needed.
+
+    async def perform_date_updates(self, page, assignments: list[dict]):
+        """
+        Iterate over each assignment dictionary and attempt to update the
+        corresponding start and due dates on the Manage Dates page.  Each
+        dictionary should include ``assignment`` (name), ``start_date``,
+        ``due_date`` and optionally ``end_date`` fields.  If a given
+        date field is empty, it is skipped.  Successful updates and
+        failures are logged; the function does not throw unless an
+        unexpected Playwright error occurs.
+
+        Parameters
+        ----------
+        page : playwright.async_api.Page
+            The already loaded Manage Dates page.
+        assignments : list of dict
+            A list of assignments as parsed from the CSV file.
+        """
+        for idx, assignment_info in enumerate(assignments, start=1):
+            name = assignment_info.get('assignment', '').strip()
+            start_date_str = assignment_info.get('start_date', '').strip()
+            due_date_str = assignment_info.get('due_date', '').strip()
+            end_date_str = assignment_info.get('end_date', '').strip()
+            if not name:
+                logger.warning(f"Row {idx}: Empty assignment name – skipping.")
+                continue
+            logger.info(f"➡️ Updating assignment '{name}' (Row {idx})")
+            logger.debug(f"📂 Raw row data: {assignment_info}")
+            logger.info(f"🔍 Locating assignment row for '{name}'...")
+            # Locate the table row for this assignment
+            row = await self.find_assignment_row(page, name)
+            if not row:
+                logger.warning(f"Row {idx}: Assignment '{name}' not found on page – skipping.")
+                continue
+            # Due date update
+            due_time_str = assignment_info.get('due_time', '').strip() if assignment_info.get('due_time') else ''
+            if due_date_str:
+                try:
+                    await self.update_due_date(page, row, due_date_str, due_time_str)
+                    logger.info(f"✅ Due date updated for '{name}' → {due_date_str}{(' ' + due_time_str) if due_time_str else ''}")
+                except Exception as err:
+                    logger.error(f"❌ Failed to update due date for '{name}': {err}")
+            # Start date update
+            start_time_str = assignment_info.get('start_time', '').strip() if assignment_info.get('start_time') else ''
+            if start_date_str:
+                try:
+                    await self.update_start_date(page, row, start_date_str, start_time_str)
+                    logger.info(f"✅ Start date updated for '{name}' → {start_date_str}{(' ' + start_time_str) if start_time_str else ''}")
+                except Exception as err:
+                    logger.error(f"❌ Failed to update start date for '{name}': {err}")
+
+    async def find_assignment_row(self, page, assignment_name: str):
+        """
+        Attempt to locate the table row containing the assignment name.  This
+        method uses a simple text match and then returns the ``<tr>``
+        element.  It first tries an exact substring match; if that fails,
+        it removes dashes (–—−) and quotes from the search term and tries
+        again.  If still not found, None is returned.
+
+        Parameters
+        ----------
+        page : playwright.async_api.Page
+            The Manage Dates page.
+        assignment_name : str
+            The exact (or near‑exact) name of the assignment.
+
+        Returns
+        -------
+        playwright.async_api.ElementHandle | None
+            The row element if found; otherwise None.
+        """
+        # Attempt exact match
+        selectors = [assignment_name]
+        import re
+        # Also search for versions without dashes and quotes
+        name_no_dash = re.sub(r'[-–—−]', ' ', assignment_name).strip()
+        if name_no_dash.lower() != assignment_name.lower():
+            selectors.append(name_no_dash)
+        clean_name = assignment_name.replace("'", '').replace('"', '')
+        if clean_name.lower() not in (assignment_name.lower(), name_no_dash.lower()):
+            selectors.append(clean_name)
+        for search_term in selectors:
+            try:
+                # Lower-case the search term for case-insensitive matching.
+                lower_term = search_term.lower()
+                # Build XPath string: search for anchor text containing the term (case-insensitive)
+                xpath = (
+                    "//td[contains(@class, 'd_dg_col_Name')]//a["
+                    "contains(translate(normalize-space(text()), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '"
+                    + lower_term + "')]/ancestor::tr"
+                )
+                logger.debug(f"🔎 Trying XPath: {xpath}")
+                row = await page.query_selector(xpath)
+                if row:
+                    logger.info(f"✅ Assignment row found using search term '{search_term}'.")
+                    return row
+            except Exception as ex:
+                logger.debug(f"⚠️ Exception during row search with term '{search_term}': {ex}")
+                continue
+        return None
+
+    async def update_due_date(self, page, row, date_str: str, time_str: str = ''):
+        """
+        Click the due date link in the provided row, then set the new date (and
+        optionally the time) in the ensuing dialog and save.  If
+        ``time_str`` is blank or missing, the time fields are left
+        unchanged.
+
+        Parameters
+        ----------
+        page : playwright.async_api.Page
+            The Manage Dates page.
+        row : playwright.async_api.ElementHandle
+            The table row containing the assignment.
+        date_str : str
+            The date string in a format accepted by the D2L date picker.
+        time_str : str, optional
+            A time string (e.g. '2:30 PM', '14:30') to set.  If omitted or
+            empty, no changes will be made to the time fields.
+        """
+        # Find the due date cell/link; it may be a dash or a date
+        due_link = await row.query_selector(".//td[contains(@class, 'd_dg_col_DueDate')]//a")
+        if not due_link:
+            # Fallback: any anchor in the row with title 'Edit the due date'
+            due_link = await row.query_selector(".//a[@title='Edit the due date']")
+        if not due_link:
+            raise RuntimeError("Due date link not found")
+        logger.info("🖱️ Clicking due date link...")
+        await due_link.click()
+        # Wait for the dialog
+        dialog = await page.wait_for_selector("[role='dialog']", timeout=8000)
+        logger.info("📋 Due date dialog opened. Setting date/time...")
+        # Determine hour/minute from time_str
+        hour, minute = self._parse_time_str(time_str) if time_str else (None, None)
+        # Fill the date/time fields inside the iframe.  If no time provided, None values
+        # will prevent the time fields from being modified.
+        await self.set_date_in_dialog(page, dialog, date_str, hour=hour, minute=minute, check_selector="#z_k")
+        logger.info("💾 Due date dialog processed (save attempted).")
+
+    async def update_start_date(self, page, row, date_str: str, time_str: str = ''):
+        """
+        Click the start date link in the provided row, then set the new date
+        (and optionally the time) in the ensuing dialog and save.  If
+        ``time_str`` is blank or missing, the time fields are left
+        unchanged.  The start date checkbox is automatically checked if
+        present.
+        """
+        start_link = await row.query_selector(".//td[contains(@class, 'd_dg_col_StartDate')]//a")
+        if not start_link:
+            # Fallback: anchor with title 'Edit the start date'
+            start_link = await row.query_selector(".//a[@title='Edit the start date']")
+        if not start_link:
+            raise RuntimeError("Start date link not found")
+        logger.info("🖱️ Clicking start date link...")
+        await start_link.click()
+        dialog = await page.wait_for_selector("[role='dialog']", timeout=8000)
+        logger.info("📋 Start date dialog opened. Setting date/time...")
+        # Determine hour/minute from time_str
+        hour, minute = self._parse_time_str(time_str) if time_str else (None, None)
+        # Use checkbox id 'z_o' for start date; D2L uses this id for the "Has Start Date" checkbox
+        await self.set_date_in_dialog(page, dialog, date_str, hour=hour, minute=minute, check_selector="#z_o")
+        logger.info("💾 Start date dialog processed (save attempted).")
+
+    async def set_date_in_dialog(self, page, dialog, date_str: str, hour, minute, check_selector: str):
+        """
+        Helper to set date and time inside the date picker dialog.  It
+        switches into the first iframe containing date fields, checks the
+        appropriate checkbox (if not already checked) and fills year,
+        month, day, hour, minute.  After setting values it clicks the Save
+        button outside the iframe.  The checkbox selector should be '#z_k'
+        for due date and '#z_o' for start date.
+
+        Parameters
+        ----------
+        page : playwright.async_api.Page
+            The current page.
+        dialog : playwright.async_api.ElementHandle
+            The dialog element with role='dialog'.
+        date_str : str
+            The date string to set (e.g., '2025-10-19' or '10/19/2025').
+        hour : str or None
+            Hour in 24‑hour format to set (e.g., '23' for 11 PM).  If None,
+            the hour field is not modified.
+        minute : str or None
+            Minute to set (e.g., '59').  If None, the minute field is not
+            modified.
+        check_selector : str
+            CSS selector for the date checkbox inside the iframe ('#z_k' for due, '#z_o' for start).
+        """
+        # Determine month/day/year
+        try:
+            import datetime
+            if '/' in date_str:
+                parts = [p.strip() for p in date_str.split('/')]
+                if len(parts) == 3:
+                    month, day, year = parts
+                else:
+                    # Unknown format; fallback to parsing as ISO
+                    dt = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+                    month, day, year = str(dt.month), str(dt.day), str(dt.year)
+            elif '-' in date_str:
+                dt = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+                month, day, year = str(dt.month), str(dt.day), str(dt.year)
+            else:
+                # Try parsing as 'Month dd, yyyy'
+                dt = datetime.datetime.strptime(date_str, '%B %d, %Y')
+                month, day, year = str(dt.month), str(dt.day), str(dt.year)
+        except Exception:
+            logger.error(f"⚠️ Could not parse date '{date_str}'. Using as-is.")
+            month = day = year = ''
+        # Log the parsed date/time values for debugging
+        try:
+            logger.debug(f"🗓️ Parsed date: {month}/{day}/{year}, time: {hour}:{minute}")
+        except Exception:
+            pass
+        logger.debug(f"🗓️ Parsing date string '{date_str}' → {month}/{day}/{year} (if available)")
+        # Find the iframe containing the date fields
+        iframes = await dialog.query_selector_all("iframe")
+        target_frame = None
+        for frame_element in iframes:
+            try:
+                frame = await frame_element.content_frame()
+                # Check for date fields
+                year_field = await frame.query_selector("input[name*='$year']")
+                month_field = await frame.query_selector("input[name*='$month']")
+                day_field = await frame.query_selector("input[name*='$day']")
+                if year_field and month_field and day_field:
+                    logger.debug("✅ Found iframe with date fields.")
+                    target_frame = frame
+                    break
+            except Exception:
+                continue
+        if not target_frame:
+            logger.error("❌ No iframe with date fields found in dialog.")
+            raise RuntimeError("No iframe with date fields found")
+        # Check the date checkbox if necessary
+        try:
+            checkbox = await target_frame.query_selector(check_selector)
+            if checkbox:
+                checked = await checkbox.is_checked()
+                if not checked:
+                    await checkbox.check()
+                    logger.debug(f"☑️ Checked checkbox {check_selector} in date dialog.")
+        except Exception:
+            pass
+        # Fill date fields if values are available
+        try:
+            if month and day and year:
+                await target_frame.fill("input[name*='$year']", year)
+                await target_frame.fill("input[name*='$month']", month)
+                await target_frame.fill("input[name*='$day']", day)
+                logger.debug(f"🖊️ Filled date fields: {month}/{day}/{year}")
+            # Set time fields only if hour and minute are provided
+            if hour is not None and minute is not None:
+                await target_frame.fill("input[name*='$hour']", hour)
+                await target_frame.fill("input[name*='$minute']", minute)
+                logger.debug(f"🖊️ Filled time fields: {hour}:{minute}")
+        except Exception as fill_err:
+            logger.error(f"⚠️ Error filling date/time fields: {fill_err}")
+        # Save the date: switch to default content and click save
+        await page.main_frame().wait_for_timeout(200)  # small delay
+        # Switch back to page context to click save button
+        # Buttons might be labelled 'Save' or 'Save and Close'
+        save_selectors = [
+            "//button[text()='Save']",
+            "//button[contains(text(), 'Save')]"
+        ]
+        for selector in save_selectors:
+            try:
+                btn = await page.query_selector(selector)
+                if btn:
+                    await btn.click()
+                    logger.debug(f"💾 Clicked save button using selector '{selector}'.")
+                    break
+            except Exception:
+                continue
+        await page.main_frame().wait_for_timeout(500)
+
 
 # ========================================
 # 🚀 CLI ENTRY POINT
@@ -252,7 +679,9 @@ if __name__ == "__main__":
             "message": "D2L automation completed" if success else "D2L automation failed",
             "action": action,
             "course": course_code,
-            "csv": csv_path
+            "csv": csv_path,
+            # include how many assignments were processed (logged) if available
+            "processed": getattr(processor, "assignments_processed", None)
         }
         print(json.dumps(result))
     except Exception as e:
