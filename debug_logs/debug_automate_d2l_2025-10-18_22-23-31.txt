@@ -1,0 +1,22 @@
+Stage: automate_d2l
+Error: TargetClosedError('Page.goto: Target page, context or browser has been closed\nCall log:\n  - navigating to "https://d2l.lonestar.edu/", waiting until "networkidle"\n')
+
+Traceback (most recent call last):
+  File "C:\Users\chase\Documents\School Scrips\D2L-Macro\d2l_playwright_processor.py", line 87, in automate_d2l
+    await self.page.goto(D2L_BASE_URL, wait_until="networkidle")
+  File "C:\Users\chase\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\async_api\_generated.py", line 8992, in goto
+    await self._impl_obj.goto(
+  File "C:\Users\chase\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\_impl\_page.py", line 556, in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\chase\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\_impl\_frame.py", line 153, in goto
+    await self._channel.send(
+  File "C:\Users\chase\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\_impl\_connection.py", line 69, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\chase\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\_impl\_connection.py", line 558, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TargetClosedError: Page.goto: Target page, context or browser has been closed
+Call log:
+  - navigating to "https://d2l.lonestar.edu/", waiting until "networkidle"
+
