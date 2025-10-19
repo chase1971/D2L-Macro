@@ -40,13 +40,28 @@ COURSE_URLS = {
 }
 
 LOG_PATH = os.path.join(os.path.dirname(__file__), "d2l_processor.log")
+# Configure logging to write to both a file and stdout.  By default
+# logging.StreamHandler writes to stderr, which may not be captured by the
+# Node backend.  Explicitly direct the stream to sys.stdout to ensure
+# logs are printed on stdout and thus captured by the parent process.
+# Configure logging with force=True to ensure our handlers are
+# registered even if another module (such as one imported by the
+# Playwright library) has already configured the root logger.  The
+# ``force`` parameter, added in Python 3.8+, will remove any existing
+# handlers and reset the configuration.  This prevents duplicate logs
+# or missing handlers when the script is run multiple times in the same
+# process.  We direct log output to both a file and to stdout so that
+# any supervising process (e.g. the Node backend) can capture the
+# messages.  Without ``force=True`` the configuration may silently
+# fail if logging has already been set up elsewhere.
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s | %(levelname)s | %(message)s",
     handlers=[
         logging.FileHandler(LOG_PATH, mode="a", encoding="utf-8"),
-        logging.StreamHandler()
-    ]
+        logging.StreamHandler(sys.stdout)
+    ],
+    force=True
 )
 logger = logging.getLogger(__name__)
 
