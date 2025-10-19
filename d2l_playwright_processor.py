@@ -203,8 +203,8 @@ class D2LProcessor:
             
             # navigate the current tab to the Manage Dates URL
             await page.goto(url, wait_until='domcontentloaded')
-            # wait for the assignments table to load
-            await page.wait_for_selector("//td[contains(@class,'d_dg_col_Name')]", timeout=15000)
+            # wait for the assignments table to load BEFORE processing CSV
+            await page.wait_for_selector("//td[contains(@class,'d_dg_col_Name')]", timeout=20000)
             logger.info(f"✅ Course page loaded. Preparing to process CSV: {csv_path}")
 
             # Read the CSV file and log each assignment for debugging
@@ -280,13 +280,7 @@ class D2LProcessor:
 
             if assignments_processed > 0:
                 try:
-                    # After navigating to the Manage Dates page
-                    await page.goto(url, wait_until='domcontentloaded')
-                    
-                    # Wait until at least one assignment row is present or until a reasonable timeout
-                    await page.wait_for_selector("//td[contains(@class,'d_dg_col_Name')]", timeout=20000)
-                    
-                    # Now the table should be populated; proceed to process rows
+                    # Table is already loaded from the initial navigation and wait above
                     logger.info("🛠️ Beginning automated date updates for CSV assignments...")
                     await self.perform_date_updates(page, assignments)
                 except Exception as update_err:
