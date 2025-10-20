@@ -199,12 +199,50 @@ class D2LProcessor:
             url = COURSE_URLS.get(course_code, course_code)
             # reuse the current page instead of opening a new one
             page = self.page if self.page else (self.context.pages[0] if self.context.pages else await self.context.new_page())
-            logger.info(f"📘 Opening course for processing: {url}")
+            logger.info(f"📘 Using existing page for processing: {url}")
             
-            # navigate the current tab to the Manage Dates URL
-            await page.goto(url, wait_until='domcontentloaded')
-            # wait for the assignments table to load BEFORE processing CSV
-            await page.wait_for_selector("//td[contains(@class,'d_dg_col_Name')]", timeout=20000)
+            # Check if we're already on the correct page - don't reload if we don't need to
+            current_url = page.url
+            if not current_url.startswith(url):
+                logger.info(f"🔄 Navigating to Manage Dates page: {url}")
+                await page.goto(url, wait_until='domcontentloaded')
+                # wait for the assignments table to load
+                await page.wait_for_selector("//td[contains(@class,'d_dg_col_Name')]", timeout=20000)
+            else:
+                logger.info(f"✅ Already on target page: {current_url}")
+                # Just wait for the table to be ready (it should already be loaded)
+                await page.wait_for_selector("//td[contains(@class,'d_dg_col_Name')]", timeout=5000)
+            
+            # Wait for the table to be fully populated by checking if more assignments load
+            logger.info("⏳ Checking for additional assignments to load...")
+            previous_count = 0
+            for attempt in range(6):  # Try up to 6 times
+                current_links = await page.query_selector_all("//td[contains(@class,'d_dg_col_Name')]//a")
+                current_count = len(current_links)
+                logger.info(f"🔍 Load attempt {attempt + 1}: Found {current_count} assignment links")
+                
+                if current_count > previous_count:
+                    previous_count = current_count
+                    await asyncio.sleep(2)  # Wait 2 seconds for more to load
+                else:
+                    logger.info(f"✅ Table loading complete. Total assignments found: {current_count}")
+                    break
+            
+            # Debug: Log the current page URL and check what elements are actually present
+            logger.info(f"🔍 Current page URL: {page.url}")
+            
+            # Debug: Check if any assignment links exist
+            assignment_links = await page.query_selector_all("//td[contains(@class,'d_dg_col_Name')]//a")
+            logger.info(f"🔍 Found {len(assignment_links)} assignment links on page")
+            
+            # Debug: Log the first few assignment names found
+            for i, link in enumerate(assignment_links[:3]):
+                try:
+                    text = await link.text_content()
+                    logger.info(f"🔍 Assignment {i+1}: '{text.strip()}'")
+                except:
+                    logger.info(f"🔍 Assignment {i+1}: Could not get text content")
+            
             logger.info(f"✅ Course page loaded. Preparing to process CSV: {csv_path}")
 
             # Read the CSV file and log each assignment for debugging
@@ -442,20 +480,36 @@ class D2LProcessor:
                 continue
             # Due date update
             due_time_str = assignment_info.get('due_time', '').strip() if assignment_info.get('due_time') else ''
+            # Treat 'nan' as empty (common in CSV exports)
+            if due_date_str and due_date_str.lower() == 'nan':
+                due_date_str = ''
+            if due_time_str and due_time_str.lower() == 'nan':
+                due_time_str = ''
+            logger.debug(f"🔍 Due date check: due_date_str='{due_date_str}' (len={len(due_date_str) if due_date_str else 0})")
             if due_date_str:
                 try:
                     await self.update_due_date(page, row, due_date_str, due_time_str)
                     logger.info(f"✅ Due date updated for '{name}' → {due_date_str}{(' ' + due_time_str) if due_time_str else ''}")
                 except Exception as err:
                     logger.error(f"❌ Failed to update due date for '{name}': {err}")
+            else:
+                logger.debug(f"🔍 Skipping due date for '{name}' - no due date provided")
             # Start date update
             start_time_str = assignment_info.get('start_time', '').strip() if assignment_info.get('start_time') else ''
+            # Treat 'nan' as empty (common in CSV exports)
+            if start_date_str and start_date_str.lower() == 'nan':
+                start_date_str = ''
+            if start_time_str and start_time_str.lower() == 'nan':
+                start_time_str = ''
+            logger.debug(f"🔍 Start date check: start_date_str='{start_date_str}' (len={len(start_date_str) if start_date_str else 0})")
             if start_date_str:
                 try:
                     await self.update_start_date(page, row, start_date_str, start_time_str)
                     logger.info(f"✅ Start date updated for '{name}' → {start_date_str}{(' ' + start_time_str) if start_time_str else ''}")
                 except Exception as err:
                     logger.error(f"❌ Failed to update start date for '{name}': {err}")
+            else:
+                logger.debug(f"🔍 Skipping start date for '{name}' - no start date provided")
 
     async def find_assignment_row(self, page, assignment_name: str):
         """
@@ -491,13 +545,52 @@ class D2LProcessor:
             try:
                 # Lower-case the search term for case-insensitive matching.
                 lower_term = search_term.lower()
-                # Build XPath string: search for anchor text containing the term (case-insensitive)
+                # Debug: Check if any elements match the base selector first
+                base_elements = await page.query_selector_all("//td[contains(@class, 'd_dg_col_Name')]//a")
+                logger.debug(f"🔍 Found {len(base_elements)} base assignment links for search term '{search_term}'")
+                
+                # Debug: Log the text content of the first few base elements
+                for i, elem in enumerate(base_elements[:3]):
+                    try:
+                        text = await elem.text_content()
+                        logger.debug(f"🔍 Base element {i+1}: '{text.strip()}'")
+                    except:
+                        logger.debug(f"🔍 Base element {i+1}: Could not get text")
+                
+                # Try a simpler approach: search through all elements manually
+                for elem in base_elements:
+                    try:
+                        text = await elem.text_content()
+                        if text and lower_term in text.lower():
+                            logger.debug(f"✅ Found matching element: '{text.strip()}'")
+                            # Get the parent row using XPath
+                            try:
+                                row = await elem.evaluate_handle("element => element.closest('tr')")
+                                if row:
+                                    logger.info(f"✅ Assignment row found using search term '{search_term}'.")
+                                    return row
+                            except Exception as ex:
+                                logger.debug(f"⚠️ Exception getting parent row: {ex}")
+                                # Try alternative approach
+                                try:
+                                    row = await elem.evaluate_handle("element => element.parentElement.closest('tr')")
+                                    if row:
+                                        logger.info(f"✅ Assignment row found using search term '{search_term}'.")
+                                        return row
+                                except Exception as ex2:
+                                    logger.debug(f"⚠️ Alternative approach also failed: {ex2}")
+                                    continue
+                    except Exception as ex:
+                        logger.debug(f"⚠️ Exception checking element: {ex}")
+                        continue
+                
+                # Fallback to original XPath if manual search fails
                 xpath = (
                     "//td[contains(@class, 'd_dg_col_Name')]//a["
                     "contains(translate(normalize-space(text()), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '"
                     + lower_term + "')]/ancestor::tr"
                 )
-                logger.debug(f"🔎 Trying XPath: {xpath}")
+                logger.debug(f"🔎 Trying XPath fallback: {xpath}")
                 row = await page.query_selector(xpath)
                 if row:
                     logger.info(f"✅ Assignment row found using search term '{search_term}'.")
@@ -527,10 +620,10 @@ class D2LProcessor:
             empty, no changes will be made to the time fields.
         """
         # Find the due date cell/link; it may be a dash or a date
-        due_link = await row.query_selector(".//td[contains(@class, 'd_dg_col_DueDate')]//a")
+        due_link = await row.query_selector("xpath=.//td[contains(@class, 'd_dg_col_DueDate')]//a")
         if not due_link:
             # Fallback: any anchor in the row with title 'Edit the due date'
-            due_link = await row.query_selector(".//a[@title='Edit the due date']")
+            due_link = await row.query_selector("xpath=.//a[@title='Edit the due date']")
         if not due_link:
             raise RuntimeError("Due date link not found")
         logger.info("🖱️ Clicking due date link...")
@@ -553,10 +646,10 @@ class D2LProcessor:
         unchanged.  The start date checkbox is automatically checked if
         present.
         """
-        start_link = await row.query_selector(".//td[contains(@class, 'd_dg_col_StartDate')]//a")
+        start_link = await row.query_selector("xpath=.//td[contains(@class, 'd_dg_col_StartDate')]//a")
         if not start_link:
             # Fallback: anchor with title 'Edit the start date'
-            start_link = await row.query_selector(".//a[@title='Edit the start date']")
+            start_link = await row.query_selector("xpath=.//a[@title='Edit the start date']")
         if not start_link:
             raise RuntimeError("Start date link not found")
         logger.info("🖱️ Clicking start date link...")
@@ -624,19 +717,90 @@ class D2LProcessor:
         logger.debug(f"🗓️ Parsing date string '{date_str}' → {month}/{day}/{year} (if available)")
         # Find the iframe containing the date fields
         iframes = await dialog.query_selector_all("iframe")
-        target_frame = None
-        for frame_element in iframes:
+        logger.debug(f"🔍 Found {len(iframes)} iframes in dialog")
+        
+        # Debug: Check what's actually in the dialog (not just iframe)
+        all_dialog_inputs = await dialog.query_selector_all("input")
+        logger.debug(f"🔍 Dialog has {len(all_dialog_inputs)} input fields directly")
+        for j, inp in enumerate(all_dialog_inputs[:3]):
             try:
+                name = await inp.get_attribute("name")
+                input_type = await inp.get_attribute("type")
+                logger.debug(f"🔍 Dialog Input {j+1}: name='{name}', type='{input_type}'")
+            except:
+                logger.debug(f"🔍 Dialog Input {j+1}: Could not get attributes")
+        
+        target_frame = None
+        for i, frame_element in enumerate(iframes):
+            try:
+                # Debug: Check iframe attributes
+                iframe_src = await frame_element.get_attribute("src")
+                iframe_title = await frame_element.get_attribute("title")
+                logger.debug(f"🔍 Iframe {i+1}: src='{iframe_src}', title='{iframe_title}'")
+                
+                # Wait for iframe to load content properly
+                logger.debug(f"⏳ Waiting for iframe {i+1} content to load...")
+                await frame_element.wait_for_element_state("visible", timeout=10000)
+                
+                # Wait for iframe to have actual content (not just blank)
+                for attempt in range(10):  # Try up to 10 times (10 seconds total)
+                    frame = await frame_element.content_frame()
+                    if frame:
+                        # Check if iframe has meaningful content
+                        all_elements = await frame.query_selector_all("*")
+                        all_inputs = await frame.query_selector_all("input")
+                        logger.debug(f"🔍 Iframe {i+1} attempt {attempt+1}: {len(all_elements)} elements, {len(all_inputs)} inputs")
+                        
+                        # If we have inputs, the iframe is loaded
+                        if len(all_inputs) > 0:
+                            logger.debug(f"✅ Iframe {i+1} loaded with {len(all_inputs)} input fields")
+                            break
+                        elif len(all_elements) > 5:  # More than just basic HTML structure
+                            logger.debug(f"✅ Iframe {i+1} loaded with {len(all_elements)} elements")
+                            break
+                        else:
+                            logger.debug(f"⏳ Iframe {i+1} still loading... waiting 1 second")
+                            await asyncio.sleep(1)
+                    else:
+                        logger.debug(f"⏳ Iframe {i+1} frame not ready... waiting 1 second")
+                        await asyncio.sleep(1)
+                
                 frame = await frame_element.content_frame()
-                # Check for date fields
-                year_field = await frame.query_selector("input[name*='$year']")
-                month_field = await frame.query_selector("input[name*='$month']")
-                day_field = await frame.query_selector("input[name*='$day']")
-                if year_field and month_field and day_field:
-                    logger.debug("✅ Found iframe with date fields.")
+                logger.debug(f"🔍 Checking iframe {i+1}...")
+                
+                # Debug: Log ALL elements in iframe, not just inputs
+                all_elements = await frame.query_selector_all("*")
+                logger.debug(f"🔍 Iframe {i+1} has {len(all_elements)} total elements")
+                
+                # Debug: Log all input fields in this iframe
+                all_inputs = await frame.query_selector_all("input")
+                logger.debug(f"🔍 Iframe {i+1} has {len(all_inputs)} input fields")
+                for j, inp in enumerate(all_inputs[:5]):  # Show first 5 inputs
+                    try:
+                        name = await inp.get_attribute("name")
+                        input_type = await inp.get_attribute("type")
+                        logger.debug(f"🔍 Input {j+1}: name='{name}', type='{input_type}'")
+                    except:
+                        logger.debug(f"🔍 Input {j+1}: Could not get attributes")
+                
+                # Debug: Check for ANY form elements
+                forms = await frame.query_selector_all("form")
+                selects = await frame.query_selector_all("select")
+                buttons = await frame.query_selector_all("button")
+                logger.debug(f"🔍 Iframe {i+1} has {len(forms)} forms, {len(selects)} selects, {len(buttons)} buttons")
+                
+                # Check for the actual D2L date field - single text input with M/D/YYYY placeholder
+                date_field = await frame.query_selector("input[placeholder='M/D/YYYY']:not([type='hidden'])")
+                time_field = await frame.query_selector("input[aria-label*='Time']:not([type='hidden'])") or await frame.query_selector("input[placeholder*='time']:not([type='hidden'])")
+                
+                if date_field:
+                    logger.debug("✅ Found iframe with date field.")
                     target_frame = frame
                     break
-            except Exception:
+                else:
+                    logger.debug(f"⚠️ Iframe {i+1} missing date field: date={date_field is not None}")
+            except Exception as ex:
+                logger.debug(f"⚠️ Exception checking iframe {i+1}: {ex}")
                 continue
         if not target_frame:
             logger.error("❌ No iframe with date fields found in dialog.")
@@ -651,38 +815,119 @@ class D2LProcessor:
                     logger.debug(f"☑️ Checked checkbox {check_selector} in date dialog.")
         except Exception:
             pass
-        # Fill date fields if values are available
+        # Fill the actual D2L date field - single text input
         try:
-            if month and day and year:
-                await target_frame.fill("input[name*='$year']", year)
-                await target_frame.fill("input[name*='$month']", month)
-                await target_frame.fill("input[name*='$day']", day)
-                logger.debug(f"🖊️ Filled date fields: {month}/{day}/{year}")
-            # Set time fields only if hour and minute are provided
-            if hour is not None and minute is not None:
-                await target_frame.fill("input[name*='$hour']", hour)
-                await target_frame.fill("input[name*='$minute']", minute)
-                logger.debug(f"🖊️ Filled time fields: {hour}:{minute}")
+            # Check if frame is still attached before filling
+            logger.debug(f"🔍 Checking frame detachment status...")
+            try:
+                frame_detached = target_frame.is_detached()
+                logger.debug(f"🔍 Frame detachment check result: {frame_detached}")
+            except Exception as frame_check_err:
+                logger.debug(f"⚠️ Exception checking frame detachment: {frame_check_err}")
+                frame_detached = True  # Assume detached if we can't check
+                logger.debug(f"🔍 Assuming frame is detached due to error")
+            
+            if not frame_detached:
+                logger.debug(f"🔍 Frame is still attached, proceeding with field filling...")
+                # Fill the date field with M/D/YYYY format
+                if month and day and year:
+                    date_value = f"{month}/{day}/{year}"
+                    await target_frame.fill("input[placeholder='M/D/YYYY']:not([type='hidden'])", date_value)
+                    logger.debug(f"🖊️ Filled date field: {date_value}")
+                
+                # Fill time field if available - D2L time dropdown
+                if hour is not None and minute is not None:
+                    # Convert to 12-hour format (AM/PM)
+                    try:
+                        hour_int = int(hour)
+                        minute_int = int(minute)
+                        
+                        # Convert 24-hour to 12-hour format
+                        if hour_int == 0:
+                            display_hour = 12
+                            period = "AM"
+                        elif hour_int < 12:
+                            display_hour = hour_int
+                            period = "AM"
+                        elif hour_int == 12:
+                            display_hour = 12
+                            period = "PM"
+                        else:
+                            display_hour = hour_int - 12
+                            period = "PM"
+                        
+                        time_value = f"{display_hour}:{minute_int:02d} {period}"
+                    except (ValueError, TypeError):
+                        # If conversion fails, use the original values
+                        time_value = f"{hour}:{minute}"
+                    
+                    # Try multiple selectors for the time dropdown
+                    time_selectors = [
+                        "input[role='combobox'][class*='d2l-dropdown-opener']",  # D2L time dropdown
+                        "input[aria-controls*='timezone']",  # Time field with timezone control
+                        "input[class*='d2l-dropdown-opener']",  # Any D2L dropdown opener
+                        "input[aria-label*='Time']"  # Fallback
+                    ]
+                    
+                    time_filled = False
+                    for selector in time_selectors:
+                        try:
+                            await target_frame.fill(selector, time_value)
+                            logger.debug(f"🖊️ Filled time field using '{selector}': {time_value}")
+                            time_filled = True
+                            break
+                        except Exception:
+                            continue
+                    
+                    if not time_filled:
+                        logger.debug(f"⚠️ Could not find time field to fill with: {time_value}")
+                logger.debug(f"🔍 Completed field filling, about to exit try block...")
+            else:
+                logger.error("❌ Frame was detached before filling fields")
         except Exception as fill_err:
             logger.error(f"⚠️ Error filling date/time fields: {fill_err}")
-        # Save the date: switch to default content and click save
-        await page.main_frame().wait_for_timeout(200)  # small delay
-        # Switch back to page context to click save button
-        # Buttons might be labelled 'Save' or 'Save and Close'
+            logger.debug(f"🔍 Exception details: {type(fill_err).__name__}: {fill_err}")
+        
+        # Debug: Check if we're reaching the save button section
+        logger.debug(f"🔍 Reached save button section - about to look for save button...")
+        
+        # Save the date: click save button in the main dialog (NOT in iframe)
+        await page.wait_for_timeout(200)  # small delay
+        
+        # Debug: Check iframe context and find save button
+        logger.debug(f"🔍 Looking for save button in main dialog...")
+        # Note: We're now in main dialog context, not iframe context
+        logger.debug(f"🔍 Searching for save button in main page context...")
+        
+        # Save button is in the main dialog, not in the iframe
         save_selectors = [
-            "//button[text()='Save']",
-            "//button[contains(text(), 'Save')]"
+            "button.d2l-button[primary='']",  # Exact match for D2L save button
+            "button[class='d2l-button'][primary='']",  # More specific
+            "button.d2l-button",  # Any D2L button
+            "//button[text()='Save']",  # Fallback to text
+            "//button[contains(text(), 'Save')]"  # Fallback to partial text
         ]
+        
+        save_clicked = False
         for selector in save_selectors:
             try:
-                btn = await page.query_selector(selector)
+                logger.debug(f"🔍 Trying save selector: '{selector}'")
+                btn = await page.query_selector(selector)  # Look in main page, not iframe
                 if btn:
+                    logger.debug(f"✅ Found save button with selector: '{selector}'")
                     await btn.click()
                     logger.debug(f"💾 Clicked save button using selector '{selector}'.")
+                    save_clicked = True
                     break
-            except Exception:
+                else:
+                    logger.debug(f"❌ No save button found with selector: '{selector}'")
+            except Exception as e:
+                logger.debug(f"⚠️ Exception with save selector '{selector}': {e}")
                 continue
-        await page.main_frame().wait_for_timeout(500)
+        
+        if not save_clicked:
+            logger.error("❌ Could not find save button in main dialog")
+        await page.wait_for_timeout(500)
 
 
 # ========================================
