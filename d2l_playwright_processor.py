@@ -39,7 +39,10 @@ COURSE_URLS = {
     "CA4105": "https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1580431",
 }
 
-LOG_PATH = os.path.join(os.path.dirname(__file__), "d2l_processor.log")
+# Centralized logs folder
+LOGS_DIR = r"C:\Users\chase\Documents\School Scrips\Logs"
+os.makedirs(LOGS_DIR, exist_ok=True)
+LOG_PATH = os.path.join(LOGS_DIR, "d2l_processor.log")
 # Configure logging to write to both a file and stdout.  By default
 # logging.StreamHandler writes to stderr, which may not be captured by the
 # Node backend.  Explicitly direct the stream to sys.stdout to ensure
@@ -366,7 +369,7 @@ class D2LProcessor:
         Useful for diagnosing unexpected errors during automation.
         """
         try:
-            debug_dir = os.path.join(os.path.dirname(__file__), "debug_logs")
+            debug_dir = os.path.join(LOGS_DIR, "debug_logs")
             os.makedirs(debug_dir, exist_ok=True)
             timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
             debug_path = os.path.join(debug_dir, f"debug_{stage}_{timestamp}.txt")
