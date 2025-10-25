@@ -1,12 +1,12 @@
 #===============================================================================
 # CODE SYNOPSIS: d2l_playwright_processor.py
-# SYNOPSIS_HASH: ae3ae173ba7247a351cedf3e144750f6a787b18195b353f3178c83fbd85eb7ae
-# Generated: 2025-10-24 23:36:21
-# INTENT: Manages external processes for date operations.
+# SYNOPSIS_HASH: db625244c4dfdd3565f517ea107abf588a0ab5e372e59ad57b653e635ded92f4
+# Generated: 2025-10-25 14:48:11
+# INTENT: D2L browser automation using Playwright. Provides asynchronous operations.
 #===============================================================================
 #
 # OVERVIEW:
-#   Total Lines: 961
+#   Total Lines: 965
 #   Functions: 12
 #   Classes: 1
 #   Global Variables: 12
@@ -30,7 +30,7 @@
 # BEGIN MACHINE-READABLE DATA (for automated processing)
 # ════════════════════
 # SYNOPSIS_ANNOTATED: YES
-# LAST_ANALYZED: 2025-10-24 23:36:21
+# LAST_ANALYZED: 2025-10-25 14:48:11
 # FILE: d2l_playwright_processor.py
 # IMPORTS_EXTERNAL: asyncio, csv, datetime, json, logging, os, pandas, playwright.async_api, re, subprocess, sys, traceback
 # IMPORTS_LOCAL: 
@@ -44,13 +44,14 @@
 # CLASSES: D2LProcessor
 # IO_READS: 
 # IO_WRITES: 
+# EXCEPTIONS: line 944: ['Exception'], line 114: ['Exception'], line 166: ['Exception'], line 202: ['Exception'], line 347: ['SystemExit', 'Exception'], line 375: ['Exception'], line 410: ['Exception'], line 699: ['Exception'], line 720: ['Exception'], line 816: ['Exception'], line 826: ['Exception'], line 122: ['Exception'], line 360: ['Exception'], line 552: ['Exception'], line 733: ['all exceptions'], line 742: ['Exception'], line 829: ['Exception'], line 920: ['Exception'], line 247: ['all exceptions'], line 259: ['Exception'], line 327: ['Exception'], line 497: ['Exception'], line 513: ['Exception'], line 261: ['ImportError'], line 561: ['all exceptions'], line 569: ['Exception'], line 786: ['all exceptions'], line 848: ['ValueError', 'TypeError'], line 881: ['Exception'], line 574: ['Exception'], line 582: ['Exception']
 # CALLGRAPH_ROOTS: __init__,automate_d2l,open_course,process_course,run_automation,_write_debug_report,_parse_time_str,perform_date_updates,find_assignment_row,update_due_date,update_start_date,set_date_in_dialog
 # STATE_VARS: COURSE_URLS,D2L_BASE_URL,LOGS_DIR,logger
 # STATE_MACHINES_COUNT: 0
 # STATE_TRANSITIONS_COUNT: 0
 # INIT_SEQUENCE: os.makedirs; logging.basicConfig
-# INTENT: Manages external processes for date operations.
-# FUNCTION_INTENTS: __init__=Handles the target entities., _parse_time_str=Parses time str., _write_debug_report=Writes debug report., automate_d2l=Handles d 2 l., find_assignment_row=Locates or gathers assignment row., open_course=Handles course., perform_date_updates=Handles date updates., process_course=Handles or executes course., run_automation=Handles automation., set_date_in_dialog=Handles date in dialog., update_due_date=Handles due date., update_start_date=Handles start date.
+# INTENT: D2L browser automation using Playwright. Provides asynchronous operations.
+# FUNCTION_INTENTS: __init__=Handles the target entities., _parse_time_str=Parse a time string from the CSV into a 24‑hour hour and minute pair., _write_debug_report=Write detailed debug info to a file and launch Notepad to display it., automate_d2l=Main coroutine that attaches to an existing Chrome instance and performs., find_assignment_row=Attempt to locate the table row containing the assignment name., open_course=Navigate to a specific course page., perform_date_updates=Iterate over each assignment dictionary and attempt to update the., process_course=Open the course manage-dates page and prepare to process a CSV., run_automation=Launch the automation coroutine and handle cleanup., set_date_in_dialog=Helper to set date and time inside the date picker dialog., update_due_date=Click the due date link in the provided row; then set the new date (and., update_start_date=Click the start date link in the provided row; then set the new date.
 # END MACHINE-READABLE DATA
 # ════════════════════
 #===============================================================================
@@ -72,7 +73,7 @@
 #
 # 🧱 CLASSES FOUND:
 #
-#   D2LProcessor (line 72):
+#   D2LProcessor (line 76):
 #     - D2LProcessor.__init__()
 #     - D2LProcessor.run_automation()
 #     - D2LProcessor._write_debug_report()
@@ -192,6 +193,10 @@
 #   5. Keep UI-threaded calls (e.g., tk.after) on main thread or marshal via queue
 #   6. Ensure hotkeys and binds still invoke the same callbacks
 #===============================================================================
+# === END SYNOPSIS HEADER ===
+# === END SYNOPSIS HEADER ===
+# === END SYNOPSIS HEADER ===
+# === END SYNOPSIS HEADER ===
 # === END SYNOPSIS HEADER ===
 #!/usr/bin/env python3
 """

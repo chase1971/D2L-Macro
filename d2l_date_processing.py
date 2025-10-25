@@ -1,12 +1,12 @@
 #===============================================================================
 # CODE SYNOPSIS: d2l_date_processing.py
-# SYNOPSIS_HASH: db8a1924b6e93b4d5869658ce0ab373ab65f886eada9cafcf74d75d4ab8fd441
-# Generated: 2025-10-24 23:36:21
-# INTENT: Creates and manages user interface components for date and assignment operations.
+# SYNOPSIS_HASH: a681c15a961b4b1288763f26391813c9f1d705c3e077f97608edae6b702682fd
+# Generated: 2025-10-25 14:48:11
+# INTENT: D2L assignment date automation and management.
 #===============================================================================
 #
 # OVERVIEW:
-#   Total Lines: 1111
+#   Total Lines: 1115
 #   Functions: 21
 #   Classes: 2
 #   Global Variables: 0
@@ -38,7 +38,7 @@
 # BEGIN MACHINE-READABLE DATA (for automated processing)
 # ════════════════════
 # SYNOPSIS_ANNOTATED: YES
-# LAST_ANALYZED: 2025-10-24 23:36:21
+# LAST_ANALYZED: 2025-10-25 14:48:11
 # FILE: d2l_date_processing.py
 # IMPORTS_EXTERNAL: csv, datetime, logging, os, psutil, re, selenium, selenium.common.exceptions, selenium.webdriver.chrome.options, selenium.webdriver.chrome.service, selenium.webdriver.common.by, selenium.webdriver.support, selenium.webdriver.support.ui, shutil, subprocess, tempfile, threading, time, tkinter, webdriver_manager.chrome
 # IMPORTS_LOCAL: 
@@ -50,15 +50,16 @@
 # TK_BINDS: 
 # COMMAND_BINDS: 
 # CLASSES: D2LDateProcessor, D2LDateProcessorGUI
-# IO_READS: 
+# IO_READS: unknown
 # IO_WRITES: 
+# EXCEPTIONS: line 1088: ['all exceptions'], line 51: ['Exception'], line 96: ['Exception'], line 199: ['Exception'], line 222: ['Exception'], line 261: ['Exception'], line 406: ['Exception'], line 557: ['Exception'], line 608: ['Exception'], line 681: ['Exception'], line 1001: ['Exception'], line 1025: ['Exception'], line 1051: ['Exception'], line 1073: ['all exceptions'], line 1089: ['ImportError'], line 74: ['Exception'], line 233: ['Exception'], line 685: ['Exception'], line 730: ['Exception'], line 860: ['Exception'], line 600: ['all exceptions'], line 624: ['all exceptions'], line 673: ['all exceptions'], line 892: ['all exceptions'], line 1095: ['all exceptions'], line 113: ['Exception'], line 239: ['Exception'], line 281: ['all exceptions'], line 317: ['all exceptions'], line 373: ['Exception'], line 428: ['all exceptions'], line 466: ['all exceptions'], line 489: ['Exception'], line 528: ['Exception'], line 871: ['all exceptions'], line 745: ['Exception'], line 765: ['Exception'], line 146: ['Exception']
 # CALLGRAPH_ROOTS: main,__init__,setup_logging,setup_driver,process_csv_file,set_assignment_due_date,set_assignment_start_date,find_assignment_due_date_link,find_assignment_start_date_link,set_date_in_mini_editor,set_start_date_in_mini_editor,set_date_in_iframe,create_widgets,browse_csv_file,update_status,login_to_d2l,process_csv,clear_login,exit_app,run
 # STATE_VARS: 
 # STATE_MACHINES_COUNT: 0
 # STATE_TRANSITIONS_COUNT: 0
 # INIT_SEQUENCE: 
-# INTENT: Creates and manages user interface components for date and assignment operations.
-# FUNCTION_INTENTS: __init__=Handles the target entities., browse_csv_file=Handles csv file., cleanup_existing_processes=Handles existing processes., clear_login=Handles login., create_widgets=Handles widgets., exit_app=Handles app., find_assignment_due_date_link=Locates or gathers assignment due date link., find_assignment_start_date_link=Locates or gathers assignment start date link., login_to_d2l=Handles to d 2 l., main=Handles the target entities., process_csv=Handles or executes csv., process_csv_file=Handles or executes csv file., run=Handles the target entities., set_assignment_due_date=Handles assignment due date., set_assignment_start_date=Handles assignment start date., set_date_in_iframe=Handles date in iframe., set_date_in_mini_editor=Handles date in mini editor., set_start_date_in_mini_editor=Handles start date in mini editor., setup_driver=Handles driver., setup_logging=Handles logging., update_status=Handles status.
+# INTENT: D2L assignment date automation and management.
+# FUNCTION_INTENTS: __init__=Handles the target entities., browse_csv_file=Browse for CSV file., cleanup_existing_processes=Clean up any existing Chrome/ChromeDriver processes., clear_login=Clear saved login session., create_widgets=Create the GUI widgets., exit_app=Exit the application., find_assignment_due_date_link=Find the due date link for a specific assignment by name with fuzzy matching., find_assignment_start_date_link=Find the start date link for a specific assignment by name with fuzzy matching., login_to_d2l=Handle login process., main=Main function., process_csv=Process the CSV file., process_csv_file=Process CSV file and update assignments., run=Start the GUI., set_assignment_due_date=Set due date for a specific assignment., set_assignment_start_date=Set start date for a specific assignment., set_date_in_iframe=Set date and time in the iframe., set_date_in_mini_editor=Set date and time in the mini editor popup., set_start_date_in_mini_editor=Set start date in mini editor - handles start date checkbox., setup_driver=Setup Chrome driver with persistent login session., setup_logging=Setup logging configuration., update_status=Update the status label and log.
 # END MACHINE-READABLE DATA
 # ════════════════════
 #===============================================================================
@@ -133,7 +134,7 @@
 #
 # 🧱 CLASSES FOUND:
 #
-#   D2LDateProcessor (line 24):
+#   D2LDateProcessor (line 28):
 #     - D2LDateProcessor.__init__()
 #     - D2LDateProcessor.setup_logging()
 #     - D2LDateProcessor.setup_driver()
@@ -145,7 +146,7 @@
 #     - D2LDateProcessor.set_date_in_mini_editor()
 #     - D2LDateProcessor.set_start_date_in_mini_editor()
 #     - D2LDateProcessor.set_date_in_iframe()
-#   D2LDateProcessorGUI (line 895):
+#   D2LDateProcessorGUI (line 899):
 #     - D2LDateProcessorGUI.__init__()
 #     - D2LDateProcessorGUI.create_widgets()
 #     - D2LDateProcessorGUI.browse_csv_file()
@@ -212,6 +213,11 @@
 #
 #===============================================================================
 #
+# 🔌 EXTERNAL I/O SUMMARY:
+#
+#   Reads: unknown
+#===============================================================================
+#
 # 📊 DATA FLOW SUMMARY:
 #
 #   setup_logging() — calls logging.FileHandler, logging.StreamHandler, logging.basicConfig, logging.getLogger, os.makedirs; returns value
@@ -270,6 +276,10 @@
 #   5. Keep UI-threaded calls (e.g., tk.after) on main thread or marshal via queue
 #   6. Ensure hotkeys and binds still invoke the same callbacks
 #===============================================================================
+# === END SYNOPSIS HEADER ===
+# === END SYNOPSIS HEADER ===
+# === END SYNOPSIS HEADER ===
+# === END SYNOPSIS HEADER ===
 # === END SYNOPSIS HEADER ===
 #!/usr/bin/env python3
 """

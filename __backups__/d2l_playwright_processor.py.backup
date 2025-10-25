@@ -1,3 +1,201 @@
+#===============================================================================
+# CODE SYNOPSIS: d2l_playwright_processor.py
+# Generated: 2025-10-25 14:41:58
+# INTENT: Processes and analyzes data for date operations.
+#===============================================================================
+#
+# OVERVIEW:
+#   Total Lines: 965
+#   Functions: 12
+#   Classes: 1
+#   Global Variables: 12
+#
+# Key Dependencies:
+#   - asyncio
+#   - csv
+#   - datetime
+#   - json
+#   - logging
+#   - os
+#   - pandas
+#   - playwright.async_api
+#   - re
+#   - subprocess
+#   - sys
+#   - traceback
+#
+#===============================================================================
+# ════════════════════
+# BEGIN MACHINE-READABLE DATA (for automated processing)
+# ════════════════════
+# SYNOPSIS_ANNOTATED: YES
+# LAST_ANALYZED: 2025-10-25 14:41:58
+# FILE: d2l_playwright_processor.py
+# IMPORTS_EXTERNAL: asyncio, csv, datetime, json, logging, os, pandas, playwright.async_api, re, subprocess, sys, traceback
+# IMPORTS_LOCAL: 
+# GLOBALS: COURSE_URLS, D2L_BASE_URL, LOGS_DIR, LOG_PATH, SHARED_BROWSER_DIR, action, course_code, csv_path, logger, processor, result, success
+# FUNCTIONS: __init__, _parse_time_str, _write_debug_report, automate_d2l, find_assignment_row, open_course, perform_date_updates, process_course, run_automation, set_date_in_dialog, update_due_date, update_start_date
+# RETURNS: _parse_time_str, find_assignment_row, run_automation
+# THREAD_TARGETS: 
+# HOTKEYS: 
+# TK_BINDS: 
+# COMMAND_BINDS: 
+# CLASSES: D2LProcessor
+# IO_READS: 
+# IO_WRITES: 
+# EXCEPTIONS: line 944: ['Exception'], line 114: ['Exception'], line 166: ['Exception'], line 202: ['Exception'], line 347: ['SystemExit', 'Exception'], line 375: ['Exception'], line 410: ['Exception'], line 699: ['Exception'], line 720: ['Exception'], line 816: ['Exception'], line 826: ['Exception'], line 122: ['Exception'], line 360: ['Exception'], line 552: ['Exception'], line 733: ['all exceptions'], line 742: ['Exception'], line 829: ['Exception'], line 920: ['Exception'], line 247: ['all exceptions'], line 259: ['Exception'], line 327: ['Exception'], line 497: ['Exception'], line 513: ['Exception'], line 261: ['ImportError'], line 561: ['all exceptions'], line 569: ['Exception'], line 786: ['all exceptions'], line 848: ['ValueError', 'TypeError'], line 881: ['Exception'], line 574: ['Exception'], line 582: ['Exception']
+# CALLGRAPH_ROOTS: __init__,automate_d2l,open_course,process_course,run_automation,_write_debug_report,_parse_time_str,perform_date_updates,find_assignment_row,update_due_date,update_start_date,set_date_in_dialog
+# STATE_VARS: COURSE_URLS,D2L_BASE_URL,LOGS_DIR,logger
+# STATE_MACHINES_COUNT: 0
+# STATE_TRANSITIONS_COUNT: 0
+# INIT_SEQUENCE: os.makedirs; logging.basicConfig
+# INTENT: Processes and analyzes data for date operations.
+# FUNCTION_INTENTS: __init__=Handles the target entities., _parse_time_str=Parse a time string from the CSV into a 24‑hour hour and minute pair., _write_debug_report=Write detailed debug info to a file and launch Notepad to display it., automate_d2l=Main coroutine that attaches to an existing Chrome instance and performs., find_assignment_row=Attempt to locate the table row containing the assignment name., open_course=Navigate to a specific course page., perform_date_updates=Iterate over each assignment dictionary and attempt to update the., process_course=Open the course manage-dates page and prepare to process a CSV., run_automation=Launch the automation coroutine and handle cleanup., set_date_in_dialog=Helper to set date and time inside the date picker dialog., update_due_date=Click the due date link in the provided row; then set the new date (and., update_start_date=Click the start date link in the provided row; then set the new date.
+# END MACHINE-READABLE DATA
+# ════════════════════
+#===============================================================================
+#
+# 📝 FUNCTION SIGNATURES:
+#
+# D2LProcessor.__init__(self) -> None
+#
+# D2LProcessor._parse_time_str(self, time_str: str) -> None
+#   Parse a time string from the CSV into a 24‑hour hour and minute pair.
+#
+# D2LProcessor._write_debug_report(self, stage, exception) -> None
+#   Write detailed debug info to a file and launch Notepad to display it.
+#
+# D2LProcessor.run_automation(self, action = None, course_code = None, csv_path = None) -> None
+#   Launch the automation coroutine and handle cleanup. The optional
+#
+#===============================================================================
+#
+# 🧱 CLASSES FOUND:
+#
+#   D2LProcessor (line 76):
+#     - D2LProcessor.__init__()
+#     - D2LProcessor.run_automation()
+#     - D2LProcessor._write_debug_report()
+#     - D2LProcessor._parse_time_str()
+#===============================================================================
+#
+# CRITICAL GLOBAL VARIABLES:
+#
+# logger:
+#   Read by: automate_d2l, open_course, process_course, run_automation, _write_debug_report, _parse_time_str +5 more
+#
+#===============================================================================
+#
+# SHARED STATE CATEGORIES:
+#
+#   Config State:
+#     - LOG_PATH
+#     - csv_path
+#===============================================================================
+#
+# 🧠 FUNCTION BEHAVIORAL SUMMARIES:
+#
+#
+#===============================================================================
+#
+# FUNCTION CALL HIERARCHY (depth-limited):
+#
+# - __init__()
+#
+# - automate_d2l()
+#
+# - open_course()
+#
+# - process_course()
+#
+# - run_automation()
+#
+# - _write_debug_report()
+#
+# - _parse_time_str()
+#
+# - perform_date_updates()
+#
+# - find_assignment_row()
+#
+# - update_due_date()
+#
+# - update_start_date()
+#
+# - set_date_in_dialog()
+#
+#===============================================================================
+#
+# 🔄 STATE MACHINES:
+#
+#   (No state machines detected.)
+#
+#===============================================================================
+#
+# 🚀 INITIALIZATION SEQUENCE:
+#
+#   1. os.makedirs
+#   2. logging.basicConfig
+#===============================================================================
+#
+# 📊 DATA FLOW SUMMARY:
+#
+#   __init__() — pure/local computation; no return value
+#   automate_d2l() — reads D2L_BASE_URL, logger; calls RuntimeError, async_playwright, asyncio.Event, asyncio.sleep, logger.error, logger.info; no return value
+#   open_course() — reads COURSE_URLS, logger; calls COURSE_URLS.get, RuntimeError, asyncio.sleep, current_url.startswith, logger.info, page.goto; no return value
+#   process_course() — reads COURSE_URLS, logger; calls COURSE_URLS.get, RuntimeError, assignments.append, asyncio.sleep, csv_module.DictReader, current_url.startswith; no return value
+#   run_automation() — reads logger; calls asyncio.run, logger.error, logger.info, logger.warning, self.automate_d2l, self.context.close; returns value
+#   _write_debug_report() — reads LOGS_DIR, logger; calls datetime.now, f.write, logger.error, logger.info, open, os.makedirs; no return value
+#   _parse_time_str() — reads logger; calls am_pm_match.group, int, len, logger.error, re.search, s.split; returns value
+#   perform_date_updates() — reads logger; calls assignment_info.get, due_date_str.lower, due_time_str.lower, enumerate, len, logger.debug; no return value
+#   find_assignment_row() — reads logger; calls assignment_name.lower, assignment_name.replace, clean_name.lower, elem.evaluate_handle, elem.text_content, enumerate; returns value
+#   update_due_date() — reads logger; calls RuntimeError, due_link.click, logger.info, page.wait_for_selector, row.query_selector, self._parse_time_str; no return value
+#   update_start_date() — reads logger; calls RuntimeError, logger.info, page.wait_for_selector, row.query_selector, self._parse_time_str, self.set_date_in_dialog; no return value
+#   set_date_in_dialog() — reads logger; calls RuntimeError, asyncio.sleep, btn.click, checkbox.check, checkbox.is_checked, date_str.split; no return value
+#===============================================================================
+#
+# 🔧 MODULARIZATION RECOMMENDATIONS:
+#
+# ⚠️ GLOBAL STATE: Significant global variables found.
+#    1. Create a State class to hold all globals
+#    2. Pass state object instead of using globals
+#    3. Use getter/setter methods for thread-safe access
+#
+# When modularizing, consider splitting by:
+#   - Separate state management from business logic
+#   - Group related functions into modules
+#   - Separate UI code from core logic
+#===============================================================================
+#===============================================================================
+# 📞 FUNCTION CALL HIERARCHY:
+#   (No intra-module function calls detected.)
+#===============================================================================
+# 🔄 STATE MACHINE TRANSITIONS:
+#   (No *_state transitions detected.)
+#===============================================================================
+# ⌨️ HOTKEY BINDINGS:
+#   (No keyboard hotkeys detected.)
+#===============================================================================
+#
+# 🧩 MODULE INTEGRATION INTENT:
+#   Role: Single-file code analyzer that injects a synopsis header
+#   Used by: (future) system_synopsis_builder.py for folder-wide Markdown
+#   Inputs: Python source file path
+#   Outputs: Annotated source file (prepends this synopsis)
+#===============================================================================
+#
+# 📝 INSTRUCTIONS FOR AI:
+#   1. Preserve ALL global variable dependencies shown above
+#   2. Maintain thread safety for variables accessed by multiple threads
+#   3. Do NOT rename variables unless explicitly asked
+#   4. Ensure all function dependencies are preserved
+#   5. Keep UI-threaded calls (e.g., tk.after) on main thread or marshal via queue
+#   6. Ensure hotkeys and binds still invoke the same callbacks
+#===============================================================================
+# === END SYNOPSIS HEADER ===
+# === END SYNOPSIS HEADER ===
+# === END SYNOPSIS HEADER ===
+# === END SYNOPSIS HEADER ===
 #!/usr/bin/env python3
 """
 D2L Playwright Processor (Fixed to match Automation Agent behavior)
