@@ -535,6 +535,39 @@ class D2LDateProcessor:
             self.logger.error(f"Error setting start date for '{assignment_name}': {e}")
             return False
     
+    def _remove_emojis(self, text: str) -> str:
+        """
+        Remove emojis and other emoji-related Unicode characters from a string.
+        
+        Parameters
+        ----------
+        text : str
+            The text to clean.
+            
+        Returns
+        -------
+        str
+            The text with emojis removed.
+        """
+        import re
+        # Remove emojis and emoji-related Unicode ranges
+        emoji_pattern = re.compile(
+            "["
+            "\U0001F600-\U0001F64F"  # Emoticons
+            "\U0001F300-\U0001F5FF"  # Misc Symbols and Pictographs
+            "\U0001F680-\U0001F6FF"  # Transport and Map
+            "\U0001F1E0-\U0001F1FF"  # Flags
+            "\U00002702-\U000027B0"  # Dingbats
+            "\U000024C2-\U0001F251"  # Enclosed characters
+            "\U0001F900-\U0001F9FF"  # Supplemental Symbols and Pictographs
+            "\U0001FA00-\U0001FA6F"  # Chess Symbols
+            "\U0001FA70-\U0001FAFF"  # Symbols and Pictographs Extended-A
+            "\U00002600-\U000026FF"  # Miscellaneous Symbols
+            "\U00002700-\U000027BF"  # Dingbats
+            "\U0000FE00-\U0000FE0F"  # Variation Selectors
+            "]+", flags=re.UNICODE)
+        return emoji_pattern.sub('', text).strip()
+
     def find_assignment_due_date_link(self, assignment_name):
         """Find the due date link for a specific assignment by name with fuzzy matching"""
         try:
@@ -546,40 +579,85 @@ class D2LDateProcessor:
             # Try exact match first
             assignment_links = self.driver.find_elements(By.XPATH, f"//a[contains(text(), '{assignment_name}')]")
             
-            # If no exact match, try DASH-FREE matching (remove all types of dashes)
+            # If no exact match, try normalized matching (remove dashes, normalize commas, remove emojis)
             if not assignment_links:
-                # Remove all dash characters from search term
+                # Normalize search term: remove dashes, normalize comma spacing, collapse spaces
                 import re
-                name_no_dashes = re.sub(r'[-–—−]', ' ', assignment_name)  # Remove all dash types
-                name_no_dashes = re.sub(r'\s+', ' ', name_no_dashes).strip()  # Clean up extra spaces
-                self.logger.info(f"Trying DASH-FREE search: '{name_no_dashes}'")
+                name_normalized = re.sub(r'[-–—−]', ' ', assignment_name)  # Replace dashes with spaces
+                name_normalized = re.sub(r',\s*', ', ', name_normalized)  # Normalize comma spacing to ", "
+                name_normalized = re.sub(r'\s+', ' ', name_normalized).strip()  # Collapse multiple spaces
+                name_normalized = self._remove_emojis(name_normalized)  # Remove emojis
+                name_normalized_lower = name_normalized.lower()
+                self.logger.info(f"Trying normalized search: '{name_normalized}'")
                 
-                # Find all links and check their text without dashes
+                # Find all links and check their text with the same normalization
                 all_links = self.driver.find_elements(By.XPATH, "//td[contains(@class, 'd_dg_col_Name')]//a")
                 for link in all_links:
                     try:
                         link_text = link.text.strip()
-                        link_no_dashes = re.sub(r'[-–—−]', ' ', link_text)  # Remove all dash types
-                        link_no_dashes = re.sub(r'\s+', ' ', link_no_dashes).strip()  # Clean up extra spaces
+                        link_normalized = re.sub(r'[-–—−]', ' ', link_text)  # Replace dashes with spaces
+                        link_normalized = re.sub(r',\s*', ', ', link_normalized)  # Normalize comma spacing to ", "
+                        link_normalized = re.sub(r'\s+', ' ', link_normalized).strip()  # Collapse multiple spaces
+                        link_normalized = self._remove_emojis(link_normalized)  # Remove emojis
+                        link_normalized_lower = link_normalized.lower()
                         
-                        if name_no_dashes.lower() == link_no_dashes.lower():
-                            self.logger.info(f"SUCCESS: Found DASH-FREE match! '{link_text}'")
+                        # EXACT MATCH ONLY after normalization - prevents confusion between similar assignments
+                        if name_normalized_lower == link_normalized_lower:
+                            self.logger.info(f"SUCCESS: Found exact normalized match! '{link_text}'")
                             assignment_links = [link]
                             break
                     except:
                         continue
             
-            # If still no match, try without quotes
+            # If still no match, try without quotes and emojis
             if not assignment_links:
                 clean_name = assignment_name.replace('"', '').replace("'", '')
                 self.logger.info(f"Trying without quotes: '{clean_name}'")
                 assignment_links = self.driver.find_elements(By.XPATH, f"//a[contains(text(), '{clean_name}')]")
+                
+                # Also try matching with emojis removed from both sides
+                if not assignment_links:
+                    clean_name_no_emoji = self._remove_emojis(clean_name)
+                    all_links = self.driver.find_elements(By.XPATH, "//td[contains(@class, 'd_dg_col_Name')]//a")
+                    for link in all_links:
+                        try:
+                            link_text = link.text.strip()
+                            link_text_no_emoji = self._remove_emojis(link_text)
+                            # Normalize: dashes to spaces, comma spacing, collapse spaces
+                            clean_normalized = re.sub(r'[-–—−]', ' ', clean_name_no_emoji)
+                            clean_normalized = re.sub(r',\s*', ', ', clean_normalized)
+                            clean_normalized = re.sub(r'\s+', ' ', clean_normalized).strip().lower()
+                            link_normalized = re.sub(r'[-–—−]', ' ', link_text_no_emoji)
+                            link_normalized = re.sub(r',\s*', ', ', link_normalized)
+                            link_normalized = re.sub(r'\s+', ' ', link_normalized).strip().lower()
+                            # EXACT MATCH ONLY after normalization
+                            if clean_normalized == link_normalized:
+                                self.logger.info(f"SUCCESS: Found exact normalized match! '{link_text}'")
+                                assignment_links = [link]
+                                break
+                        except:
+                            continue
             
             # If still no match, try the key part only
             if not assignment_links and 'key' in assignment_name:
                 key_part = assignment_name.replace(' key', '')
                 self.logger.info(f"Trying without 'key': '{key_part}'")
                 assignment_links = self.driver.find_elements(By.XPATH, f"//a[contains(text(), '{key_part}')]")
+                
+                # Also try with emojis removed
+                if not assignment_links:
+                    key_part_no_emoji = self._remove_emojis(key_part)
+                    all_links = self.driver.find_elements(By.XPATH, "//td[contains(@class, 'd_dg_col_Name')]//a")
+                    for link in all_links:
+                        try:
+                            link_text = link.text.strip()
+                            link_text_no_emoji = self._remove_emojis(link_text)
+                            if key_part_no_emoji.lower() in link_text_no_emoji.lower() or link_text_no_emoji.lower() in key_part_no_emoji.lower():
+                                self.logger.info(f"SUCCESS: Found match ignoring emojis! '{link_text}'")
+                                assignment_links = [link]
+                                break
+                        except:
+                            continue
             
             if assignment_links:
                 self.logger.info(f"EXACT MATCH: Found {len(assignment_links)} assignment name links")
@@ -693,34 +771,64 @@ class D2LDateProcessor:
             if assignment_links:
                 self.logger.info(f"SUCCESS: Found exact match!")
             
-            # If no exact match, try DASH-FREE matching (remove all types of dashes)
+            # If no exact match, try normalized matching (remove dashes, normalize commas, remove emojis)
             if not assignment_links:
-                # Remove all dash characters from search term
+                # Normalize search term: remove dashes, normalize comma spacing, collapse spaces
                 import re
-                name_no_dashes = re.sub(r'[-–—−]', ' ', assignment_name)  # Remove all dash types
-                name_no_dashes = re.sub(r'\s+', ' ', name_no_dashes).strip()  # Clean up extra spaces
-                self.logger.info(f"Trying DASH-FREE search: '{name_no_dashes}'")
+                name_normalized = re.sub(r'[-–—−]', ' ', assignment_name)  # Replace dashes with spaces
+                name_normalized = re.sub(r',\s*', ', ', name_normalized)  # Normalize comma spacing to ", "
+                name_normalized = re.sub(r'\s+', ' ', name_normalized).strip()  # Collapse multiple spaces
+                name_normalized = self._remove_emojis(name_normalized)  # Remove emojis
+                name_normalized_lower = name_normalized.lower()
+                self.logger.info(f"Trying normalized search: '{name_normalized}'")
                 
-                # Find all links and check their text without dashes
+                # Find all links and check their text with the same normalization
                 all_links = self.driver.find_elements(By.XPATH, "//td[contains(@class, 'd_dg_col_Name')]//a")
                 for link in all_links:
                     try:
                         link_text = link.text.strip()
-                        link_no_dashes = re.sub(r'[-–—−]', ' ', link_text)  # Remove all dash types
-                        link_no_dashes = re.sub(r'\s+', ' ', link_no_dashes).strip()  # Clean up extra spaces
+                        link_normalized = re.sub(r'[-–—−]', ' ', link_text)  # Replace dashes with spaces
+                        link_normalized = re.sub(r',\s*', ', ', link_normalized)  # Normalize comma spacing to ", "
+                        link_normalized = re.sub(r'\s+', ' ', link_normalized).strip()  # Collapse multiple spaces
+                        link_normalized = self._remove_emojis(link_normalized)  # Remove emojis
+                        link_normalized_lower = link_normalized.lower()
                         
-                        if name_no_dashes.lower() == link_no_dashes.lower():
-                            self.logger.info(f"SUCCESS: Found DASH-FREE match! '{link_text}'")
+                        # EXACT MATCH ONLY after normalization - prevents confusion between similar assignments
+                        if name_normalized_lower == link_normalized_lower:
+                            self.logger.info(f"SUCCESS: Found exact normalized match! '{link_text}'")
                             assignment_links = [link]
                             break
                     except:
                         continue
             
-            # If still no match, try without quotes
+            # If still no match, try without quotes and emojis
             if not assignment_links:
                 clean_name = assignment_name.replace('"', '').replace("'", '')
                 self.logger.info(f"Trying without quotes: '{clean_name}'")
                 assignment_links = self.driver.find_elements(By.XPATH, f"//a[contains(text(), '{clean_name}')]")
+                
+                # Also try matching with emojis removed from both sides
+                if not assignment_links:
+                    clean_name_no_emoji = self._remove_emojis(clean_name)
+                    all_links = self.driver.find_elements(By.XPATH, "//td[contains(@class, 'd_dg_col_Name')]//a")
+                    for link in all_links:
+                        try:
+                            link_text = link.text.strip()
+                            link_text_no_emoji = self._remove_emojis(link_text)
+                            # Normalize: dashes to spaces, comma spacing, collapse spaces
+                            clean_normalized = re.sub(r'[-–—−]', ' ', clean_name_no_emoji)
+                            clean_normalized = re.sub(r',\s*', ', ', clean_normalized)
+                            clean_normalized = re.sub(r'\s+', ' ', clean_normalized).strip().lower()
+                            link_normalized = re.sub(r'[-–—−]', ' ', link_text_no_emoji)
+                            link_normalized = re.sub(r',\s*', ', ', link_normalized)
+                            link_normalized = re.sub(r'\s+', ' ', link_normalized).strip().lower()
+                            # EXACT MATCH ONLY after normalization
+                            if clean_normalized == link_normalized:
+                                self.logger.info(f"SUCCESS: Found exact normalized match! '{link_text}'")
+                                assignment_links = [link]
+                                break
+                        except:
+                            continue
                 if assignment_links:
                     self.logger.info(f"SUCCESS: Found match without quotes!")
             
@@ -729,6 +837,21 @@ class D2LDateProcessor:
                 key_part = assignment_name.replace(' key', '')
                 self.logger.info(f"Trying without 'key': '{key_part}'")
                 assignment_links = self.driver.find_elements(By.XPATH, f"//a[contains(text(), '{key_part}')]")
+                
+                # Also try with emojis removed
+                if not assignment_links:
+                    key_part_no_emoji = self._remove_emojis(key_part)
+                    all_links = self.driver.find_elements(By.XPATH, "//td[contains(@class, 'd_dg_col_Name')]//a")
+                    for link in all_links:
+                        try:
+                            link_text = link.text.strip()
+                            link_text_no_emoji = self._remove_emojis(link_text)
+                            if key_part_no_emoji.lower() in link_text_no_emoji.lower() or link_text_no_emoji.lower() in key_part_no_emoji.lower():
+                                self.logger.info(f"SUCCESS: Found match ignoring emojis! '{link_text}'")
+                                assignment_links = [link]
+                                break
+                        except:
+                            continue
                 if assignment_links:
                     self.logger.info(f"SUCCESS: Found match without 'key'!")
             

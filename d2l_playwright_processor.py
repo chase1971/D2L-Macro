@@ -714,12 +714,45 @@ class D2LProcessor:
             else:
                 logger.debug(f"🔍 Skipping start date for '{name}' - no start date provided")
 
+    def _remove_emojis(self, text: str) -> str:
+        """
+        Remove emojis and other emoji-related Unicode characters from a string.
+        
+        Parameters
+        ----------
+        text : str
+            The text to clean.
+            
+        Returns
+        -------
+        str
+            The text with emojis removed.
+        """
+        import re
+        # Remove emojis and emoji-related Unicode ranges
+        emoji_pattern = re.compile(
+            "["
+            "\U0001F600-\U0001F64F"  # Emoticons
+            "\U0001F300-\U0001F5FF"  # Misc Symbols and Pictographs
+            "\U0001F680-\U0001F6FF"  # Transport and Map
+            "\U0001F1E0-\U0001F1FF"  # Flags
+            "\U00002702-\U000027B0"  # Dingbats
+            "\U000024C2-\U0001F251"  # Enclosed characters
+            "\U0001F900-\U0001F9FF"  # Supplemental Symbols and Pictographs
+            "\U0001FA00-\U0001FA6F"  # Chess Symbols
+            "\U0001FA70-\U0001FAFF"  # Symbols and Pictographs Extended-A
+            "\U00002600-\U000026FF"  # Miscellaneous Symbols
+            "\U00002700-\U000027BF"  # Dingbats
+            "\U0000FE00-\U0000FE0F"  # Variation Selectors
+            "]+", flags=re.UNICODE)
+        return emoji_pattern.sub('', text).strip()
+
     async def find_assignment_row(self, page, assignment_name: str):
         """
         Attempt to locate the table row containing the assignment name.  This
         method uses a simple text match and then returns the ``<tr>``
         element.  It first tries an exact substring match; if that fails,
-        it removes dashes (–—−) and quotes from the search term and tries
+        it removes dashes (–—−), quotes, and emojis from the search term and tries
         again.  If still not found, None is returned.
 
         Parameters
@@ -737,17 +770,41 @@ class D2LProcessor:
         # Attempt exact match
         selectors = [assignment_name]
         import re
-        # Also search for versions without dashes and quotes
-        name_no_dash = re.sub(r'[-–—−]', ' ', assignment_name).strip()
+        # Also search for versions without dashes, quotes, and emojis
+        # Normalize: remove dashes, normalize comma spacing, collapse multiple spaces, remove quotes
+        name_no_dash = re.sub(r'[-–—−]', ' ', assignment_name)  # Replace dashes with spaces
+        name_no_dash = re.sub(r',\s*', ', ', name_no_dash)  # Normalize comma spacing to ", "
+        name_no_dash = re.sub(r'\s+', ' ', name_no_dash).strip()  # Collapse multiple spaces
         if name_no_dash.lower() != assignment_name.lower():
             selectors.append(name_no_dash)
         clean_name = assignment_name.replace("'", '').replace('"', '')
+        clean_name = re.sub(r',\s*', ', ', clean_name)  # Normalize comma spacing
+        clean_name = re.sub(r'\s+', ' ', clean_name).strip()  # Normalize spaces in clean name too
         if clean_name.lower() not in (assignment_name.lower(), name_no_dash.lower()):
             selectors.append(clean_name)
+        
+        # Remove emojis from the assignment name for comparison
+        assignment_name_no_emoji = self._remove_emojis(assignment_name)
+        if assignment_name_no_emoji != assignment_name:
+            selectors.append(assignment_name_no_emoji)
+        
+        # Create a fully normalized version: no dashes, normalized commas, no quotes, no emojis, normalized spaces
+        fully_normalized = self._remove_emojis(name_no_dash)
+        fully_normalized = fully_normalized.replace("'", '').replace('"', '')
+        fully_normalized = re.sub(r',\s*', ', ', fully_normalized)  # Normalize comma spacing again
+        fully_normalized = re.sub(r'\s+', ' ', fully_normalized).strip()
+        if fully_normalized.lower() not in [s.lower() for s in selectors]:
+            selectors.append(fully_normalized)
+        
         for search_term in selectors:
             try:
+                # Normalize search term: remove emojis, normalize dashes to spaces, normalize commas, collapse spaces
+                search_term_no_emoji = self._remove_emojis(search_term)
+                search_term_normalized = re.sub(r'[-–—−]', ' ', search_term_no_emoji)  # Replace dashes with spaces
+                search_term_normalized = re.sub(r',\s*', ', ', search_term_normalized)  # Normalize comma spacing to ", "
+                search_term_normalized = re.sub(r'\s+', ' ', search_term_normalized).strip()  # Collapse multiple spaces
                 # Lower-case the search term for case-insensitive matching.
-                lower_term = search_term.lower()
+                lower_term = search_term_normalized.lower()
                 # Debug: Check if any elements match the base selector first
                 base_elements = await page.query_selector_all("//td[contains(@class, 'd_dg_col_Name')]//a")
                 logger.debug(f"🔍 Found {len(base_elements)} base assignment links for search term '{search_term}'")
@@ -764,30 +821,46 @@ class D2LProcessor:
                 for elem in base_elements:
                     try:
                         text = await elem.text_content()
-                        if text and lower_term in text.lower():
-                            logger.debug(f"✅ Found matching element: '{text.strip()}'")
-                            # Get the parent row using XPath
-                            try:
-                                row = await elem.evaluate_handle("element => element.closest('tr')")
-                                if row:
-                                    logger.info(f"✅ Assignment row found using search term '{search_term}'.")
-                                    return row
-                            except Exception as ex:
-                                logger.debug(f"⚠️ Exception getting parent row: {ex}")
-                                # Try alternative approach
+                        if text:
+                            # Normalize webpage text: remove emojis, normalize dashes to spaces, normalize commas, collapse spaces
+                            text_no_emoji = self._remove_emojis(text)
+                            text_normalized = re.sub(r'[-–—−]', ' ', text_no_emoji)  # Replace dashes with spaces
+                            text_normalized = re.sub(r',\s*', ', ', text_normalized)  # Normalize comma spacing to ", "
+                            text_normalized = re.sub(r'\s+', ' ', text_normalized).strip()  # Collapse multiple spaces
+                            text_normalized_lower = text_normalized.lower()
+                            
+                            # EXACT MATCH ONLY after normalization - no partial matching to avoid confusion between similar assignments
+                            if lower_term == text_normalized_lower:
+                                logger.debug(f"✅ Found exact match after normalization: '{text.strip()}'")
+                                match_found = True
+                            else:
+                                logger.debug(f"⚠️ No exact match: search='{lower_term}' vs webpage='{text_normalized_lower}'")
+                                match_found = False
+                            
+                            if match_found:
+                                # Get the parent row using XPath
                                 try:
-                                    row = await elem.evaluate_handle("element => element.parentElement.closest('tr')")
+                                    row = await elem.evaluate_handle("element => element.closest('tr')")
                                     if row:
                                         logger.info(f"✅ Assignment row found using search term '{search_term}'.")
                                         return row
-                                except Exception as ex2:
-                                    logger.debug(f"⚠️ Alternative approach also failed: {ex2}")
-                                    continue
+                                except Exception as ex:
+                                    logger.debug(f"⚠️ Exception getting parent row: {ex}")
+                                    # Try alternative approach
+                                    try:
+                                        row = await elem.evaluate_handle("element => element.parentElement.closest('tr')")
+                                        if row:
+                                            logger.info(f"✅ Assignment row found using search term '{search_term}'.")
+                                            return row
+                                    except Exception as ex2:
+                                        logger.debug(f"⚠️ Alternative approach also failed: {ex2}")
+                                        continue
                     except Exception as ex:
                         logger.debug(f"⚠️ Exception checking element: {ex}")
                         continue
                 
                 # Fallback to original XPath if manual search fails
+                # Note: XPath doesn't support emoji removal easily, so we'll rely on manual search above
                 xpath = (
                     "//td[contains(@class, 'd_dg_col_Name')]//a["
                     "contains(translate(normalize-space(text()), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '"
@@ -1008,16 +1081,27 @@ class D2LProcessor:
         if not target_frame:
             logger.error("❌ No iframe with date fields found in dialog.")
             raise RuntimeError("No iframe with date fields found")
-        # Check the date checkbox if necessary
+        # Check the date checkbox if necessary (especially important for start dates)
         try:
             checkbox = await target_frame.query_selector(check_selector)
             if checkbox:
                 checked = await checkbox.is_checked()
+                logger.debug(f"🔍 Checkbox {check_selector} current state: {checked}")
                 if not checked:
+                    logger.debug(f"☑️ Checking checkbox {check_selector}...")
                     await checkbox.check()
-                    logger.debug(f"☑️ Checked checkbox {check_selector} in date dialog.")
-        except Exception:
-            pass
+                    # Wait a moment for the checkbox state to update and fields to become enabled
+                    await asyncio.sleep(0.3)
+                    # Verify it's now checked
+                    checked_after = await checkbox.is_checked()
+                    logger.debug(f"☑️ Checkbox {check_selector} after check: {checked_after}")
+                    if not checked_after:
+                        logger.warning(f"⚠️ Checkbox {check_selector} may not have been checked properly")
+                else:
+                    logger.debug(f"✅ Checkbox {check_selector} was already checked")
+        except Exception as checkbox_err:
+            logger.warning(f"⚠️ Error handling checkbox {check_selector}: {checkbox_err}")
+            # For start dates, this is critical - but we'll continue and see if fields are accessible
         # Fill the actual D2L date field - single text input
         try:
             # Check if frame is still attached before filling
