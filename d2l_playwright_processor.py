@@ -258,7 +258,7 @@ LOG_PATH = os.path.join(LOGS_DIR, "d2l_processor.log")
 # messages.  Without ``force=True`` the configuration may silently
 # fail if logging has already been set up elsewhere.
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(message)s",
     handlers=[
         logging.FileHandler(LOG_PATH, mode="a", encoding="utf-8"),
@@ -277,6 +277,8 @@ class D2LProcessor:
         self.page = None
         # Track how many assignments were logged/processed in a run
         self.assignments_processed = 0
+        # Track if we're using CDP (external browser) - don't close context in this case
+        self.using_cdp = False
 
     async def automate_d2l(self, action=None, course_code=None, csv_path=None):
         """
@@ -318,8 +320,10 @@ class D2LProcessor:
             try:
                 logger.info("🔗 Connecting to existing Chrome session on port 9223...")
                 browser = await self.playwright.chromium.connect_over_cdp("http://localhost:9223")
+                self.browser = browser
                 self.context = browser.contexts[0]
                 self.page = self.context.pages[0] if self.context.pages else await self.context.new_page()
+                self.using_cdp = True  # Mark that we're using external browser
                 logger.info("✅ Attached to existing Chrome session (no relaunch).")
             except Exception as e:
                 logger.error(f"❌ Could not connect to existing browser: {e}")
@@ -542,7 +546,8 @@ class D2LProcessor:
         """
         try:
             logger.info("🧠 Starting D2L automation process...")
-            asyncio.run(self.automate_d2l(action, course_code, csv_path))
+            # Run the async function and handle cleanup within the same event loop
+            asyncio.run(self._run_with_cleanup(action, course_code, csv_path))
             logger.info("✅ D2L Automation completed successfully.")
             return True
         except SystemExit as e:
@@ -551,15 +556,33 @@ class D2LProcessor:
         except Exception as e:
             logger.error(f"❌ D2L Automation error: {str(e)}")
             return False
+
+    async def _run_with_cleanup(self, action, course_code, csv_path):
+        """
+        Run the automation and handle cleanup within the same async context.
+        This ensures cleanup happens in the same event loop.
+        """
+        try:
+            await self.automate_d2l(action, course_code, csv_path)
         finally:
-            # Cleanup
+            # Cleanup - only close what we own
             try:
-                if self.context:
-                    asyncio.run(self.context.close())
-                    logger.info("✅ Browser context closed.")
+                # When using CDP (external browser), don't close the context
+                # The browser is managed externally by Node.js
+                if self.context and not self.using_cdp:
+                    try:
+                        await self.context.close()
+                        logger.info("✅ Browser context closed.")
+                    except Exception as e:
+                        logger.debug(f"Context already closed or error closing: {e}")
+                
+                # Always try to stop playwright, but handle errors gracefully
                 if self.playwright:
-                    asyncio.run(self.playwright.stop())
-                    logger.info("✅ Playwright stopped.")
+                    try:
+                        await self.playwright.stop()
+                        logger.info("✅ Playwright stopped.")
+                    except Exception as e:
+                        logger.debug(f"Playwright stop error (may already be stopped): {e}")
             except Exception as cleanup_error:
                 logger.warning(f"⚠️ Cleanup error: {cleanup_error}")
 
