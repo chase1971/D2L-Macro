@@ -218,6 +218,7 @@ add that logic without disrupting existing features.
 import sys
 import os
 import json
+import csv
 import asyncio
 import logging
 import traceback
@@ -232,11 +233,10 @@ SHARED_BROWSER_DIR = r"C:\Users\chase\Documents\Shared-Browser-Data"
 D2L_BASE_URL = "https://d2l.lonestar.edu/"
 
 COURSE_URLS = {
-    "FM4202": "https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1580392",
-    "FM4103": "https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1580390",
-    "CA4203": "https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1580436",
-    "CA4201": "https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1580434",
-    "CA4105": "https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1580431",
+    "FM4101": "https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1616943",
+    "CA4101": "https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1617029",
+    "FM4201": "https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1616946",
+    "FM4203": "https://d2l.lonestar.edu/d2l/lms/manageDates/date_manager.d2l?fromCMC=1&ou=1616948",
 }
 
 # Centralized logs folder
@@ -287,7 +287,7 @@ class D2LProcessor:
 
         - ``login`` (default): navigate to the D2L home page and hold for manual login.
         - ``open-course``: open the manage dates page for the given course code. The
-          ``course_code`` may be a short code (e.g. ``CA4105``) or a full URL. If a
+          ``course_code`` may be a short code (e.g. ``FM4203``) or a full URL. If a
           short code is provided, it will be looked up in ``COURSE_URLS``. If it is
           already a URL, it will be used directly.
         - ``process``: open the manage dates page for the given course and prepare
@@ -463,8 +463,8 @@ class D2LProcessor:
                         df = pd.read_csv(csv_path)
                         logger.info(f"📄 CSV loaded: {len(df)} rows")
                         for idx, row in df.iterrows():
-                            # Support both 'Assignment Name' and legacy 'Name' headers
-                            assignment = str(row.get('Assignment Name') or row.get('Name') or '').strip()
+                            # Support multiple assignment name column headers
+                            assignment = str(row.get('Assignment Name') or row.get('Item Name') or row.get('Name') or '').strip()
                             # Standard date fields
                             start_date = str(row.get('Start Date') or row.get('Start') or '').strip()
                             due_date = str(row.get('Due Date') or row.get('Due') or '').strip()
@@ -486,13 +486,12 @@ class D2LProcessor:
                             })
                     except ImportError:
                         # Fallback to csv module if pandas isn't available
-                        import csv as csv_module
                         with open(csv_path, newline='', encoding='utf-8') as csvfile:
-                            reader = csv_module.DictReader(csvfile)
+                            reader = csv.DictReader(csvfile)
                             rows = list(reader)
                         logger.info(f"📄 CSV loaded: {len(rows)} rows")
                         for idx, row in enumerate(rows):
-                            assignment = (row.get('Assignment Name') or row.get('Name') or '').strip()
+                            assignment = (row.get('Assignment Name') or row.get('Item Name') or row.get('Name') or '').strip()
                             start_date = (row.get('Start Date') or row.get('Start') or '').strip()
                             due_date = (row.get('Due Date') or row.get('Due') or '').strip()
                             end_date = (row.get('End Date') or row.get('End') or '').strip()
@@ -919,14 +918,31 @@ class D2LProcessor:
             empty, no changes will be made to the time fields.
         """
         # Find the due date cell/link; it may be a dash or a date
+        # First, try to find an anchor tag (most common case)
         due_link = await row.query_selector("xpath=.//td[contains(@class, 'd_dg_col_DueDate')]//a")
         if not due_link:
             # Fallback: any anchor in the row with title 'Edit the due date'
             due_link = await row.query_selector("xpath=.//a[@title='Edit the due date']")
+        
         if not due_link:
-            raise RuntimeError("Due date link not found")
-        logger.info("🖱️ Clicking due date link...")
-        await due_link.click()
+            # If no link exists, look for clickable elements inside the due date cell
+            # D2L sometimes uses spans, divs, or icons that are clickable
+            due_cell = await row.query_selector("xpath=.//td[contains(@class, 'd_dg_col_DueDate')]")
+            if due_cell:
+                # Try to find any clickable child element (span, label, div, etc.)
+                clickable = await due_cell.query_selector("xpath=.//*[@class or @role='button' or @onclick]")
+                if clickable:
+                    logger.info("🔍 Found clickable element in due date cell - clicking...")
+                    await clickable.click()
+                else:
+                    # No specific clickable element found - click the cell itself
+                    logger.info("🔍 No due date link found - clicking due date cell directly...")
+                    await due_cell.click()
+            else:
+                raise RuntimeError("Due date cell not found")
+        else:
+            logger.info("🖱️ Clicking due date link...")
+            await due_link.click()
         # Wait for the dialog
         dialog = await page.wait_for_selector("[role='dialog']", timeout=8000)
         logger.info("📋 Due date dialog opened. Setting date/time...")

@@ -1,5 +1,6 @@
 # 🧩 PROJECT STRUCTURE SUMMARY
 **Generated:** 2025-10-25 15:25:52
+**Updated:** 2025-12-14 (Added Cursor AI Integration)
 
 ## 🚀 APPLICATION OVERVIEW
 
@@ -10,6 +11,59 @@ This application is a **D2L Course Management Automation Tool** that automates a
 - Browser automation for D2L course management
 - Persistent login session management
 - Automated assignment date modification
+
+## 🤖 Cursor AI Integration
+
+This project includes comprehensive Cursor AI configuration to assist with development:
+
+### Pattern Files (`.cursor-patterns/`)
+Before making any coding changes, consult these pattern files:
+
+1. **d2l-automation.md** - Core D2L automation patterns
+   - Async browser context management with Playwright
+   - Element selection with fallbacks
+   - Date processing and CSV handling
+   - Comprehensive logging and debugging
+   - Error handling and retry logic
+   - Session management strategies
+   - GUI design patterns with Tkinter
+
+2. **selenium-patterns.md** - Selenium WebDriver patterns
+   - Driver setup with persistent profiles
+   - Safe element interaction with retry logic
+   - Iframe handling best practices
+   - Input and form handling
+   - Custom wait conditions
+   - Fuzzy element finding
+   - Process cleanup strategies
+   - JavaScript execution helpers
+
+3. **code-style.md** - Style guidelines and best practices
+   - Python style guidelines (PEP 8)
+   - Naming conventions
+   - Google-style docstrings
+   - Error handling patterns
+   - Structured logging
+   - Function design principles
+   - Testing patterns
+   - Configuration management
+
+### Cursor Rules (`.cursorrules`)
+The `.cursorrules` file provides:
+- Project overview and technology stack
+- References to pattern files
+- Architecture guidelines
+- Coding standards (required and prohibited practices)
+- D2L-specific automation guidelines
+- Error handling strategy
+- Performance and security considerations
+- Quick reference for common tasks
+
+**How to Use:**
+1. When starting new work, Cursor will automatically read `.cursorrules`
+2. `.cursorrules` directs you to relevant pattern files in `.cursor-patterns/`
+3. Follow established patterns for consistency
+4. Update patterns when discovering better approaches
 
 ### Key Components
 
